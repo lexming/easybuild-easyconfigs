@@ -1,0 +1,29 @@
+easyblock = 'PythonPackage'
+
+name = 'PyZMQ'
+version = '18.0.1'
+zmqversion = '4.3.1'
+versionsuffix = '-Python-%%(pyver)s-zmq%s' % zmqversion.split('.')[0]
+
+homepage = 'http://www.zeromq.org/bindings:python'
+description = """Python bindings for ZeroMQ"""
+
+toolchain = {'name': 'foss', 'version': '2019a'}
+
+source_urls = [PYPI_LOWER_SOURCE]
+sources = [SOURCELOWER_TAR_GZ]
+checksums = ['8b319805f6f7c907b101c864c3ca6cefc9db8ce0791356f180b1b644c7347e4c']
+
+dependencies = [
+    ('Python', '3.7.2'),
+    ('ZeroMQ', zmqversion),
+]
+
+options = {'modulename': 'zmq'}
+
+sanity_check_paths = {
+    'files': [],
+    'dirs': ['lib/python%(pyshortver)s/site-packages/zmq'],
+}
+
+moduleclass = 'devel'
