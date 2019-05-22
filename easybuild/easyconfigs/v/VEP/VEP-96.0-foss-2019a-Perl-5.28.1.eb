@@ -1,0 +1,22 @@
+name = 'VEP'
+version = '96.0'
+versionsuffix = '-Perl-%(perlver)s'
+
+homepage = 'https://www.ensembl.org/info/docs/tools/vep'
+description = """Variant Effect Predictor (VEP) determines the effect of your variants (SNPs, insertions, deletions,
+ CNVs or structural variants) on genes, transcripts, and protein sequence, as well as regulatory regions."""
+
+toolchain = {'name': 'foss', 'version': '2019a'}
+
+source_urls = ['https://github.com/Ensembl/ensembl-vep/archive/release/']
+sources = ['%(version)s.tar.gz']
+
+dependencies = [
+    ('Perl', '5.28.1'),
+    ('DBD-mysql', '4.050', versionsuffix),
+    ('BioPerl', '1.7.2', versionsuffix),
+    ('Bio-DB-HTS', '3.01', versionsuffix),
+    ('ensembl-xs', '2.3.2', versionsuffix),
+]
+
+moduleclass = 'bio'
