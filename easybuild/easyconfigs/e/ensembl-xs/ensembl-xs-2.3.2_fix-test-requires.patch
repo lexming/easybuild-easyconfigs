@@ -1,0 +1,17 @@
+--- t/06-assert_integer.t	2018-05-15 11:30:19.000000000 +0200
++++ t/06-assert_integer.t	2019-05-21 11:46:11.518099000 +0200
+@@ -22,10 +22,13 @@
+ use File::Temp qw/ tempfile /;
+ use FindBin '$Bin';
+ 
++use constant HAS_INTERVAL => eval{ require Bio::EnsEMBL::Utils::Scalar };
++use Test::More HAS_INTERVAL ? (tests => 63) : (skip_all => 'require Bio::EnsEMBL::Utils::Scalar');
++
+ use lib "$Bin/../lib", "$Bin/../blib/lib", "$Bin/../blib/arch";
+-use Bio::EnsEMBL::Utils::Scalar;
+ 
+ use_ok('Bio::EnsEMBL::XS');
++use_ok(' Bio::EnsEMBL::Utils::Scalar');
+ 
+ #
+ # Test exceptions, e.g. missing or wrong typed arguments

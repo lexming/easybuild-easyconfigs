@@ -1,0 +1,32 @@
+easyblock = 'PerlModule'
+
+name = 'ensembl-xs'
+version = '2.3.2'
+versionsuffix = '-Perl-%(perlver)s'
+
+homepage = 'https://github.com/Ensembl/ensembl-xs'
+description = "ensembl-xs provides pre-compiled replacements for frequently used routines in VEP."
+
+toolchain = {'name': 'GCCcore', 'version': '8.2.0'}
+toolchainopts = {'pic': True}
+
+source_urls = ['https://github.com/Ensembl/ensembl-xs/archive']
+sources = ['%(version)s.tar.gz']
+patches = ['%(name)s-%(version)s_fix-test-requires.patch']
+checksums = [
+    'aafc59568cd1042259196575e99cdfeef9c0fb7966e5f915cfaf38c70885ffa5',  # 2.3.2.tar.gz
+    'cd6a6417dba6d1256c979d185a1919037437cfae95e50c36b6d31991d2139ac3',  # ensembl-xs-2.3.2_fix-test-requires.patch
+]
+
+builddependencies = [('binutils', '2.31.1')]
+
+dependencies = [('Perl', '5.28.1')]
+
+sanity_check_paths = {
+    'files': ['lib/perl5/site_perl/%(perlver)s/x86_64-linux-thread-multi/Bio/EnsEMBL/XS.pm'],
+    'dirs': ['lib/perl5/site_perl/%(perlver)s/x86_64-linux-thread-multi/Bio/EnsEMBL/XS'],
+}
+
+options = {'modulename': 'Bio::EnsEMBL::XS'}
+
+moduleclass = 'lib'
