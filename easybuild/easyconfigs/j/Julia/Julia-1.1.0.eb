@@ -15,7 +15,10 @@ toolchain = { 'name' : 'dummy', 'version' : '' }
 source_urls = ['https://julialang-s3.julialang.org/bin/linux/x64/%(version_major_minor)s/']
 sources = ['%(namelower)s-%(version)s-linux-x86_64.tar.gz']
 
-dependencies = [('Qt5', '5.12.3', '', ('GCCcore', '8.2.0'))]
+dependencies = [
+    ('Python', '3.7.2', '', ('GCCcore', '8.2.0')),
+    ('Qt5', '5.12.3', '', ('GCCcore', '8.2.0')),
+]
 
 sanity_check_paths = {
     'files' : ['LICENSE.md'],
