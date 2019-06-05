@@ -30,9 +30,11 @@ pyqt5_configopts = "configure.py --confirm-license --verbose --destdir=%s" % pyl
 pyqt5_configopts += " --bindir=%(installdir)s/bin"
 pyqt5_configopts += " --designer-plugindir=%(installdir)s/plugins/designer"
 pyqt5_configopts += " --qml-plugindir=%(installdir)s/plugins/PyQt5"
+pyqt5_configopts += " --qsci-api-destdir=%(installdir)s/qsci"
 pyqt5_configopts += " --no-sip-files --no-stubs "
 
 pyqtweb_configopts = "configure.py --verbose --destdir=%s/PyQt5" % pylibdir
+pyqtweb_configopts += " --apidir=%(installdir)s/qsci"
 pyqtweb_configopts += " --pyqt-sipdir=%(builddir)s/PyQt5_gpl-%(version)s/sip"
 pyqtweb_configopts += " --no-dist-info --no-sip-files --no-stubs "
 
@@ -58,6 +60,7 @@ components = [
     ('PyQtWebEngine', version, {
         'source_urls': ['https://www.riverbankcomputing.com/static/Downloads/%(name)s/%(version)s/'],
         'sources': ['%(name)s_gpl-%(version)s.tar.gz'],
+        'checksums': ['860704672ea1b616e1347be1f347bc1c749e64ed378370863fe209e84e9bd473'],
         'start_dir': '%(name)s_gpl-%(version)s',
         'preconfigopts': "export PATH=%(installdir)s/bin:$PATH && export PYTHONPATH=%(installdir)s/lib/python%(pyshortver)s/site-packages:$PYTHONPATH && ",
         'configopts': pyqtweb_configopts,
@@ -76,6 +79,7 @@ sanity_check_paths = {
 
 modextrapaths = {
     'PYTHONPATH': 'lib/python%(pyshortver)s/site-packages',
+    'QT_INSTALL_DATA': 'qsci',
     'QT_PLUGIN_PATH': 'plugins',
 }
 
