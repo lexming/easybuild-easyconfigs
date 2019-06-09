@@ -1,0 +1,38 @@
+easyblock = 'PythonPackage'
+
+name = 'pygame'
+version = '1.9.6'
+versionsuffix = '-Python-%(pyver)s'
+
+homepage = 'https://www.pygame.org'
+description = """Pygame is a Python wrapper module for the SDL multimedia library. It contains python 
+functions and classes that will allow you to use SDL’s support for playing cdroms, audio and video output, 
+and keyboard, mouse and joystick input."""
+
+toolchain = {'name': 'GCCcore', 'version': '8.2.0'}
+
+source_urls = [PYPI_SOURCE]
+sources = [SOURCE_TAR_GZ]
+patches = ['%(name)s-%(version)s_fix-extrabase-expansion.patch']
+checksums = [
+    '301c6428c0880ecd4a9e3951b80e539c33863b6ff356a443db1758de4f297957',  # pygame-1.9.6.tar.gz
+    '210cc205f69de6904b55b95c5cd3884f86a0513b1fbd802f75bd33d231391ceb',  # pygame-1.9.6_fix-extrabase-expansion.patch
+]
+
+builddependencies = [('binutils', '2.31.1')]
+
+dependencies = [
+    ('Python', '3.7.2'),
+    ('SDL2libs', '2.0.9'),
+]
+
+prebuildopts = 'PYGAME_EXTRA_BASE="${EBROOTSDL2LIBS}:${EBROOTLIBPNG}:${EBROOTLIBJPEGMINTURBO}:${EBROOTFREETYPE}" python buildconfig/config.py -sdl2 -auto && '
+
+options = {'modulename': 'pygame'}
+
+sanity_check_paths = {
+    'files': [],
+    'dirs': ['lib/python%(pyshortver)s/site-packages'],
+}
+
+moduleclass = 'vis'

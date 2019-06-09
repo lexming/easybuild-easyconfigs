@@ -1,0 +1,13 @@
+--- buildconfig/config_unix.py	2019-05-18 19:45:10.001253481 +0200
++++ buildconfig/config_unix.py	2019-05-18 19:43:54.547242000 +0200
+@@ -236,8 +236,8 @@
+     incdirs = []
+     libdirs = []
+     for extrabase in extrabases:
+-        incdirs = [extrabase + d for d in origincdirs]
+-        libdirs = [extrabase + d for d in origlibdirs]
++        incdirs += [extrabase + d for d in origincdirs]
++        libdirs += [extrabase + d for d in origlibdirs]
+     incdirs += ["/usr"+d for d in origincdirs]
+     libdirs += ["/usr"+d for d in origlibdirs]
+     incdirs += ["/usr/local"+d for d in origincdirs]
