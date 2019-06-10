@@ -1,0 +1,43 @@
+easyblock = 'PythonBundle'
+
+# Using a PythonBundle would the best way to install BlueSky. Unfortunately, the available releases
+# are old and in a broken state, missing many needed files.
+name = 'BlueSky-Simulator'
+version = '0.0.1.dev2'
+versionsuffix = '-Python-%(pyver)s'
+
+homepage = 'https://github.com/ProfHoekstra/bluesky'
+description = "BlueSky is meant as a tool to perform research on Air Traffic Management and Air Traffic Flows."
+
+toolchain = {'name': 'foss', 'version': '2019a'}
+
+dependencies = [
+    ('Python', '3.7.2'),
+    ('SciPy-bundle', '2019.03'),
+    ('matplotlib', '3.0.3', versionsuffix),
+    ('PyZMQ', '18.0.1', '%s-zmq4' % versionsuffix),
+    ('PyQt5', '5.12.1', versionsuffix),
+    ('PyOpenGL', '3.1.3b2', versionsuffix),
+    ('pygame', '1.9.6', versionsuffix),
+]
+
+use_pip = True
+
+exts_list = [
+    ('msgpack', '0.6.1', {
+        'source_urls': ['https://pypi.python.org/packages/source/m/msgpack'],
+    }),
+    (name, version, {
+        'modulename': 'bluesky',
+        'source_tmpl': 'bluesky_simulator-%(version)s-py3-none-any.whl',
+        'source_urls': ['https://pypi.python.org/packages/source/b/%(namelower)s'],
+        'unpack_sources': False,
+    }),
+]
+
+sanity_check_paths = {
+    'files': ['bin/bluesky'],
+    'dirs': ['lib/python%(pyshortver)s/site-packages'],
+}
+
+moduleclass = 'math'
