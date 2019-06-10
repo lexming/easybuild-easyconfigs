@@ -1,0 +1,65 @@
+easyblock = 'Bundle'
+
+name = 'BlueSky-Simulator'
+commit = 'd09510ea73750e2efc8d4651f8dc25e985fdb455'
+version = '20190605'
+versionsuffix = '-Python-%(pyver)s'
+
+homepage = 'https://github.com/ProfHoekstra/bluesky'
+description = """BlueSky is meant as a tool to perform research on 
+Air Traffic Management and Air Traffic Flows."""
+
+toolchain = {'name': 'foss', 'version': '2019a'}
+
+dependencies = [
+    ('Python', '3.7.2'),
+    ('SciPy-bundle', '2019.03'),
+    ('matplotlib', '3.0.3', versionsuffix),
+    ('PyZMQ', '18.0.1', '%s-zmq4' % versionsuffix),
+    ('PyQt5', '5.12.1', versionsuffix),
+    ('PyOpenGL', '3.1.3b2', versionsuffix),
+    ('pygame', '1.9.6', versionsuffix),
+]
+
+components = [
+    (name, commit, {
+        'easyblock': 'Tarball',
+        'source_urls': ['https://github.com/TUDelft-CNS-ATM/bluesky/archive'],
+        'sources': [{
+            'download_filename': '%(version)s.tar.gz', 
+            'filename': '%s-%s.tar.gz' % (name,version),
+            # Extract and remove broken links in the tarball
+            'extract_cmd': "tar -xzf %s && unlink 'bluesky-%(version)s/utils/Doc generation/bluesky.wiki'"
+        }],
+        'patches': ['%s-%s_fix-absolute-paths.patch' % (name,version)],
+        'checksums': [
+            # BlueSky-Simulator-20190605.tar.gz
+            'de65f37493e6cc24952caf28fd4348e0a7e12c57c2b395233e980fd512c2bebe',
+            # BlueSky-Simulator-20190605_fix-absolute-paths.patch
+            'ef1008c7d7981e1d113bb1469084e47ed28699f5e0993d3e9516f0152d0c064e',
+        ],
+        'start_dir': 'bluesky-%(version)s',
+    }),
+    ('msgpack', '0.6.1', {
+        'easyblock': 'PythonPackage',
+        'source_urls': ['https://pypi.python.org/packages/source/m/msgpack'],
+        'sources': ['%(namelower)s-%(version)s.tar.gz'],
+        'checksums': ['4008c72f5ef2b7936447dcb83db41d97e9791c83221be13d5e19db0796df1972'],
+        'start_dir': '%(name)s-%(version)s',
+    }),
+]
+
+postinstallcmds = ["chmod a+rx %(installdir)s/BlueSky.py %(installdir)s/BlueSky_pygame.py"]
+
+sanity_check_paths = {
+    'files': ['BlueSky.py', 'BlueSky_pygame.py'],
+    'dirs': ['lib/python%(pyshortver)s/site-packages', 
+    'bluesky', 'data', 'docs', 'extra', 'plugins', 'scenario'],
+}
+
+modextrapaths = {
+    'PATH': '',
+    'PYTHONPATH': 'lib/python%(pyshortver)s/site-packages'
+}
+
+moduleclass = 'vis'                                                                                         
