@@ -1,0 +1,54 @@
+easyblock = 'Bundle'
+
+name = 'SDL2libs'
+version = '2.0.9'
+
+homepage = 's/SDL2libs/SDL2libs-2.0.0-GCCcore-8.2.0.eb'
+description = """Bundle of libraries for the Simple DirectMedia Layer (SDL2).
+Includes: SDL2_image, SDL2_mixer and SDL2_ttf."""
+
+toolchain = {'name': 'GCCcore', 'version': '8.2.0'}
+
+builddependencies = [('binutils', '2.31.1')]
+
+dependencies = [
+    ('SDL2', '2.0.9'),
+    ('zlib', '1.2.11'),
+    ('libpng', '1.6.36'),
+    ('libjpeg-turbo', '2.0.2'),
+    ('freetype', '2.9.1'),
+]
+
+default_easyblock = 'ConfigureMake'
+
+default_component_specs = {
+    'sources': [SOURCE_TAR_GZ],
+    'start_dir': '%(name)s-%(version)s',
+}
+
+components = [
+    ('SDL2_image', '2.0.4', {
+        'source_urls': ['https://www.libsdl.org/projects/SDL_image/release'],
+        'checksums': ['e74ec49c2402eb242fbfa16f2f43a19582a74c2eabfbfb873f00d4250038ceac'],
+    }),
+    ('SDL2_mixer', '2.0.4', {
+        'source_urls': ['https://www.libsdl.org/projects/SDL_mixer/release'],
+        'checksums': ['b4cf5a382c061cd75081cf246c2aa2f9df8db04bdda8dcdc6b6cca55bede2419'],
+    }),
+    ('SDL2_ttf', '2.0.15', {
+        'source_urls': ['https://www.libsdl.org/projects/SDL_ttf/release'],
+        'checksums': ['a9eceb1ad88c1f1545cd7bd28e7cbc0b2c14191d40238f531a15b01b1b22cd33'],
+    }),
+]
+
+preconfigopts = "if [ ! -f configure ]; then ./autogen.sh; fi && "
+
+sanity_check_paths = {
+    'files': ['include/SDL2/SDL_image.h', 'include/SDL2/SDL_mixer.h', 'include/SDL2/SDL_ttf.h',
+    'lib/libSDL2_image.a', 'lib/libSDL2_image.%s' % SHLIB_EXT,
+    'lib/libSDL2_mixer.a', 'lib/libSDL2_mixer.%s' % SHLIB_EXT,
+    'lib/libSDL2_ttf.a', 'lib/libSDL2_ttf.%s' % SHLIB_EXT ],
+    'dirs': [''],
+}
+
+moduleclass = 'vis'
