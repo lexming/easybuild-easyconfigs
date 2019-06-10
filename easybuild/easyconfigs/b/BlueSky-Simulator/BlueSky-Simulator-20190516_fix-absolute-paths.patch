@@ -1,0 +1,229 @@
+diff -Nru bluesky/settings.py bluesky/settings.py
+--- bluesky/settings.py	2019-05-16 21:10:51.000000000 +0200
++++ bluesky/settings.py	2019-06-09 01:04:04.185296000 +0200
+@@ -9,8 +9,10 @@
+     '''Initialize configuration.
+        Import config settings from settings.cfg if this exists, if it doesn't
+        create an initial config file'''
+-    rundir = ''
+-    srcdir = ''
++    
++    # Set path to running directory and root of installation
++    rundir = os.getcwd()
++    srcdir = os.environ['EBROOTBLUESKYMINSIMULATOR']
+ 
+     # If BlueSky is run from a compiled bundle instead of from source,
+     # adjust the startup path and change the path of
+@@ -98,6 +100,10 @@
+ 
+     exec(compile(open(cfgfile).read(), cfgfile, 'exec'), globals())
+ 
++    # Define rundir and srcdir as globals
++    globals()['rundir'] = rundir
++    globals()['srcdir'] = srcdir
++    
+     # Update cachedir with python version-specific subfolder
+     cachedir = os.path.join(cachedir, 'py%d' % sys.version_info[0])
+     globals()['cache_path'] = cachedir
+diff -Nru bluesky/stack/stack.py bluesky/stack/stack.py
+--- bluesky/stack/stack.py	2019-05-16 21:10:51.000000000 +0200
++++ bluesky/stack/stack.py	2019-06-09 19:49:24.216483469 +0200
+@@ -966,9 +966,9 @@
+ 
+         # Get filename
+         if len(cmd) > 1:
+-            fname = "./docs/" + cmd[1:]
++            fname = os.path.join(settings.srcdir, "docs/" + cmd[1:])
+         else:
+-            fname = "./docs/bluesky-commands.txt"
++            fname = os.path.join(settings.srcdir, "docs/bluesky-commands.txt")
+ 
+         # Write command dictionary to tab-delimited text file
+         try:
+diff -Nru bluesky/traffic/performance/openap/coeff.py bluesky/traffic/performance/openap/coeff.py
+--- bluesky/traffic/performance/openap/coeff.py	2019-05-16 21:10:51.000000000 +0200
++++ bluesky/traffic/performance/openap/coeff.py	2019-06-09 01:20:12.858379000 +0200
+@@ -4,7 +4,7 @@
+ import numpy as np
+ import pandas as pd
+ from bluesky import settings
+-settings.set_variable_defaults(perf_path_openap="data/performance/OpenAP")
++settings.set_variable_defaults(perf_path_openap=os.path.join(settings.srcdir,"data/performance/OpenAP"))
+ 
+ LIFT_FIXWING = 1     # fixwing aircraft
+ LIFT_ROTOR = 2       # rotor aircraft
+diff -Nru bluesky/ui/pygame/menu.py bluesky/ui/pygame/menu.py
+--- bluesky/ui/pygame/menu.py	2019-05-16 21:10:51.000000000 +0200
++++ bluesky/ui/pygame/menu.py	2019-06-09 22:06:10.178279000 +0200
+@@ -1,3 +1,4 @@
++import os.path
+ import pygame as pg
+ 
+ white = (255, 255, 255)
+@@ -31,7 +32,7 @@
+         self.bmps  = []     # list with menu bitmpas
+ 
+         for i in range(self.npages):
+-            imgpath = "data/graphics/menu/menu"+str(i+1)+".jpg"
++            imgpath = os.path.join(os.environ['EBROOTBLUESKYMINSIMULATOR'],"data/graphics/menu/menu"+str(i+1)+".jpg")
+ 
+             im = pg.image.load(imgpath)
+ 
+@@ -49,7 +50,7 @@
+         self.rect = pg.Rect(self.x,self.y,self.dx,self.dy)
+ 
+         # Read data
+-        f = open("data/graphics/menu.dat")
++        f = open(os.path.join(os.environ['EBROOTBLUESKYMINSIMULATOR'],"data/graphics/menu.dat"))
+         self.cmd = []
+         ipage = 0
+         page = []
+diff -Nru bluesky/ui/pygame/screen.py bluesky/ui/pygame/screen.py
+--- bluesky/ui/pygame/screen.py	2019-05-16 21:10:51.000000000 +0200
++++ bluesky/ui/pygame/screen.py	2019-06-09 19:52:13.353683626 +0200
+@@ -9,6 +9,7 @@
+ import numpy as np
+ 
+ import bluesky as bs
++from bluesky import settings
+ from bluesky.tools import geo, areafilter
+ from bluesky.tools.aero import ft, kts, nm
+ from bluesky.tools.misc import tim2txt
+@@ -81,7 +82,7 @@
+         print()
+         print("Setting up screen...")
+ 
+-        lst = np.genfromtxt("data/graphics/scr_cfg.dat", comments='#', dtype='i4')
++        lst = np.genfromtxt(os.path.join(settings.srcdir,"data/graphics/scr_cfg.dat"), comments='#', dtype='i4')
+ 
+         self.swfullscreen = int(lst[0]) == 0
+ 
+@@ -110,12 +111,12 @@
+         # Read graphics for acsymbol (normal = green) + amber
+         self.acsymbol = []
+         for i in range(60):
+-            self.acsymbol.append(pg.image.load("data/graphics/acsymbol/acsymbol" \
++            self.acsymbol.append(pg.image.load(os.path.join(settings.srcdir,"data/graphics/acsymbol/acsymbol") \
+                                   + str(i) + ".png"))
+ 
+         self.ambacsymbol = []
+         for i in range(60):
+-            self.ambacsymbol.append(pg.image.load("data/graphics/amb-acsymbol/amb-acsymbol" \
++            self.ambacsymbol.append(pg.image.load(os.path.join(settings.srcdir,"data/graphics/amb-acsymbol/amb-acsymbol") \
+                                      + str(i) + ".png"))
+ 
+         # Lable lines& default no trails
+@@ -123,12 +124,12 @@
+ 
+ 
+         # Read and scale waypoint symbol
+-        wptgif = pg.image.load("data/graphics/waypoint.gif")
++        wptgif = pg.image.load(os.path.join(settings.srcdir,"data/graphics/waypoint.gif"))
+         self.wptsymbol = pg.transform.scale(wptgif, (10, 7))
+         self.wpsw = 1  # 0=None, 1 = VOR 2 = non-digit ones, 3 =all
+ 
+         # Read and scale airport symbol
+-        aptgif = pg.image.load("data/graphics/airport.gif")
++        aptgif = pg.image.load(os.path.join(settings.srcdir,"data/graphics/airport.gif"))
+         self.aptsymbol = pg.transform.scale(aptgif, (12, 9))
+         self.apsw = 1  # 0 = None, 1 = Large, 2 = All
+ 
+@@ -140,7 +141,7 @@
+ 
+         #--------------------------------MAPS---------------------------------
+         # Read map of world
+-        self.mapbmp = pg.image.load("data/graphics/world.jpg")
++        self.mapbmp = pg.image.load(os.path.join(settings.srcdir,"data/graphics/world.jpg"))
+         w, h = self.mapbmp.get_size()
+ 
+         # Two ref positions for scaling, convert to scaling factors x=a*lat+b
+@@ -185,7 +186,7 @@
+             self.win = pg.display.set_mode(reso)
+ 
+         pg.display.set_caption("BlueSky Open ATM Simulator (F11 = Full Screen)", "BlueSky")
+-        iconpath = imgpath = "data/graphics/icon.gif"
++        iconpath = imgpath = os.path.join(settings.srcdir,"data/graphics/icon.gif")
+         iconbmp = pg.image.load(iconpath)
+         pg.display.set_icon(iconbmp)
+ 
+@@ -212,7 +213,7 @@
+ 
+         #-------------------------COASTLINE DATA--------------------------------------
+         # Init geo (coastline)  data
+-        f = open("data/navdata/coastlines.dat", 'r')
++        f = open(os.path.join(settings.srcdir,"data/navdata/coastlines.dat"), 'r')
+         print("Reading coastlines.dat")
+         lines = f.readlines()
+         f.close()
+@@ -1066,7 +1067,7 @@
+ 
+         pg.display.set_caption("BlueSky Open ATM Simulator (F11 = Full Screen)",
+                                "BlueSky")
+-        iconpath = imgpath = "data/graphics/icon.gif"
++        iconpath = imgpath = os.path.join(settings.srcdir,"data/graphics/icon.gif")
+         iconbmp = pg.image.load(iconpath)
+         pg.display.set_icon(iconbmp)
+ 
+diff -Nru bluesky/ui/pygame/splash.py bluesky/ui/pygame/splash.py
+--- bluesky/ui/pygame/splash.py	2019-05-16 21:10:51.000000000 +0200
++++ bluesky/ui/pygame/splash.py	2019-06-09 22:03:11.375648000 +0200
+@@ -1,10 +1,11 @@
++import os.path
+ import pygame as pg
+ 
+ 
+ def show():
+     # Show splash screen
+     pg.init()
+-    imgpath = "data/graphics/splash.gif"
++    imgpath = os.path.join(os.environ['EBROOTBLUESKYMINSIMULATOR'],"data/graphics/splash.gif")
+     splashimg = pg.image.load(imgpath)
+     splashwin = pg.display.set_mode(splashimg.get_size(),pg.NOFRAME)
+     splashwin.blit(splashimg,(0,0))
+diff -Nru bluesky/ui/qtgl/nd.py bluesky/ui/qtgl/nd.py
+--- bluesky/ui/qtgl/nd.py	2019-05-16 21:10:51.000000000 +0200
++++ bluesky/ui/qtgl/nd.py	2019-06-09 19:08:45.604157118 +0200
+@@ -7,6 +7,7 @@
+ from ctypes import c_float, c_int, Structure
+ 
+ import bluesky as bs
++from bluesky import settings
+ from .glhelpers import BlueSkyProgram, RenderObject, UniformBuffer
+ 
+ VERTEX_IS_LATLON, VERTEX_IS_METERS, VERTEX_IS_SCREEN, VERTEX_IS_GLXY = list(range(4))
+@@ -180,12 +181,13 @@
+         self.globaldata = ndUBO()
+ 
+         try:
++            shpath = path.join(settings.gfx_path, 'shaders')
+             # Compile shaders and link color shader program
+-            self.color_shader = BlueSkyProgram('data/graphics/shaders/nd-normal.vert', 'data/graphics/shaders/nd-color.frag')
++            self.color_shader = BlueSkyProgram(path.join(shpath,'nd-normal.vert'), path.join(shpath,'nd-color.frag'))
+             self.color_shader.bind_uniform_buffer('global_data', self.globaldata)
+ 
+             # Compile shaders and link text shader program
+-            self.text_shader = BlueSkyProgram('data/graphics/shaders/nd-text.vert', 'data/graphics/shaders/nd-text.frag')
++            self.text_shader = BlueSkyProgram(path.join(shpath,'nd-text.vert'), path.join(shpath,'nd-text.frag'))
+             self.text_shader.bind_uniform_buffer('global_data', self.globaldata)
+ 
+         except RuntimeError as e:
+diff -Nru bluesky/network/server.py bluesky/network/server.py
+--- bluesky/network/server.py	2019-05-16 21:10:51.000000000 +0200
++++ bluesky/network/server.py	2019-06-09 19:47:38.663888222 +0200
+@@ -9,6 +9,7 @@
+ 
+ # Local imports
+ import bluesky as bs
++from bluesky import settings
+ 
+ from .discovery import Discovery
+ 
+@@ -58,7 +59,7 @@
+     def addnodes(self, count=1):
+         ''' Add [count] nodes to this server. '''
+         for _ in range(count):
+-            p = Popen([sys.executable, 'BlueSky.py', '--sim'])
++            p = Popen([sys.executable, os.path.join(settings.srcdir, 'BlueSky.py'), '--sim'])
+             self.spawned_processes.append(p)
+ 
+     def run(self):

@@ -1,0 +1,59 @@
+easyblock = 'Tarball'
+
+name = 'BlueSky-Simulator'
+commit ='64684e5e07450e6f70485a2f62bd861f5b5c6b7e'
+version = '20190516'
+versionsuffix = '-Python-%(pyver)s'
+
+homepage = 'https://github.com/ProfHoekstra/bluesky'
+description = """BlueSky is meant as a tool to perform research on 
+Air Traffic Management and Air Traffic Flows."""
+
+toolchain = {'name': 'foss', 'version': '2019a'}
+
+source_urls = ['https://github.com/TUDelft-CNS-ATM/bluesky/archive']
+sources = [{'download_filename': '%s.tar.gz' % commit, 
+            'filename': '%(name)s-%(version)s.tar.gz',
+            # Extract and remove broken links in the tarball
+            'extract_cmd': "tar -xzf %s &&" + 
+                           "unlink 'bluesky-%s/utils/Doc generation/bluesky.wiki'" % commit}]
+patches = ['%(name)s-%(version)s_fix-absolute-paths.patch']
+checksums = [
+    '456a6b2307ee7550f5e506da477deef9f23bcd3ad5f85623d1bef650cfa0bbd8',  # BlueSky-Simulator-20190516.tar.gz
+    # BlueSky-Simulator-20190516_fix-absolute-paths.patch
+    '65afcf3bb295eaba4d4732a877564bee8839ecf16d2a1e4d26b811acb8e51855',
+]
+
+dependencies = [
+    ('Python', '3.7.2'),
+    ('SciPy-bundle', '2019.03'),
+    ('matplotlib', '3.0.3', versionsuffix),
+    ('PyZMQ', '18.0.1', '%s-zmq4' % versionsuffix),
+    ('PyQt5', '5.12.1', versionsuffix),
+    ('PyOpenGL', '3.1.3b2', versionsuffix),
+    ('pygame', '1.9.6', versionsuffix),
+]
+
+exts_defaultclass = 'PythonPackage'
+
+exts_list = [
+    ('msgpack', '0.6.1', {
+        'source_urls': ['https://pypi.python.org/packages/source/m/msgpack'],
+        'checksums': ['4008c72f5ef2b7936447dcb83db41d97e9791c83221be13d5e19db0796df1972'],
+    }),
+]
+
+postinstallcmds = ["chmod a+rx %(installdir)s/BlueSky.py %(installdir)s/BlueSky_pygame.py"]
+
+sanity_check_paths = {
+    'files': ['BlueSky.py', 'BlueSky_pygame.py'],
+    'dirs': ['lib/python%(pyshortver)s/site-packages', 
+    'bluesky', 'data', 'docs', 'extra', 'plugins', 'scenario'],
+}
+
+modextrapaths = {
+    'PATH': '',
+    'PYTHONPATH': 'lib/python%(pyshortver)s/site-packages'
+}
+
+moduleclass = 'vis'
