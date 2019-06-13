@@ -17,9 +17,9 @@ description = """Mesa is an open-source implementation of the OpenGL specificati
  a system for rendering interactive 3D graphics."""
 
 toolchain = {'name': 'GCCcore', 'version': '8.2.0'}
-# swr detects and builds parts specific for AVX and AVX2. If we use
-# -xHost, this always gets overwritten and will fail.
-toolchainopts = {'optarch': False}
+# Intel's SWR generates AVX instructions even on CPUs without support for it (ignoring march=native).
+# In that case it is necessary to explicitly set the march of your CPU, for instance for an AMD Opteron 6100
+# toolchainopts = {'optarch': 'march=barcelona'}
 
 source_urls = [
     'https://mesa.freedesktop.org/archive/',
