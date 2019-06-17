@@ -31,12 +31,17 @@ components = [
             # Extract and remove broken links in the tarball
             'extract_cmd': "tar -xzf %s && unlink 'bluesky-%(version)s/utils/Doc generation/bluesky.wiki'"
         }],
-        'patches': ['%s-%s_fix-absolute-paths.patch' % (name,version)],
+        'patches': [
+            '%s-%s_fix-absolute-paths.patch' % (name,version),
+            '%s-%s_fix-broadcast-setting.patch' % (name,version),
+        ],
         'checksums': [
             # BlueSky-Simulator-20190605.tar.gz
             'de65f37493e6cc24952caf28fd4348e0a7e12c57c2b395233e980fd512c2bebe',
             # BlueSky-Simulator-20190605_fix-absolute-paths.patch
             'ef1008c7d7981e1d113bb1469084e47ed28699f5e0993d3e9516f0152d0c064e',
+            # BlueSky-Simulator-20190605_fix-broadcast-setting.patch
+            'bf7eebb60bf6603db4deb03a305c05ce820055b878a73d2da22e3325f99fcb04',
         ],
         'start_dir': 'bluesky-%(version)s',
     }),
@@ -49,7 +54,12 @@ components = [
     }),
 ]
 
-postinstallcmds = ["chmod a+rx %(installdir)s/BlueSky.py %(installdir)s/BlueSky_pygame.py"]
+postinstallcmds = [
+    # By default the discovery mechanism broadcasts to 255.255.255.255.
+    # Uncomment the following line and fill your broadcast address to change the default
+    #"sed -i 's/255\.255\.255\.255/192\.168\.0\.255/' %(installdir)s/data/default.cfg",
+    "chmod a+rx %(installdir)s/BlueSky.py %(installdir)s/BlueSky_pygame.py",
+]
 
 sanity_check_paths = {
     'files': ['BlueSky.py', 'BlueSky_pygame.py'],

@@ -1,0 +1,34 @@
+diff -W 134 -Nru bluesky/network/discovery.py bluesky/network/discovery.py
+--- bluesky/network/discovery.py	2019-05-16 21:10:51.000000000 +0200
++++ bluesky/network/discovery.py	2019-06-17 10:06:43.417057000 +0200
+@@ -4,7 +4,7 @@
+ from bluesky.network.common import get_ownip
+ from bluesky import settings
+ 
+-settings.set_variable_defaults(discovery_port=11000)
++settings.set_variable_defaults(discovery_port=11000,broadcast_address='255.255.255.255')
+ 
+ IS_SERVER = 0
+ IS_CLIENT = 1
+@@ -19,7 +19,7 @@
+     broadcast = ''  # Broadcast address
+     def __init__(self, own_id, is_client=True):
+         self.address = get_ownip()
+-        self.broadcast = '255.255.255.255'
++        self.broadcast = settings.broadcast_address
+         self.port = settings.discovery_port
+         self.own_id = own_id
+         self.mask = IS_CLIENT if is_client else IS_SERVER
+diff -W 134 -Nru data/default.cfg data/default.cfg
+--- data/default.cfg	2019-05-16 21:10:51.000000000 +0200
++++ data/default.cfg	2019-06-17 10:28:40.728149000 +0200
+@@ -4,6 +4,9 @@
+ simevent_port=12000
+ simstream_port=12001
+ 
++# Broadcast address for server discovery
++broadcast_address='255.255.255.255'
++
+ # Select the performance model. options: 'openap', 'bada', 'legacy'
+ performance_model = 'openap'
+ 
