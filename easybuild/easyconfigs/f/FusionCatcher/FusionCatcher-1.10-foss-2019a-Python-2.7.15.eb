@@ -60,7 +60,9 @@ components = [
             '3c0d0e11d017ac56bcc2cb4c14054cf2fd68cda544db738a8ba0e5e7e456d05c', # human_v95.tar.gz.ad
             '5258f911d02c314a460d30180b358623bc956c1dca647d5953493d128a7eda9b', # human_v95.tar.gz.ac
             'd27e6a4a7f90605fe6c031199dd3c549f53a818f5ad5a7e57988f9b277bb34e3', # human_v95.tar.gz.ab
-            '9349099148654093592da5faa4fd3616ab09f3853fdc2ef32fa2110cb9ae41f9', # human_v95.tar.gz.a 
+            '9349099148654093592da5faa4fd3616ab09f3853fdc2ef32fa2110cb9ae41f9', # human_v95.tar.gz.a
+            '39a4dfcb99890db79faf9736a4b58c2fd0c78633cc41934a77aa050b04a45e25', # FusionCatcher-1.10_fix-config-path.patch
+            'c818c6e860645fedea2ba634ee4b174021a3a15b372ad44ea82190c02185bcee', # FusionCatcher-1.10_fix-test-versions.patch 
         ],
         'start_dir': '%(namelower)s_v%(version)s',
     }),
