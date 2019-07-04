@@ -1,7 +1,7 @@
 easyblock = 'MakeCp'
 
 name = 'BBMap'
-version = '38.55'
+version = '38.56'
 
 homepage = 'https://sourceforge.net/projects/bbmap/'
 description = """BBMap short read aligner, and other bioinformatic tools."""
@@ -10,7 +10,7 @@ toolchain = {'name': 'foss', 'version': '2019a'}
 
 source_urls = [SOURCEFORGE_SOURCE]
 sources = ['%(name)s_%(version)s.tar.gz']
-checksums = ['dc3b3eff75f79e9285e8bfa1e32999b864283d4eb42095608d8783fcad1a0005']
+checksums = ['c1f9231195d394dcae6041df9e2abe584508a703eeb54c6722e3dce9fb8cab3a']
 
 dependencies = [('Java', '1.8', '', True)]
 
