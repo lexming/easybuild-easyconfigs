@@ -29,6 +29,11 @@ dependencies = [('zlib', '1.2.11')]
 
 buildopts = "OPENMP=1 MAXKMERLENGTH=%s LONGSEQUENCES=1" % versionsuffix.split('_')[1]
 
-postinstallcmds = ["cd contrib/MetaVelvet-1.* && make && cd ../../ && cp -a contrib %(installdir)s/"]
+postinstallcmds = ['cd contrib/MetaVelvet-1.* && make && cd ../../ && cp -a contrib %(installdir)s/']
+
+sanity_check_paths = {
+    'files': ['bin/velvetg', 'bin/velveth'],
+    'dirs': ['contrib'],
+}
 
 moduleclass = 'bio'
