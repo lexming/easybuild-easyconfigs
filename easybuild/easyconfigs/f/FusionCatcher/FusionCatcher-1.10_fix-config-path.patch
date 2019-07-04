@@ -1,0 +1,23 @@
+--- etc/configuration.cfg	2019-04-05 08:50:37.000000000 +0200
++++ etc/configuration.cfg	2019-07-03 16:48:43.082763000 +0200
+@@ -18,16 +18,16 @@
+ fatotwobit = /apps/fusioncatcher/tools/blat/
+ samtools = /apps/fusioncatcher/tools/samtools/
+ seqtk = /apps/fusioncatcher/tools/seqtk/
+-star = /apps/fusioncatcher/tools/star/source/
++star = /apps/fusioncatcher/tools/star/
+ sra = /apps/fusioncatcher/tools/sratoolkit/bin/
+ numpy = /apps/fusioncatcher/tools/numpy/
+ biopython = /apps/fusioncatcher/tools/biopython/
+ xlrd = /apps/fusioncatcher/tools/xlrd/
+ openpyxl = /apps/fusioncatcher/tools/openpyxl/
+ lzo = /apps/fusioncatcher/tools/lzo/
+-lzop = /apps/fusioncatcher/tools/lzop/src/
+-coreutils = /apps/fusioncatcher/tools/coreutils/src/
+-parallel = /appsfusioncatcher/tools/paralell/src/
++lzop = /apps/fusioncatcher/tools/lzop/
++coreutils = /apps/fusioncatcher/tools/coreutils/
++parallel = /apps/fusioncatcher/tools/parallel/
+ pigz = /apps/fusioncatcher/tools/pigz/
+ pxz = /apps/fusioncatcher/tools/pxz/
+ picard = /apps/fusioncatcher/tools/picard/

@@ -1,0 +1,113 @@
+easyblock = 'Bundle'
+
+name = 'FusionCatcher'
+version = '1.10'
+versionsuffix = '-Python-%(pyver)s'
+
+homepage = 'https://sourceforge.net/projects/fusioncatcher/'
+description = """FusionCatcher searchers for somatic novel/known fusion genes, translocations and/or chimeras 
+in RNA-seq data (stranded/unstranded paired-end/single-end reads FASTQ files produced by Illumina next-generation 
+sequencing platforms like Illumina Solexa/HiSeq/NextSeq/MiSeq/MiniSeq) from diseased samples."""
+
+toolchain = {'name': 'foss', 'version': '2019a'}
+
+dependencies = [
+    ('Python', '2.7.15'),
+    ('SciPy-bundle', '2019.03'),
+    ('Biopython', '1.73', versionsuffix),
+    ('openpyxl','2.6.2'),
+    ('BBMap', '38.56'),
+    ('BLAT', '3.5'),
+    ('Bowtie', '1.2.2'),
+    ('Bowtie2', '2.3.5.1'),
+    ('BWA', '0.7.17'),
+    ('Java', '1.8', '', True),
+    ('Kent_tools', '20190326', '-linux.x86_64', True),
+    ('picard', '2.18.27', '-Java-1.8', True),
+    ('SAMtools', '1.9'),
+    ('SRA-Toolkit', '2.9.6', '-centos_linux64', True),
+    ('STAR', '2.7.1a'),
+    ('Velvet', '1.2.10', '-mt-kmer_191'),
+    ('Oases','0.2.08', '-mt-kmer_191'),
+    ('LZO', '2.10'),
+    ('pigz','2.4'),
+    ('zlib', '1.2.11'),
+    ('parallel','20190622'),
+]
+
+components = [
+    (name, version, {
+        'easyblock': 'Tarball',
+        'source_urls': [SOURCEFORGE_SOURCE],
+        'sources': [
+            '%(namelower)s_v%(version)s.zip',
+            # Data files are big (25 GB), consider increasing --download-timeout
+            { 'filename': 'data/human_v95.tar.gz.ae', 'extract_cmd': 'touch %s'}, 
+            { 'filename': 'data/human_v95.tar.gz.ad', 'extract_cmd': 'touch %s'}, 
+            { 'filename': 'data/human_v95.tar.gz.ac', 'extract_cmd': 'touch %s'}, 
+            { 'filename': 'data/human_v95.tar.gz.ab', 'extract_cmd': 'touch %s'}, 
+            {
+                'download_filename': 'data/human_v95.tar.gz.aa', 'filename': 'data/human_v95.tar.gz.a', 
+                'extract_cmd': 'cat %s* | tar -C %(namelower)s_v%(version)s/data -xzf -',
+            }],
+        'patches': [
+            '%(name)s-%(version)s_fix-config-path.patch',
+            '%(name)s-%(version)s_fix-test-versions.patch',
+        ],
+        'checksums': [
+            'fd0d304b756455c5d495931a6421c30c80eb7de3623cf3773c5c72b0f8d62570', # fusioncatcher_v1.10.zip
+            'e3a08b68e8742d8e2a4713f12761e41730ca0eda199bc0ec711e467ed7794d30', # human_v95.tar.gz.ae
+            '3c0d0e11d017ac56bcc2cb4c14054cf2fd68cda544db738a8ba0e5e7e456d05c', # human_v95.tar.gz.ad
+            '5258f911d02c314a460d30180b358623bc956c1dca647d5953493d128a7eda9b', # human_v95.tar.gz.ac
+            'd27e6a4a7f90605fe6c031199dd3c549f53a818f5ad5a7e57988f9b277bb34e3', # human_v95.tar.gz.ab
+            '9349099148654093592da5faa4fd3616ab09f3853fdc2ef32fa2110cb9ae41f9', # human_v95.tar.gz.a 
+        ],
+        'start_dir': '%(namelower)s_v%(version)s',
+    }),
+    # FusionCatcher is based on a fork of seqtk with features not available upstream
+    ('seqtk','1.2-r101c', {
+        'easyblock': 'MakeCp',
+        'source_urls': ['http://github.com/ndaniel/seqtk/archive'],
+        'sources': [{ 'download_filename': '%(version)s.tar.gz', 'filename': '%(name)s-%(version)s.tar.gz' }],
+        'checksums': ['4a57fbe828eccaa4f0122c84bf9c4c5409a024ad9deace31ec7bee6d25cf5e49'], # seqtk-1.2-r101c.tar.gz
+        'start_dir': '%(name)s-%(version)s',
+        'files_to_copy': [(['seqtk'], 'tools/%(name)s')],
+    }),
+]
+
+postinstallcmds = [
+    # Set paths in the configuration file
+    'sed -i "s|/apps/fusioncatcher|%(installdir)s|g" %(installdir)s/etc/configuration.cfg',
+    'sed -i "s|python = /usr/bin/|python = $EBROOTPYTHON/bin/|g" %(installdir)s/etc/configuration.cfg',
+    'sed -i "s|java = /usr/bin/|python = $EBROOTJAVA/bin/|g" %(installdir)s/etc/configuration.cfg',
+    # Create missing links
+    'cd %(installdir)s/data && ln -s human_v95 current',
+    'ln -s $EBROOTBOWTIE %(installdir)s/tools/bowtie',
+    'ln -s $EBROOTBOWTIE2 %(installdir)s/tools/bowtie2',
+    'ln -s $EBROOTBLAT %(installdir)s/tools/blat',
+    'ln -s $EBROOTBWA %(installdir)s/tools/bwa',
+    'ln -s $EBROOTBBMAP %(installdir)s/tools/bbmap',
+    'ln -s $EBROOTKENT_TOOLS/bin %(installdir)s/tools/liftover',
+    'ln -s $EBROOTVELVET %(installdir)s/tools/velvet',
+    'ln -s $EBROOTOASES %(installdir)s/tools/oases',
+    'ln -s $EBROOTSAMTOOLS %(installdir)s/tools/samtools',
+    'ln -s $EBROOTSTAR %(installdir)s/tools/star',
+    'ln -s $EBROOTSRAMINTOOLKIT %(installdir)s/tools/sratoolkit',
+    'ln -s $EBROOTSCIPYMINBUNDLE/lib/python%(pyshortver)s/site-packages/numpy %(installdir)s/tools/numpy',
+    'ln -s $EBROOTBIOPYTHON/lib/python%(pyshortver)s/site-packages/Bio %(installdir)s/tools/biopython',
+    'ln -s $EBROOTPYTHON/lib/python%(pyshortver)s/site-packages/xlrd %(installdir)s/tools/xlrd',
+    'ln -s $EBROOTOPENPYXL/lib/python%(pyshortver)s/site-packages/openpyxl %(installdir)s/tools/openpyxl',
+    'ln -s $EBROOTLZO %(installdir)s/tools/lzo',
+    'ln -s $EBROOTPARALLEL %(installdir)s/tools/parallel',
+    'ln -s $EBROOTPIGZ %(installdir)s/tools/pigz',
+    'ln -s $EBROOTPICARD %(installdir)s/tools/picard',
+]
+
+sanity_check_paths = {
+    'files': ['bin/fusioncatcher', 'bin/fusioncatcher-batch', 'bin/fusioncatcher-build', 'etc/configuration.cfg'],
+    'dirs': ['data'],
+}
+
+sanity_check_commands = ["test/test.sh"]
+
+moduleclass = 'bio'
