@@ -1,0 +1,83 @@
+easyblock = 'Tarball'
+
+name = 'PUFFIN'
+version = '20190523'
+commit = 'a63f6c563b7e'
+versionsuffix = '-Python-%(pyver)s'
+
+homepage = 'https://github.com/gifford-lab/PUFFIN'
+description = """PUFFIN models trained on peptitde-MHC binding affinity datasets
+from NetMHCpan3.0 (for class I MHC) and NetMHCIIpan-3.2 (for class II MHC)."""
+
+toolchain = {'name': 'foss', 'version': '2018b'}
+
+source_urls = ['https://github.com/gifford-lab/%(name)s/archive/']
+sources = [{ 'download_file': '%s.tar.gz' % commit, 'filename': '%(name)s-%(version)s.tar.gz']
+
+dependencies = [
+    ('Python', '2.7.15'),
+    ('PyTorch', '1.0.1', versionsuffix),
+    ('torchvision', '0.2.2', versionsuffix),
+    ('h5py', '2.8.0', versionsuffix),
+    ('scikit-learn', '0.20.2', versionsuffix),
+    ('psutil', '5.4.7', versionsuffix),
+    ('pytest', '4.4.0', versionsuffix),
+    ('PyYAML', '3.13', versionsuffix),
+    ('wheel', '0.31.1', versionsuffix),
+]
+
+exts_defaultclass = 'PythonPackage'
+
+exts_default_options = {
+    'download_dep_fail': True,
+    'use_pip': True,
+}
+
+exts_list = [
+    ('click', '7.0', {
+        'source_urls': ['https://pypi.python.org/packages/source/c/click/'],
+    }),
+    ('colorama', '0.4.1', {
+        'source_urls': ['https://pypi.python.org/packages/source/c/colorama/'],
+    }),
+    ('editdistance', '0.5.2', {
+        'source_urls': ['https://pypi.python.org/packages/source/e/editdistance/'],
+    }),
+    ('flatbuffers', '1.10', {
+        'source_urls': ['https://pypi.python.org/packages/source/f/flatbuffers/'],
+    }),
+    ('linecache2', '1.0.0', {
+        'source_urls': ['https://pypi.python.org/packages/source/l/linecache2/'],
+    }),
+    ('olefile', '0.46', {
+        'source_urls': ['https://pypi.python.org/packages/source/o/olefile/'],
+        'source_tmpl': 'olefile-%(version)s.zip',
+    }),
+    ('ray', '0.7.2', {
+        'source_urls': ['https://pypi.python.org/packages/source/r/ray/'],
+    }),
+    ('redis', '3.0.1', {
+        'source_urls': ['https://pypi.python.org/packages/source/r/redis/'],
+    }),
+    ('torchsummary', '1.5.1', {
+        'source_urls': ['https://pypi.python.org/packages/source/t/torchsummary/'],
+    }),
+    ('traceback2', '1.4.0', {
+        'source_urls': ['https://pypi.python.org/packages/source/t/traceback2/'],
+    }),
+    ('unittest2', '1.1.0', {
+        'source_urls': ['https://pypi.python.org/packages/source/u/unittest2/'],
+    }),
+]
+
+sanity_check_paths = {
+    'files': ['score.py', 'preprocess.py'],
+    'dirs': ['data', 'lib/python%(pyshortver)s/site-packages']
+}
+
+modextrapaths = {
+    'PATH': '',
+    'PYTHONPATH': 'lib/python%(pyshortver)s/site-packages',
+}
+
+moduleclass = 'bio'
