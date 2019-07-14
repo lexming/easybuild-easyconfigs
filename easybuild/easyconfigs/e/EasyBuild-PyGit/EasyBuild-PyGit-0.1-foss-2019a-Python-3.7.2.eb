@@ -1,0 +1,38 @@
+easyblock = 'PythonBundle'
+
+name = 'EasyBuild-PyGit'
+version = '0.1'
+versionsuffix = '-Python-%(pyver)s'
+
+homepage = 'https://github.com/lexming/easybuild-easyconfigs/tree/ebpy'
+description = "Python modules required to integrate EasyBuild with Github"
+
+toolchain = {'name': 'foss', 'version': '2019a'}
+
+
+dependencies = [('Python', '3.7.2')]
+
+use_pip = True
+
+exts_list = [
+    # Dependencies for code style check
+    ('pycodestyle', '2.5.0', {
+        'source_urls': ['https://pypi.python.org/packages/source/c/pycodestyle/'],
+    }),
+    # Dependencies for Github integration
+    ('configparser', '3.7.4', {
+        'source_urls': ['https://pypi.python.org/packages/source/c/configparser/'],
+    }),
+    ('entrypoints', '0.2.3', {
+        'source_urls': ['https://pypi.python.org/packages/source/e/entrypoints/'],
+        'checksums': ['d2d587dde06f99545fb13a383d2cd336a8ff1f359c5839ce3a64c917d10c029f'],
+    }),
+    ('keyring', '18.0.1', {
+        'source_urls': ['https://pypi.python.org/packages/source/k/keyring'],
+    }),
+    ('keyrings.cryptfile', '1.3.4', {
+        'source_urls': ['https://pypi.python.org/packages/source/k/keyrings.cryptfile'],
+    }),
+]
+
+moduleclass = 'tools'
