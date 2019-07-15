@@ -14,6 +14,7 @@ toolchain = {'name': 'foss', 'version': '2018b'}
 
 source_urls = ['https://github.com/gifford-lab/%(name)s/archive/']
 sources = [{ 'download_filename': '%s.tar.gz' % commit, 'filename': '%(name)s-%(version)s.tar.gz' }]
+checksums = ['c0cef98d05aeb6ce79a2f164d60dd036f0712f4f73edf5fefd8bf5f8f7546ce6']
 
 dependencies = [
     ('Python', '2.7.15'),
@@ -37,44 +38,56 @@ exts_default_options = {
 
 exts_list = [
     ('click', '7.0', {
-        'source_urls': ['https://pypi.python.org/packages/source/c/click/'],
         'source_tmpl': 'Click-%(version)s.tar.gz',
+        'source_urls': ['https://pypi.python.org/packages/source/c/click/'],
+        'checksums': ['5b94b49521f6456670fdb30cd82a4eca9412788a93fa6dd6df72c94d5a8ff2d7'],
     }),
     ('colorama', '0.4.1', {
         'source_urls': ['https://pypi.python.org/packages/source/c/colorama/'],
+        'checksums': ['05eed71e2e327246ad6b38c540c4a3117230b19679b875190486ddd2d721422d'],
     }),
     ('editdistance', '0.5.2', {
         'source_urls': ['https://pypi.python.org/packages/source/e/editdistance/'],
+        'checksums': ['5a51276aaa6be65c2ac0fb807af93267b4f2488662fc925d27c4d317ef5d067a'],
     }),
     ('faulthandler', '3.1', {
         'source_urls': ['https://pypi.python.org/packages/source/f/faulthandler/'],
+        'checksums': ['83301ffab03c86b291677b64b5cec7026f412cbda5ebd27e4cb3338452c40021'],
     }),
     ('flatbuffers', '1.10', {
         'source_urls': ['https://pypi.python.org/packages/source/f/flatbuffers/'],
+        'checksums': ['91800165bedd4efbb4d3a60a7007d2124514faf7f6d85919f7023b74b503445d'],
     }),
     ('linecache2', '1.0.0', {
         'source_urls': ['https://pypi.python.org/packages/source/l/linecache2/'],
+        'checksums': ['4b26ff4e7110db76eeb6f5a7b64a82623839d595c2038eeda662f2a2db78e97c'],
     }),
     ('olefile', '0.46', {
-        'source_urls': ['https://pypi.python.org/packages/source/o/olefile/'],
         'source_tmpl': '%(name)s-%(version)s.zip',
+        'source_urls': ['https://pypi.python.org/packages/source/o/olefile/'],
+        'checksums': ['133b031eaf8fd2c9399b78b8bc5b8fcbe4c31e85295749bb17a87cba8f3c3964'],
     }),
     ('ray', '0.7.2', {
+        'source_tmpl': '%(name)s-%(version)s-cp27-cp27mu-manylinux1_x86_64.whl',
         'source_urls': ['https://pypi.python.org/packages/source/r/ray'],
-        'source_tmpl': '%%(name)s-%%(version)s-cp%s-cp%smu-manylinux1_x86_64.whl' % (pyver_mm, pyver_mm),
         'unpack_sources': False,
+        'checksums': ['20b89f83df0cf9ab49c3ac2b0ff8c421563fc8a1cb035784fa1b0709c0c3fc47'],
     }),
     ('redis', '3.0.1', {
         'source_urls': ['https://pypi.python.org/packages/source/r/redis/'],
+        'checksums': ['2100750629beff143b6a200a2ea8e719fcf26420adabb81402895e144c5083cf'],
     }),
     ('torchsummary', '1.5.1', {
         'source_urls': ['https://pypi.python.org/packages/source/t/torchsummary/'],
+        'checksums': ['981bf689e22e0cf7f95c746002f20a24ad26aa6b9d861134a14bc6ce92230590'],
     }),
     ('traceback2', '1.4.0', {
         'source_urls': ['https://pypi.python.org/packages/source/t/traceback2/'],
+        'checksums': ['05acc67a09980c2ecfedd3423f7ae0104839eccb55fc645773e1caa0951c3030'],
     }),
     ('unittest2', '1.1.0', {
         'source_urls': ['https://pypi.python.org/packages/source/u/unittest2/'],
+        'checksums': ['22882a0e418c284e1f718a822b3b022944d53d2d908e1690b319a9d3eb2c0579'],
     }),
 ]
 
