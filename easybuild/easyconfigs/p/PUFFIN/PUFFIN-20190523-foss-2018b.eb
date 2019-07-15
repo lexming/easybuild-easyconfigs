@@ -4,6 +4,7 @@ name = 'PUFFIN'
 version = '20190523'
 commit = 'a63f6c563b7e'
 versionsuffix = '-Python-%(pyver)s'
+pyver_mm = '27'
 
 homepage = 'https://github.com/gifford-lab/PUFFIN'
 description = """PUFFIN models trained on peptitde-MHC binding affinity datasets
@@ -12,7 +13,7 @@ from NetMHCpan3.0 (for class I MHC) and NetMHCIIpan-3.2 (for class II MHC)."""
 toolchain = {'name': 'foss', 'version': '2018b'}
 
 source_urls = ['https://github.com/gifford-lab/%(name)s/archive/']
-sources = [{ 'download_file': '%s.tar.gz' % commit, 'filename': '%(name)s-%(version)s.tar.gz']
+sources = [{ 'download_filename': '%s.tar.gz' % commit, 'filename': '%(name)s-%(version)s.tar.gz' }]
 
 dependencies = [
     ('Python', '2.7.15'),
@@ -20,6 +21,7 @@ dependencies = [
     ('torchvision', '0.2.2', versionsuffix),
     ('h5py', '2.8.0', versionsuffix),
     ('scikit-learn', '0.20.2', versionsuffix),
+    ('protobuf-python', '3.6.0', versionsuffix),
     ('psutil', '5.4.7', versionsuffix),
     ('pytest', '4.4.0', versionsuffix),
     ('PyYAML', '3.13', versionsuffix),
@@ -36,12 +38,16 @@ exts_default_options = {
 exts_list = [
     ('click', '7.0', {
         'source_urls': ['https://pypi.python.org/packages/source/c/click/'],
+        'source_tmpl': 'Click-%(version)s.tar.gz',
     }),
     ('colorama', '0.4.1', {
         'source_urls': ['https://pypi.python.org/packages/source/c/colorama/'],
     }),
     ('editdistance', '0.5.2', {
         'source_urls': ['https://pypi.python.org/packages/source/e/editdistance/'],
+    }),
+    ('faulthandler', '3.1', {
+        'source_urls': ['https://pypi.python.org/packages/source/f/faulthandler/'],
     }),
     ('flatbuffers', '1.10', {
         'source_urls': ['https://pypi.python.org/packages/source/f/flatbuffers/'],
@@ -51,10 +57,12 @@ exts_list = [
     }),
     ('olefile', '0.46', {
         'source_urls': ['https://pypi.python.org/packages/source/o/olefile/'],
-        'source_tmpl': 'olefile-%(version)s.zip',
+        'source_tmpl': '%(name)s-%(version)s.zip',
     }),
     ('ray', '0.7.2', {
-        'source_urls': ['https://pypi.python.org/packages/source/r/ray/'],
+        'source_urls': ['https://pypi.python.org/packages/source/r/ray'],
+        'source_tmpl': '%%(name)s-%%(version)s-cp%s-cp%smu-manylinux1_x86_64.whl' % (pyver_mm, pyver_mm),
+        'unpack_sources': False,
     }),
     ('redis', '3.0.1', {
         'source_urls': ['https://pypi.python.org/packages/source/r/redis/'],
