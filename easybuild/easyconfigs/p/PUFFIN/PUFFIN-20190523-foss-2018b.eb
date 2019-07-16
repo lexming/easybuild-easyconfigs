@@ -12,9 +12,19 @@ from NetMHCpan3.0 (for class I MHC) and NetMHCIIpan-3.2 (for class II MHC)."""
 
 toolchain = {'name': 'foss', 'version': '2018b'}
 
-source_urls = ['https://github.com/gifford-lab/%(name)s/archive/']
-sources = [{ 'download_filename': '%s.tar.gz' % commit, 'filename': '%(name)s-%(version)s.tar.gz' }]
-checksums = ['c0cef98d05aeb6ce79a2f164d60dd036f0712f4f73edf5fefd8bf5f8f7546ce6']
+source_urls = [
+    'https://github.com/gifford-lab/%(name)s/archive/',  # source code
+    'http://gerv.csail.mit.edu',  # data files
+]
+sources = [
+    { 'download_filename': '%s.tar.gz' % commit, 'filename': '%(name)s-%(version)s.tar.gz' },
+    # Data files are big (1.2 GB), consider increasing --download-timeout
+    { 'filename': 'models.tar.gz', 'extract_cmd': "tar -C %(name)s-* -xzf %s" },
+]
+checksums = [
+    'c0cef98d05aeb6ce79a2f164d60dd036f0712f4f73edf5fefd8bf5f8f7546ce6',  # PUFFIN-20190523.tar.gz
+    'ece887afff468c9d8646b0df5c50d7cf132f2a0ea20b4f87f46ce7cf5f596263',  # models.tar.gz
+]
 
 dependencies = [
     ('Python', '2.7.15'),
