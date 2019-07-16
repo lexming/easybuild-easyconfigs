@@ -37,4 +37,6 @@ configopts = '--LIBS="$LIBS -lrt" '
 # configopts += '--with-batch=1 --known-mpi-shared-libraries=1 --known-64-bit-blas-indices=0 '
 # prebuildopts = "srun ./conftest-arch-linux2-c-opt && ./reconfigure-arch-linux2-c-opt.py && "
 
+shared_libs = True
+
 moduleclass = 'numlib'
