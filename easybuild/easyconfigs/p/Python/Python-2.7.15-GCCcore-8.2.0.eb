@@ -324,6 +324,10 @@ exts_list = [
         'source_urls': ['https://pypi.python.org/packages/source/s/singledispatch/'],
         'checksums': ['5b06af87df13818d14f08a028e42f566640aef80805c3b50c5056b086e3c2b9c'],
     }),
+    ('typing', '3.6.6', {
+        'source_urls': ['https://pypi.python.org/packages/source/t/typing/'],
+        'checksums': ['4027c5f6127a6267a435201981ba156de91ad0d1d98e9ddc2aa173453453492d'],
+    }),
 ]
 
 moduleclass = 'lang'
