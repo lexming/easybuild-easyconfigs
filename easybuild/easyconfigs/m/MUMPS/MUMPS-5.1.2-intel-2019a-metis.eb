@@ -5,7 +5,7 @@ versionsuffix = '-metis'
 homepage = 'http://graal.ens-lyon.fr/MUMPS/'
 description = "A parallel sparse direct solver"
 
-toolchain = {'name': 'foss', 'version': '2019a'}
+toolchain = {'name': 'intel', 'version': '2019a'}
 toolchainopts = {'pic': True, 'usempi': True}
 
 source_urls = ['http://mumps.enseeiht.fr/']
