@@ -1,0 +1,22 @@
+easyblock = "PythonPackage"
+
+name = 'pyproj'
+version = '1.9.6'
+versionsuffix = "-Python-%(pyver)s"
+
+homepage = 'https://pyproj4.github.io/pyproj'
+description = "Python interface to PROJ4 library for cartographic transformations"
+
+toolchain = {'name': 'foss', 'version': '2018b'}
+
+source_urls = [PYPI_SOURCE]
+sources = [SOURCE_TAR_GZ]
+
+dependencies = [
+    ('Python', '3.6.6'),
+    ('PROJ', '5.0.0'),
+]
+
+prebuildopts = "export PROJ_DIR=$EBROOTPROJ && "
+
+moduleclass = 'math'
