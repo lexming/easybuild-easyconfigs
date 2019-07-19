@@ -1,0 +1,21 @@
+easyblock = "PythonPackage"
+
+name = 'descartes'
+version = '1.1.0'
+versionsuffix = "-Python-%(pyver)s"
+
+homepage = 'https://bitbucket.org/sgillies/descartes'
+description = "Use Shapely or GeoJSON-like geometric objects as matplotlib paths and patches"
+
+toolchain = {'name': 'foss', 'version': '2018b'}
+
+source_urls = [PYPI_SOURCE]
+sources = [SOURCE_TAR_GZ]
+
+dependencies = [
+    ('Python', '3.6.6'),
+    ('matplotlib', '3.0.2', versionsuffix),
+    ('Shapely', '1.6.4', versionsuffix),
+]
+
+moduleclass = 'vis'
