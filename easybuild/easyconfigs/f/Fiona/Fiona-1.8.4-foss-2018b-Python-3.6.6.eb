@@ -1,0 +1,47 @@
+easyblock = 'PythonBundle'
+
+name = 'Fiona'
+version = '1.8.4'
+versionsuffix = "-Python-%(pyver)s"
+
+homepage = 'https://github.com/Toblerity/Fiona'
+description = """Fiona is designed to be simple and dependable. It focuses on reading and writing data
+in standard Python IO style and relies upon familiar Python types and protocols such as files, dictionaries,
+mappings, and iterators instead of classes specific to OGR. Fiona can read and write real-world data using
+multi-layered GIS formats and zipped virtual file systems and integrates readily with other Python GIS
+packages such as pyproj, Rtree, and Shapely."""
+
+toolchain = {'name': 'foss', 'version': '2018b'}
+
+dependencies = [
+    ('Python', '3.6.6'),
+    ('GDAL', '2.2.3', versionsuffix),
+]
+
+use_pip = True
+
+exts_list = [
+    ('Click', '7.0', {
+        'source_urls': ['https://pypi.python.org/packages/source/c/click'],
+    }),
+    ('attrs', '18.2.0', {
+        'modulename': 'attr',
+        'source_urls': ['https://pypi.python.org/packages/source/a/attrs/'],
+    }),
+    ('cligj', '0.5.0', {
+        'source_urls': ['https://pypi.python.org/packages/source/c/cligj/'],
+    }),
+    ('munch', '2.3.2', {
+        'source_urls': ['https://pypi.python.org/packages/source/m/munch/'],
+    }),
+    (name, version, {
+        'source_urls': ['https://pypi.python.org/packages/source/f/Fiona/'],
+    }),
+]
+
+sanity_check_paths = {
+    'files': ['bin/fio'],
+    'dirs': ['lib/python%(pyshortver)s/site-packages'],
+}
+
+moduleclass = 'data'
