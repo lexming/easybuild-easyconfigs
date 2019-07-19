@@ -1,7 +1,7 @@
 easyblock = 'PythonBundle'
 
 name = 'Fiona'
-version = '1.8.4'
+version = '1.8.6'
 versionsuffix = "-Python-%(pyver)s"
 
 homepage = 'https://github.com/Toblerity/Fiona'
