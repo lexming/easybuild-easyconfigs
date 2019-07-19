@@ -27,7 +27,7 @@ dependencies = [
     ('METIS', '5.1.0'),
     ('ParMETIS', '4.0.3'),
     ('SCOTCH', '6.0.6'),
-    ('MUMPS', '5.1.2', '-metis'),
+    ('MUMPS', '5.2.1', '-metis'),
     ('SuiteSparse', '5.4.0', '-METIS-5.1.0'),
     ('Hypre', '2.15.1'),
 ]
