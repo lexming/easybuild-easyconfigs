@@ -1,0 +1,26 @@
+easyblock = 'ConfigureMake'
+
+name = 'libspatialindex'
+version = '1.9.0'
+
+homepage = 'https://libspatialindex.org/'
+description = "C++ implementation of R*-tree, an MVR-tree and a TPR-tree with C API"
+
+toolchain = {'name': 'GCCcore', 'version': '8.2.0'}
+
+source_urls = ['https://github.com/libspatialindex/libspatialindex/archive/']
+sources = ['%(version)s.tar.gz']
+
+builddependencies = [
+    ('binutils', '2.31.1'),
+    ('CMake', '3.13.3'),
+]
+
+preconfigopts = "./autogen.sh && "
+
+sanity_check_paths = {
+    'files': ['lib/libspatialindex.a', 'lib/libspatialindex.%s' % SHLIB_EXT],
+    'dirs': ['include/spatialindex'],
+}
+
+moduleclass = 'lib'
