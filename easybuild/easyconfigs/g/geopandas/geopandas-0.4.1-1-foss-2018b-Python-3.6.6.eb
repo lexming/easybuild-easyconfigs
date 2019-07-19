@@ -1,4 +1,4 @@
-easyblock = "PythonPackage"
+easyblock = 'PythonBundle'
 
 name = 'geopandas'
 version = '0.4.1'
@@ -8,23 +8,33 @@ homepage = 'https://github.com/geopandas/geopandas'
 description = """GeoPandas is a project to add support for geographic data to pandas objects.
 It currently implements GeoSeries and GeoDataFrame types which are subclasses of pandas.Series
 and pandas.DataFrame respectively. GeoPandas objects can act on shapely geometry objects and
-perform geometric operations."""
+perform geometric operations.
+This module bundles geopandas with geopy, contextily, geoplot, descartes and matplotlib."""
 
 toolchain = {'name': 'foss', 'version': '2018b'}
-
-source_urls = [PYPI_SOURCE]
-sources = [SOURCE_TAR_GZ]
 
 dependencies = [
     ('Python', '3.6.6'),
     ('Shapely', '1.6.4', versionsuffix),
     ('Fiona', '1.8.4', versionsuffix),
     ('pyproj', '1.9.6', versionsuffix),
-    ('matplotlib', '3.0.2', versionsuffix),   # optional (needed for plotting)
-    ('descartes', '1.1.0', versionsuffix),    # optional (needed for plotting)
-    ('Rtree', '0.8.3', versionsuffix),        # optional
+    ('matplotlib', '3.0.2', versionsuffix),   # required by geoplots, optional for geopandas
+    ('Cartopy', '0.17.0', versionsuffix),     # required by geoplots
+    ('descartes', '1.1.0', versionsuffix),    # optional
     ('geopy', '1.18.1', versionsuffix),       # optional
     ('contextily', '1.0rc1', versionsuffix),  # optional
+    ('Rtree', '0.8.3', versionsuffix),        # optional
+]
+
+use_pip = True
+
+exts_list = [
+    ('geoplot', '0.2.4', {
+        'source_urls': ['https://pypi.python.org/packages/source/g/geoplot'],
+    }),
+    (name, version, {
+        'source_urls': ['https://pypi.python.org/packages/source/g/geopandas/'],
+    }),
 ]
 
 moduleclass = 'geo'
