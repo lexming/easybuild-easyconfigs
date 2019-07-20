@@ -21,11 +21,13 @@ use_pip = True
 
 exts_list = [
     ('pyshp', '2.0.1', {
-        'source_urls': ['https://pypi.python.org/packages/source/p/pyshp'],
         'modulename': 'shapefile',
+        'source_urls': ['https://pypi.python.org/packages/source/p/pyshp'],
+        'checksums': ['5a092adcb8c2cd1dbeab76b62695db9b8e6e1408e7c37cf49eb61c0dcc913d11'],
     }),
     (name, version, {
         'source_urls': ['https://pypi.python.org/packages/source/c/cartopy/'],
+        'checksums': ['424bd9e9ddef6e48cbdee694ce589ec431be8591f15b6cb93cb2b333a29b2c61'],
     }),
 ]
 
