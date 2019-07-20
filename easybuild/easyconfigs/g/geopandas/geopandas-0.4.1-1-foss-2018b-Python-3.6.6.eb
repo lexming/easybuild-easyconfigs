@@ -16,7 +16,7 @@ toolchain = {'name': 'foss', 'version': '2018b'}
 dependencies = [
     ('Python', '3.6.6'),
     ('Shapely', '1.6.4', versionsuffix),
-    ('Fiona', '1.8.4', versionsuffix),
+    ('Fiona', '1.8.6', versionsuffix),
     ('pyproj', '1.9.6', versionsuffix),
     ('matplotlib', '3.0.2', versionsuffix),   # required by geoplots, optional for geopandas
     ('Cartopy', '0.17.0', versionsuffix),     # required by geoplots
