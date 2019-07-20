@@ -10,6 +10,7 @@ toolchain = {'name': 'GCCcore', 'version': '7.3.0'}
 
 source_urls = ['https://github.com/libspatialindex/libspatialindex/archive/']
 sources = ['%(version)s.tar.gz']
+checksums = ['93cce77269612f45287b521d5afdfb245be2b93b8b6438d92f8b9e0bdb37059d']
 
 builddependencies = [
     ('binutils', '2.30'),
