@@ -15,7 +15,7 @@ checksums = ['93cce77269612f45287b521d5afdfb245be2b93b8b6438d92f8b9e0bdb37059d']
 
 builddependencies = [
     ('binutils', '2.30'),
-    ('CMake', '3.12.1'),
+    ('Autotools', '20180311'),
     ('libtool', '2.4.6'),
 ]
 
