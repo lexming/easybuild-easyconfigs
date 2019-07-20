@@ -11,6 +11,7 @@ toolchain = {'name': 'foss', 'version': '2018b'}
 
 source_urls = [PYPI_SOURCE]
 sources = [SOURCE_TAR_GZ]
+checksums = ['135a502146af5ed6ff359975e2ebc5fa4b71b5432c355c2cafdc6dea1337035b']
 
 dependencies = [
     ('Python', '3.6.6'),
