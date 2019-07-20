@@ -31,9 +31,11 @@ use_pip = True
 exts_list = [
     ('geoplot', '0.2.4', {
         'source_urls': ['https://pypi.python.org/packages/source/g/geoplot'],
+        'checksums': ['5e42912016c88d48e44fe0603e9f0250cb29a539fc3e99ac30b9dd41893217af'],
     }),
     (name, version, {
         'source_urls': ['https://pypi.python.org/packages/source/g/geopandas/'],
+        'checksums': ['a59345c7ee9c4532101342bf31f5c576c32f901f16a5aaf0637c7e1f5ac8939c'],
     }),
 ]
 
