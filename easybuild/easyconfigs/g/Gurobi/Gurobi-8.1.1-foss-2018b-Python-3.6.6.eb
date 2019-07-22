@@ -26,7 +26,7 @@ sanity_check_paths = {
     'dirs': [],
 }
 
-license_file = '/u/adomingo/.config/%(name)s.lic'
+license_file = HOME + '/licenses/%(name)s.lic'
 
 modloadmsg = 'Gurobi Python Interface can be loaded in Python with "import gurobipy"'
 
