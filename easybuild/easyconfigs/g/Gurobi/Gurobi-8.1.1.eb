@@ -15,4 +15,6 @@ checksums = ['c030414603d88ad122246fe0e42a314fab428222d98e26768480f1f870b53484']
 
 license_file = HOME + '/licenses/%(name)s/%(namelower)s.lic'
 
+modloadmsg = 'Gurobi Python shell available with command `gurobi.sh`'
+
 moduleclass = 'math'
