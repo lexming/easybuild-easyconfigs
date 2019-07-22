@@ -1,0 +1,33 @@
+name = 'Gurobi'
+version = '8.1.1'
+versionsuffix = '-Python-%(pyver)s'
+
+homepage = 'http://www.gurobi.com'
+description = """The Gurobi Optimizer is a state-of-the-art solver for mathematical programming.
+The solvers in the Gurobi Optimizer were designed from the ground up to exploit modern 
+architectures and multi-core processors, using the most advanced implementations of the 
+latest algorithms."""
+
+toolchain = {'name': 'foss', 'version': '2018b'}
+
+source_urls = ['https://packages.gurobi.com/%(version_major_minor)s/']
+sources = ['%(namelower)s%(version)s_linux64.tar.gz']
+checksums = ['c030414603d88ad122246fe0e42a314fab428222d98e26768480f1f870b53484']
+
+dependencies = [('Python', '3.6.6')]
+
+postinstallcmds = [
+    'rm %(installdir)s/bin/gurobi.sh',  # Gurobi Python shell will not work because it
+    'rm %(installdir)s/bin/python2.7',  # is based on Python 2.7
+]
+
+sanity_check_paths = {
+    'files': ['bin/grbprobe', 'bin/grbtune', 'bin/gurobi_cl'],
+    'dirs': [],
+}
+
+license_file = '/u/adomingo/.config/%(name)s.lic'
+
+modloadmsg = 'Gurobi Python Interface can be loaded in Python with "import gurobipy"'
+
+moduleclass = 'math'
