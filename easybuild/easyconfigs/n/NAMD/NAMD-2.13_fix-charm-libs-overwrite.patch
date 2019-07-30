@@ -1,0 +1,31 @@
+The build script of charm resets the environment (CMK_) multiple times during its execution, resulting in a partial declaration of libraries at link time and failure. This patch rearranges the execution of scripts in conv-config.sh to ensure that no information is lost.
+Author: Alex Domingo (alex.domingo.toro@vub.be)
+diff -W 134 -Nru NAMD_2.13_Source_orig/charm-6.8.2/src/arch/verbs-linux-x86_64/conv-mach.sh NAMD_2.13_Source/charm-6.8.2/src/arch/verbs-linux-x86_64/conv-mach.sh
+--- NAMD_2.13_Source_orig/charm-6.8.2/src/arch/verbs-linux-x86_64/conv-mach.sh	2018-01-12 02:06:19.000000000 +0100
++++ NAMD_2.13_Source/charm-6.8.2/src/arch/verbs-linux-x86_64/conv-mach.sh	2019-07-24 11:39:34.163308277 +0200
+@@ -1,4 +1,4 @@
+-. $CHARMINC/cc-gcc.sh
++#. $CHARMINC/cc-gcc.sh
+ 
+ #CMK_DEFS="$CMK_DEFS -DHAVE_USR_INCLUDE_MALLOC_H=1 "
+ CMK_XIOPTS=''
+diff -W 134 -Nru NAMD_2.13_Source_orig/charm-6.8.2/src/scripts/conv-config.sh NAMD_2.13_Source/charm-6.8.2/src/scripts/conv-config.sh
+--- NAMD_2.13_Source_orig/charm-6.8.2/src/scripts/conv-config.sh	2018-01-12 02:06:20.000000000 +0100
++++ NAMD_2.13_Source/charm-6.8.2/src/scripts/conv-config.sh	2019-07-24 11:44:50.557091018 +0200
+@@ -27,6 +27,7 @@
+ 
+ CMK_LD_SHARED="-shared"
+ 
++. $CHARMINC/cc-gcc.sh
+ . $CHARMINC/conv-mach.sh
+ 
+ [ -z "$CMK_C_OPTIMIZE" ] && CMK_C_OPTIMIZE="-O2"
+@@ -69,6 +70,7 @@
+ if [ -r $CHARMINC/conv-mach-opt.sh ]
+ then
+ . $CHARMINC/conv-mach-opt.sh
++. $CHARMINC/conv-mach.sh
+ fi
+ 
+ CMK_CPP_C="$CMK_CPP_C $CMK_DEFS "
+Binary files NAMD_2.13_Source_orig/.git/index and NAMD_2.13_Source/.git/index differ
