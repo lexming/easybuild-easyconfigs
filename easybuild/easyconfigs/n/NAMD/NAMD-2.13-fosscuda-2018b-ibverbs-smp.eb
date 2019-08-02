@@ -1,0 +1,31 @@
+name = 'NAMD'
+version = '2.13'
+versionsuffix = '-ibverbs-smp'
+
+homepage = 'http://www.ks.uiuc.edu/Research/namd/'
+description = """NAMD is a parallel molecular dynamics code designed for high-performance simulation of
+ large biomolecular systems."""
+
+toolchain = {'name': 'fosscuda', 'version': '2018b'}
+toolchainopts = {'usempi': False, 'openmp': True, 'pic': True}
+
+sources = [{'filename': 'NAMD_%(version)s_Source.tar.gz'}]
+patches = ['%(name)s-%(version)s_fix-charm-libs-overwrite.patch']
+checksums = [
+    'cb0b43f520ac6be761899326441541aa00de15897986223c8ce2f0f6e42b52bc',  # NAMD_2.13_Source.tar.gz
+    '56ab2c25b8afac01978273ce5711c97dee17d854ab1f7c64dad41cf3883a8042',  # NAMD-2.13_fix-charm-libs-overwrite.patch
+]
+
+osdependencies = [('libibverbs-dev', 'libibverbs-devel', 'rdma-core-devel')]
+
+dependencies = [('Tcl', '8.6.8')]
+
+# /bin/csh is required by 'config' script
+osdependencies = ['tcsh']
+
+charm_arch = "verbs-linux-x86_64-smp"
+
+# Disable test step as those are not prepared for IB and CUDA
+runtest = False
+
+moduleclass = 'chem'
