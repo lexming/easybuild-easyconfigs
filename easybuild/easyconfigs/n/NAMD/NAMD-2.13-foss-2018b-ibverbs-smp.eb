@@ -1,6 +1,6 @@
 name = 'NAMD'
 version = '2.13'
-versionsuffix = '-ibverbs'
+versionsuffix = '-ibverbs-smp'
 
 homepage = 'http://www.ks.uiuc.edu/Research/namd/'
 description = """NAMD is a parallel molecular dynamics code designed for high-performance simulation of
@@ -9,10 +9,7 @@ description = """NAMD is a parallel molecular dynamics code designed for high-pe
 toolchain = {'name': 'foss', 'version': '2018b'}
 toolchainopts = {'usempi': False, 'openmp': True, 'pic': True}
 
-sources = [{
-    'filename': 'NAMD_%(version)s_Source.tar.gz',
-    'extract_cmd': "tar xfv %s",  # source file is actually not gzipped
-}]
+sources = ['NAMD_%(version)s_Source.tar.gz']
 patches = ['%(name)s-%(version)s_fix-charm-libs-overwrite.patch']
 checksums = [
     'cb0b43f520ac6be761899326441541aa00de15897986223c8ce2f0f6e42b52bc',  # NAMD_2.13_Source.tar.gz
