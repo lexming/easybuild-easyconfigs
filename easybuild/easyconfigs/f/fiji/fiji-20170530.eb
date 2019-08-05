@@ -1,0 +1,28 @@
+easyblock = 'PackedBinary'
+
+name = 'fiji'
+version = '20170530'
+
+homepage = 'https://fiji.sc/'
+description = """Fiji is an image processing package—a 'batteries-included' distribution of
+ ImageJ, bundling a lot of plugins which facilitate scientific image analysis.
+This release is based on ImageJ-1.51n"""
+
+toolchain = {'name': 'dummy', 'version': 'dummy'}
+
+source_urls = ['https://downloads.imagej.net/fiji/Life-Line/']
+sources = ['%(name)s-nojre-%(version)s.zip']
+
+dependencies = [('Java', '1.8', '', True)]
+
+# Remove binaries for other platforms
+postinstallcmds = ['rm %(installdir)s/{ImageJ-win32.exe,ImageJ-win64.exe,ImageJ-linux32}']
+
+sanity_check_paths = {
+    'files': ['ImageJ-linux64'],
+    'dirs': [],
+}
+
+modloadmsg = 'ImageJ/fiji can be started with the command: ImageJ-linux64'
+
+moduleclass = 'bio'
