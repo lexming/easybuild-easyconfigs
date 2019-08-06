@@ -40,4 +40,4 @@ modloadmsg = """ ImageJ/fiji can be started with the command: ImageJ-linux64.
  Plugins can be installed in your $HOME/.plugins folder.
  If you need any other update sites to be enabled, please contact support."""
 
-moduleclass = 'bio'
+moduleclass = 'vis'
