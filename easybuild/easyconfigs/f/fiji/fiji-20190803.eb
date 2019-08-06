@@ -8,7 +8,7 @@ description = """Fiji is an image processing package—a 'batteries-included' di
  ImageJ, bundling a lot of plugins which facilitate scientific image analysis.
 This release is based on ImageJ-1.52p and fiji-2.0.0-pre8"""
 
-toolchain = {'name': 'dummy', 'version': 'dummy'}
+toolchain = {'name': 'dummy', 'version': ''}
 
 # There are no sane releases of fiji, only a tarball of the *latest* version is available.
 # Manually download the 'nojre' version and check the versions of ImageJ and fiji in the folder 'jars'
