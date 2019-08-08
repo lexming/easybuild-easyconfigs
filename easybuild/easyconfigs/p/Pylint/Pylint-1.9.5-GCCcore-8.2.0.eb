@@ -1,0 +1,57 @@
+easyblock = 'PythonBundle'
+
+name = 'Pylint'
+version = '1.9.5'
+
+homepage = 'https://www.pylint.org/'
+description = """Pylint is a tool that checks for errors in Python code, tries to enforce
+ a coding standard and looks for code smells. It can also look for certain type errors,
+ it can recommend suggestions about how particular blocks can be refactored and
+ can offer you details about the code's complexity."""
+
+toolchain = {'name': 'GCCcore', 'version': '8.2.0'}
+
+dependencies = [('Python','2.7.15')]
+
+use_pip = True
+
+exts_list = [
+    ('wrapt', '1.11.2', {
+        'source_urls': ['https://pypi.python.org/packages/source/w/wrapt'],
+    }),
+    ('lazy-object-proxy', '1.4.1', {
+        'modulename': 'lazy_object_proxy',
+        'source_urls': ['https://pypi.python.org/packages/source/l/lazy-object-proxy'],
+    }),
+    ('futures', '3.3.0', {
+        'modulename': 'concurrent.futures',
+        'source_urls': ['https://pypi.python.org/packages/source/f/futures'],
+    }),
+    ('backports.functools_lru_cache', '1.5', {
+        'modulename': 'backports.functools_lru_cache',
+        'source_urls': ['https://pypi.python.org/packages/source/b/backports.functools_lru_cache'],
+        'checksums': ['9d98697f088eb1b0fa451391f91afb5e3ebde16bbdb272819fd091151fda4f1a'],
+    }),
+    ('singledispatch', '3.4.0.3', {
+        'source_urls': ['https://pypi.python.org/packages/source/s/singledispatch'],
+        'checksums': ['5b06af87df13818d14f08a028e42f566640aef80805c3b50c5056b086e3c2b9c'],
+    }),
+    ('astroid', '1.6.6', {
+        'source_urls': ['https://pypi.python.org/packages/source/a/astroid'],
+    }),
+    ('isort', '4.3.21', {
+        'source_urls': ['https://pypi.python.org/packages/source/i/isort'],
+    }),
+    ('mccabe', '0.6.1', {
+        'source_urls': ['https://pypi.python.org/packages/source/m/mccabe'],
+        'checksums': ['dd8d182285a0fe56bace7f45b5e7d1a6ebcbf524e8f3bd87eb0f125271b8831f'],
+    }),
+    ('configparser', '3.7.4', {
+        'source_urls': ['https://pypi.python.org/packages/source/c/configparser'],
+    }),
+    (name.lower(), version, {
+        'source_urls': ['https://pypi.python.org/packages/source/p/pylint'],
+    }),
+]
+
+moduleclass = 'tools'
