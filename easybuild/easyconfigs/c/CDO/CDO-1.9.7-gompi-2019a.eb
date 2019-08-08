@@ -9,8 +9,8 @@ description = """CDO is a collection of command line Operators to manipulate and
 toolchain = {'name': 'gompi', 'version': '2019a'}
 toolchainopts = {'pic': True, 'usempi': True}
 
-source_urls = ['https://code.mpimet.mpg.de/attachments/download/18264/']
-sources = [SOURCELOWER_TAR_GZ]
+source_urls = ['https://code.mpimet.mpg.de/attachments/download/20124/']
+sources = ['%(namelower)s-1.9.7.1.tar.gz']
 
 dependencies = [
     ('HDF5', '1.10.5'),
