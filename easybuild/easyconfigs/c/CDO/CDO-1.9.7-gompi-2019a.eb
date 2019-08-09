@@ -11,6 +11,7 @@ toolchainopts = {'pic': True, 'usempi': True}
 
 source_urls = ['https://code.mpimet.mpg.de/attachments/download/20124/']
 sources = ['%(namelower)s-1.9.7.1.tar.gz']
+checksums = ['3771952e065bcf935d43e492707370ed2a0ecb59a06bea24f9ab69d77943962c']
 
 dependencies = [
     ('HDF5', '1.10.5'),
