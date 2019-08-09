@@ -10,6 +10,7 @@ toolchain = {'name': 'gompi', 'version': '2019a'}
 
 source_urls = ['https://parallel-netcdf.github.io/Release/']
 sources = [SOURCELOWER_TAR_GZ]
+checksums = ['d2c18601b364c35b5acb0a0b46cd6e14cae456e0eb854e5c789cf65f3cd6a2a7']
 
 sanity_check_paths = {
     'files': ['bin/pnetcdf_version'],
