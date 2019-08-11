@@ -21,7 +21,7 @@ dependencies = [
     ('UDUNITS', '2.2.26'),
     ('expat', '2.2.6'),
     ('ANTLR', '2.7.7'),
-    ('libdap', '3.20.3'),
+    ('libdap', '3.20.4'),
     ('GSL', '2.5'),
     ('netCDF', '4.6.2'),
     ('ESMF', '7.1.0r'),
