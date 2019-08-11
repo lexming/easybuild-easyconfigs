@@ -11,6 +11,7 @@ toolchain = {'name': 'foss', 'version': '2018b'}
 
 source_urls = ['https://github.com/pytorch/vision/archive']
 sources = ['v%(version)s.tar.gz']
+checksums = ['9572c557fe8be1946c76f9fe21ddd0ffd8de487e8d0abc5008d7f58f76acd1b3']
 
 builddependencies = [('CMake', '3.12.1')]
 
