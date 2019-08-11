@@ -11,37 +11,37 @@ toolchain = {'name': 'foss', 'version': '2018b'}
 
 dependencies = [
     ('Python', '3.6.6'),
-    ('PyTorch', '1.0.1', versionsuffix ),
-    ('torchvision', '0.2.2', versionsuffix ),
-    ('protobuf-python', '3.6.0', versionsuffix ),
-    ('matplotlib', '3.0.2', versionsuffix ),
-    ('pytest', '4.4.0', versionsuffix ),
-    ('Pillow', '5.3.0', versionsuffix ), # needed by imageio
+    ('PyTorch', '1.0.1', versionsuffix),
+    ('torchvision', '0.2.2', versionsuffix),
+    ('protobuf-python', '3.6.0', versionsuffix),
+    ('matplotlib', '3.0.2', versionsuffix),
+    ('pytest', '4.4.0', versionsuffix),
+    ('Pillow', '5.3.0', versionsuffix),  # needed by imageio
 ]
 
 exts_list = [
     ('imageio', '2.4.1', {
         'source_urls': ['https://pypi.python.org/packages/source/i/imageio'],
+        'checksums': ['16b8077bc8a5fa7a58b3e744f7ecbb156d8c088132df31e0f4f546c98de3514a'],
     }),
     ('decorator', '4.3.2', {
         'source_urls': ['https://pypi.python.org/packages/source/d/decorator'],
+        'checksums': ['33cd704aea07b4c28b3eb2c97d288a06918275dac0ecebdaf1bc8a48d98adb9e'],
     }),
     ('tqdm', '4.28.1', {
         'source_urls': ['https://pypi.python.org/packages/source/t/tqdm'],
+        'checksums': ['5b4d5549984503050883bc126280b386f5f4ca87e6c023c5d015655ad75bdebb'],
     }),
     ('moviepy', '0.2.3.5', {
         'source_urls': ['https://pypi.python.org/packages/source/m/moviepy'],
+        'checksums': ['536ea61c2c7d276ee65daf2da8a1d2e34bbafd524d6e8a20fde38ce9bfbd2dcb'],
     }),
     (name, version, {
-        'source_urls': ['https://github.com/lanpa/%(name)s/archive'],
-        'source_tmpl': 'v%(version)s.tar.gz',
         'modulename': '%(name)s',
+        'source_tmpl': 'v%(version)s.tar.gz',
+        'source_urls': ['https://github.com/lanpa/%(name)s/archive'],
+        'checksums': ['c7b5dca231afccc68a95d03b8ff81fa9931d4a30542e4491d31cf009572c4672'],
     }),
 ]
-
-sanity_check_paths = {
-    'files': [],
-    'dirs': ['lib/python%(pyshortver)s/site-packages'],
-}
 
 moduleclass = 'vis'
