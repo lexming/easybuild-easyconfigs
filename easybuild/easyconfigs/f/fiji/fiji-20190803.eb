@@ -12,8 +12,8 @@ toolchain = {'name': 'dummy', 'version': ''}
 
 # There are no sane releases of fiji, only a tarball of the *latest* version is available.
 # Manually download the 'nojre' version and check the versions of ImageJ and fiji in the folder 'jars'
-#source_urls = ['https://downloads.imagej.net/fiji/latest/']
-#sources = ['%(name)s-nojre.tar.gz']
+# source_urls = ['https://downloads.imagej.net/fiji/latest/']
+# sources = ['%(name)s-nojre.tar.gz']
 sources = ['%(name)s-nojre-%(version)s.tar.gz']
 
 dependencies = [('Java', '1.8', '', True)]
@@ -28,8 +28,8 @@ postinstallcmds = [
     '%(installdir)s/ImageJ-linux64 --headless --update edit-update-site "3D ImageJ Suite"'
     ' http://sites.imagej.net/Tboudier/',
     # Add a new update site
-    #'%(installdir)s/ImageJ-linux64 --headless --update add-update-site "New Name"'
-    #' http://site.url/NewName/',
+    # '%(installdir)s/ImageJ-linux64 --headless --update add-update-site "New Name"'
+    # ' http://site.url/NewName/',
     # Update the installation
     '%(installdir)s/ImageJ-linux64 --headless --update update',
 ]
