@@ -7,7 +7,7 @@ homepage = 'https://doi.org/10.1007/s10851-008-0135-9'
 description = """Implementation based on ITK of a Fast and Log-Euclidean
  Polyaffine Framework for Locally Linear Registration. Published by Vincent
  Arsigny, Olivier Commowick, Nicholas Ayache, Xavier Pennec. Journal of
- Mathematical Imaging and Vision, Springer Verlag, 2009, 33 (2), pp.222-238."
+ Mathematical Imaging and Vision, Springer Verlag, 2009, 33 (2), pp.222-238."""
 
 toolchain = {'name': 'foss', 'version': '2018b'}
 toolchainopts = {'pic': True, 'cstd': 'c++11'}
