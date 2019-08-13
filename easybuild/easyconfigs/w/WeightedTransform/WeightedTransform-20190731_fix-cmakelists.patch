@@ -1,0 +1,13 @@
+# author: Alex Domingo
+diff -W 134 -Nru WeightedTransform/CMakeLists.txt WeightedTransform_new/CMakeLists.txt
+--- WeightedTransform/CMakeLists.txt	2019-07-31 20:14:00.000000000 +0200
++++ WeightedTransform_new/CMakeLists.txt	2019-08-13 11:01:47.171094727 +0200
+@@ -12,7 +12,7 @@
+   include(${VTK_USE_FILE})
+ endif()
+ 
+-add_executable(WeightedTransform MACOSX_BUNDLE WeightedTransform.cxx animaBobyqaOptimizer.cxx)
++add_executable(WeightedTransform Cluster.cpp Point.cpp csvUtils.cpp WeightedTransform.cxx animaBobyqaOptimizer.cxx)
+ 
+ if( "${ITK_VERSION_MAJOR}" LESS 4 )
+   target_link_libraries(WeightedTransform ITKReview ${ITK_LIBRARIES})

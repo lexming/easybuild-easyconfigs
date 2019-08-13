@@ -1,0 +1,33 @@
+easyblock = 'CMakeMakeCp'
+
+name = 'WeightedTransform'
+version = '20190731'
+
+homepage = 'https://hpc.ulb.be/'
+description = "Weighted transform based on ITK."
+
+toolchain = {'name': 'foss', 'version': '2018b'}
+toolchainopts = {'pic': True, 'cstd': 'c++11'}
+
+# Sources were provided by the user (INC0034562)
+sources = [SOURCE_TAR_GZ]
+patches = ['%(name)s-%(version)s_fix-cmakelists.patch']
+checksums = [
+    # WeightedTransform-20190731.tar.gz
+    '42b7dc1b7aa9a7209d9b94088f1e58ba81f9b084a2486a15c6a979dbefb94649',
+    # WeightedTransform-20190731_fix-cmakelists.patch
+    'cc0fd418a684244f7cea19fc156e16a1cff4d5b46c1052ccc6f08335770431ce',
+]
+
+builddependencies = [('CMake', '3.12.1')]
+
+dependencies = [('ITK', '4.13.1', '-Python-3.6.6')]
+
+files_to_copy = [(['WeightedTransform'], 'bin')]
+
+sanity_check_paths = {
+    'files': ['bin/WeightedTransform'],
+    'dirs': [''],
+}
+
+moduleclass = 'data'
