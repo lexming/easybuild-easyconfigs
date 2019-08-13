@@ -2,8 +2,8 @@ name = 'COMSOL'
 version = '5.4'
 
 homepage = 'https://www.comsol.se/'
-description = """COMSOL Multiphysics - Simulation Tool for Electrical, Mechanical, Fluid Flow, and Chemical
-Applications"""
+description = """COMSOL Multiphysics - Simulation Tool for Electrical, Mechanical,
+ Fluid Flow, and Chemical Applications."""
 
 toolchain = {'name': 'dummy', 'version': 'dummy'}
 
@@ -11,8 +11,5 @@ sources = [SOURCE_TAR_GZ, '%(name)s-%(version)s-licset.tar.gz']
 
 # license is required, can be specified via $LMCOMSOL_LICENSE_FILE
 license_file = 'license.dat'
-
-#preinstallopts = 'COMSOL-5.4_setupconfig.ini && '
-#preinstallopts += 'COMSOL-5.4_setupconfig.ini && '
 
 moduleclass = 'phys'
