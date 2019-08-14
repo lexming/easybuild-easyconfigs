@@ -10,7 +10,7 @@ description = """CESM is a fully-coupled, community, global climate model that p
 toolchain = {'name': 'foss', 'version': '2019a'}
 
 dependencies = [
-    ('Python','2.7.15'),
+    ('Python', '2.7.15'),
     ('CMake', '3.13.3'),
     ('Perl', '5.28.1'),
     ('XML-LibXML', '2.0200', '-Perl-%(perlver)s'),
@@ -23,10 +23,6 @@ dependencies = [
     ('Subversion', '1.12.0'),
     ('git', '2.21.0'),
 ]
-
-modloadmsg = """Environment for CESM2 based on GCC-8.2.0 and OpenMPI-3.1.3.
- - List loaded modules with `module list`
- - Print usage instructions with `module show CESM-deps/2-foss-2019a`"""
 
 usage = """Environment to run CESM2 simulations
  - Download the code to a designated directory (e.g. git clone -b release-cesm2.0.1 https://github.com/ESCOMP/cesm.git)
