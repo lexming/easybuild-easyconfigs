@@ -2150,11 +2150,11 @@ exts_list = [
     ('lda', '1.4.2', {
         'checksums': ['5606a1e1bc24706988853528023f7a004c725791ae1a7309f1aea2fc6681240f'],
     }),
-    ('jiebaR', '0.10.99', {
-        'checksums': ['c691f285f659d300696db9f93e677b83ffb9a06414dbd126ce9243e522bd653e'],
-    }),
     ('jiebaRD', '0.1', {
         'checksums': ['045ee670f5378fe325a45b40fd55136b355cbb225e088cb229f512c51abb4df1'],
+    }),
+    ('jiebaR', '0.10.99', {
+        'checksums': ['c691f285f659d300696db9f93e677b83ffb9a06414dbd126ce9243e522bd653e'],
     }),
 ]
 
