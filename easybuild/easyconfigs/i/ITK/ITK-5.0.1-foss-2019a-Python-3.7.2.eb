@@ -52,12 +52,12 @@ configopts += '-DModule_ITKReview=ON -DModule_ITKVtkGlue=ON '
 preinstallopts = "export PYTHONPATH=%(installdir)s/lib/python%(pyshortver)s/site-packages:$PYTHONPATH && "
 
 sanity_check_paths = {
-    'files': ['bin/itkTestDriver', 
-        'lib/libITKCommon-%(version_major)s.0.%s' % SHLIB_EXT,
-        'lib/libITKIOHDF5-%(version_major)s.0.%s' % SHLIB_EXT,
-        'lib/libITKVTK-%(version_major)s.0.%s' % SHLIB_EXT,
-        'lib/libITKVtkGlue-%(version_major)s.0.%s' % SHLIB_EXT,
-        'lib/libITKReview-%(version_major)s.0.%s' % SHLIB_EXT]
+    'files': ['bin/itkTestDriver',
+              'lib/libITKCommon-%%(version_major)s.0.%s' % SHLIB_EXT,
+              'lib/libITKIOHDF5-%%(version_major)s.0.%s' % SHLIB_EXT,
+              'lib/libITKVTK-%%(version_major)s.0.%s' % SHLIB_EXT,
+              'lib/libITKVtkGlue-%%(version_major)s.0.%s' % SHLIB_EXT,
+              'lib/libITKReview-%%(version_major)s.0.%s' % SHLIB_EXT],
     'dirs': ['include/ITK-%(version_major)s.0',
              'lib/python%(pyshortver)s/site-packages',
              'share'],
