@@ -1,0 +1,45 @@
+easyblock = 'CMakeMake'
+
+name = 'NuMoon'
+version = '20190916'
+versionsuffix = '-Python-%(pyver)s'
+
+homepage = 'https://www.rug.nl/kvi-cart/research/app/numoon/'
+description = "Analysis and Simulation Software for NuMoon project."
+
+toolchain = {'name': 'fosscuda', 'version': '2019a'}
+
+sources = [SOURCE_TAR_GZ]
+patches = ['%(name)s-%(version)s_default-nvcc.patch']
+checksums = [
+    '00a37335fe8173459389144101771eb2d0b9e86eaec004e58cca484a4c914fbf',  # NuMoon-20190916.tar.gz
+    '516f67c6d130f73e7b053085d6539023d3c76b7dbbbd59ed960495e81f22ad24',  # NuMoon-20190916_default-nvcc.patch
+]
+
+builddependencies = [
+    ('CMake', '3.13.3'),
+]
+
+dependencies = [
+    ('Python', '2.7.15'),
+    ('SWIG', '3.0.12'),
+    ('SciPy-bundle', '2019.03'),
+    ('h5py', '2.9.0'),
+    ('matplotlib', '2.2.4', versionsuffix),
+]
+
+separate_build_dir = True
+
+sanity_check_paths = {
+    'files': ['lib/libnuMoon.%s' % SHLIB_EXT],
+    'dirs': ['share/%(namelower)s'],
+}
+
+sanity_check_commands = [('python', "-c 'import %(namelower)s'")]
+
+modextrapaths = {'PYTHONPATH': [
+    'lib/python%(pyshortver)s/site-packages',
+    'lib/python%(pyshortver)s/site-packages/%(namelower)s',
+]}
+
+moduleclass = 'phys'
