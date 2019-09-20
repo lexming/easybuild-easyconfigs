@@ -17,8 +17,9 @@ checksums = ['474452fa87a1ca0228137693bfede3200b91e4e166b2216c4bd24f8b270c1dea']
 
 dependencies = [
     ('Python', '2.7.15'),
-    ('MATLAB', '2019a', '', True),
-    ('ant', '1.10.6', '-Java-1.8', True),
+    ('SciPy-bundle', '2019.03'),
+    ('MATLAB', '2019a', '', True),  # (Optional) provides interface to Matlab
+    ('ant', '1.10.6', '-Java-1.8', True),  # (Optional) needed for preprocessing script
 ]
 
 cmds_map = [('', "ant")]
