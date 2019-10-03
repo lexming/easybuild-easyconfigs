@@ -1,0 +1,34 @@
+easyblock = 'EB_Gaussian'
+
+name = 'Gaussian'
+version = 'G16.A.03'
+
+homepage = 'http://www.gaussian.com/'
+description = """Gaussian is a computational chemistry software program."""
+
+toolchain = {'name': 'intel', 'version': '2017b'}
+
+sources = ['G16_SOURCE_A.03.tar.bz2']
+
+patches = [
+    '%(version)s_dsyevd.patch',
+    '%(version)s_parallel_make.patch',
+    '%(version)s_lower_optlevel.patch',
+    '%(version)s_intel_vms.patch',
+    '%(version)s_skylake.patch',  # only needed for Skylake
+    ['gaussian_link_wrapper.sh', '.'],  # specify link wrapper as file to copy
+]
+
+dependencies = [('jemalloc', '4.5.0')]
+
+group = 'gaussian'
+
+modluafooter = """append_path("GAUSS_EXEDIR", os.getenv("EBROOTIMKL") .. "/lib/intel64")
+append_path("GAUSS_EXEDIR", os.getenv("EBROOTIFORT") .. "/compilers_and_libraries_2017.4.196/linux/compiler/lib/intel64")
+setenv("GAUSS_SCRDIR", os.getenv("TMPDIR"))"""
+
+modtclfooter = """append_path GAUSS_EXEDIR $::env(EBROOTIMKL)/lib/intel64
+append_path GAUSS_EXEDIR $::env(EBROOTIFORT)/compilers_and_libraries_2017.4.196/linux/compiler/lib/intel64
+setenv GAUSS_SCRDIR $::env(TMPDIR)"""
+
+moduleclass = 'chem'
