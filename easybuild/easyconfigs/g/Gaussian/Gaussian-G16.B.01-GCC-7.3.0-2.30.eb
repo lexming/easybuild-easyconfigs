@@ -1,0 +1,38 @@
+easyblock = 'Tarball'
+
+name = 'Gaussian'
+version = 'G16.B.01'
+
+moduleclass = 'tools'
+homepage = 'http://www.gaussian.com/'
+description = """Gaussian is a computational chemistry software program."""
+
+toolchain = {'name': 'GCC', 'version': '7.3.0-2.30'}
+
+group = 'gaussian'
+
+# AVX version for IvyBridge
+# AVX2 version for Haswell and onwards.
+sources = ['G16-B01-AVX2.tar.xz']
+
+start_dir = '%(builddir)s'
+
+postinstallcmds = ["cd g16 && ./bsd/install"]
+
+sanity_check_paths = {
+    'files': ['g16/g16'],
+    'dirs': ['g16/bsd', 'g16/basis']
+}
+
+modextrapaths = {
+    'g16root': '',
+    'PATH': ['g16', 'g16/bsd'],
+    'LD_LIBRARY_PATH': ['g16', 'g16/bsd'],
+    'GAUSS_EXEDIR': ['g16', 'g16/bsd'],
+}
+
+modextravars = {
+    'GAUSS_SCRDIR': '$TMPDIR',
+}
+
+moduleclass = 'chem'
