@@ -12,6 +12,7 @@ toolchain = {'name': 'GCC', 'version': '7.3.0-2.30'}
 group = 'gaussian'
 
 # AVX version for IvyBridge
+# sources = ['G16-B01-AVX.tar.xz']
 # AVX2 version for Haswell and onwards.
 sources = ['G16-B01-AVX2.tar.xz']
 
@@ -25,14 +26,17 @@ sanity_check_paths = {
 }
 
 modextrapaths = {
-    'g16root': '',
-    'PATH': ['g16', 'g16/bsd'],
-    'LD_LIBRARY_PATH': ['g16', 'g16/bsd'],
-    'GAUSS_EXEDIR': ['g16', 'g16/bsd'],
+    'PATH': ['g16/bsd', 'g16'],
+    'LD_LIBRARY_PATH': ['g16/bsd', 'g16'],
 }
 
 modextravars = {
-    'GAUSS_SCRDIR': '$TMPDIR',
+    'g16root': '%(installdir)s',
+    'GAUSS_EXEDIR': '%(installdir)s/g16/bsd:%(installdir)s/g16',
+    'GAUSS_BSDDIR': '%(installdir)s/g16/bsd',
+    'G16BASIS': '%(installdir)s/g16/basis',
 }
+
+modluafooter = 'setenv("GAUSS_SCRDIR", os.getenv("TMPDIR"))'
 
 moduleclass = 'chem'
