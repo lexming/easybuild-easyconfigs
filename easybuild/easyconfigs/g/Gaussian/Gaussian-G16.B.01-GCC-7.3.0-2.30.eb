@@ -37,6 +37,6 @@ modextravars = {
     'G16BASIS': '%(installdir)s/g16/basis',
 }
 
-modluafooter = 'setenv("GAUSS_SCRDIR", os.getenv("TMPDIR"))'
+modluafooter = 'setenv("GAUSS_SCRDIR", os.getenv("TMPDIR") or "$TMPDIR")'
 
 moduleclass = 'chem'
