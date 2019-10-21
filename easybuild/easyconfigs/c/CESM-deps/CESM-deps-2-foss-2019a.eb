@@ -22,12 +22,13 @@ dependencies = [
     ('PnetCDF', '1.11.2'),
     ('Subversion', '1.12.0'),
     ('git', '2.21.0'),
+    ('ncview', '2.1.7'),  # Optional tool for visualization
 ]
 
 usage = """Environment to run CESM2 simulations
  - Download the code to a designated directory (e.g. git clone -b release-cesm2.0.1 https://github.com/ESCOMP/cesm.git)
- - Edit the versions of external programs in cesm/External.cfg (if needed)
- - Download the external programs (cd cesm; ./manage_externals/checkout_externals)
- - Checkout the desired branch of external programs (if needed)"""
+ - Download external programs (cd cesm; ./manage_externals/checkout_externals)
+ - Copy config files (cp $EBROOTCESMMINDEPS/machines/* cime/config/cesm/machine/)
+ - Create case (cd cime/scripts && ./create_newcase --machine hydra --case ...)"""
 
 moduleclass = 'geo'
