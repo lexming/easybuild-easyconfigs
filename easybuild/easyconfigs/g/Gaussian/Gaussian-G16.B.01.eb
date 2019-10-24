@@ -3,7 +3,6 @@ easyblock = 'Tarball'
 name = 'Gaussian'
 version = 'G16.B.01'
 
-moduleclass = 'tools'
 homepage = 'http://www.gaussian.com/'
 description = """Gaussian is a computational chemistry software program."""
 
