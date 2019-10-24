@@ -14,7 +14,7 @@ checksums = ['a93be4d36afcdb482afd1fa4c12edfb888c709170470382301baba0545a8f67f']
 
 installopts = '-licserverinfo port:port:ip'
 
-group = 'bchemeng'
+group = 'group'
 
 modextrapaths = {
     'PATH': ['v%(version_major)s%(version_minor)s/CFD-Post/bin',
