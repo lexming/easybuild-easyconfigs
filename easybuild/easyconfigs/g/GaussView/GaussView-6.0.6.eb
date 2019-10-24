@@ -1,0 +1,37 @@
+easyblock = 'Tarball'
+
+name = 'GaussView'
+version = '6.0.16'
+
+homepage = 'https://gaussian.com/gaussview6/'
+description = """Graphical interface used with Gaussian. It aids in the creation
+ of Gaussian input files, enables the user to run Gaussian calculations from a
+ graphical interface without the need for using a command line instruction, and
+ helps in the interpretation of Gaussian output"""
+
+toolchain = SYSTEM
+
+sources = ['gv-6016-Linux-x86_64.tbz']
+
+multi_deps = {'Gaussian': ['G16.A.03-intel-2017b', 'G16.B.01']}
+
+group = 'gaussian'
+
+#postinstallcmds = ["cd g16 && ./bsd/install"]
+
+sanity_check_paths = {
+    'files': ['gview.sh'],
+    'dirs': ['bin', 'exec', 'lib']
+}
+
+modextrapaths = {
+    'PATH': ['exec', 'bin', ''],
+    'LD_LIBRARY_PATH': ['lib'],
+}
+
+modextravars = {
+    'GV_DIR': '%(installdir)s',
+    'LC_ALL': 'C',  # GaussView fails to start with other locales
+}
+
+moduleclass = 'chem'
