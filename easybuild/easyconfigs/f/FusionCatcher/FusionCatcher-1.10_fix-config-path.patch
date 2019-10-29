@@ -1,6 +1,6 @@
 --- etc/configuration.cfg	2019-04-05 08:50:37.000000000 +0200
-+++ etc/configuration.cfg	2019-07-03 16:48:43.082763000 +0200
-@@ -18,16 +18,16 @@
++++ etc/configuration.cfg	2019-10-29 18:21:15.345768000 +0100
+@@ -18,24 +18,24 @@
  fatotwobit = /apps/fusioncatcher/tools/blat/
  samtools = /apps/fusioncatcher/tools/samtools/
  seqtk = /apps/fusioncatcher/tools/seqtk/
@@ -17,7 +17,17 @@
 -parallel = /appsfusioncatcher/tools/paralell/src/
 +lzop = /apps/fusioncatcher/tools/lzop/
 +coreutils = /apps/fusioncatcher/tools/coreutils/
-+parallel = /apps/fusioncatcher/tools/parallel/
++parallel = /appsfusioncatcher/tools/paralell/
  pigz = /apps/fusioncatcher/tools/pigz/
  pxz = /apps/fusioncatcher/tools/pxz/
  picard = /apps/fusioncatcher/tools/picard/
+ java = /usr/bin/
+ 
+ [parameters]
+-threads = 1
+-aligners = blat,star
++threads = 0
++aligners = blat,star,bbmap
+ 
+ [versions]
+ fusioncatcher = 1.10
