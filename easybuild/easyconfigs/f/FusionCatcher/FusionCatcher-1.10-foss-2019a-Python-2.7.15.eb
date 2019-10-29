@@ -61,38 +61,37 @@ components = [
     }),
 ]
 
-#postinstallcmds = [
-#    # Set paths in the configuration file
-#    'sed -i "s|/apps/fusioncatcher|%(installdir)s|g" %(installdir)s/etc/configuration.cfg',
-#    'sed -i "s|python = /usr/bin/|python = $EBROOTPYTHON/bin/|g" %(installdir)s/etc/configuration.cfg',
-#    'sed -i "s|java = /usr/bin/|python = $EBROOTJAVA/bin/|g" %(installdir)s/etc/configuration.cfg',
-#    # Create missing links
-#    'cd %(installdir)s/data && ln -s human_v95 current',
-#    'ln -s $EBROOTBOWTIE %(installdir)s/tools/bowtie',
-#    'ln -s $EBROOTBOWTIE2 %(installdir)s/tools/bowtie2',
-#    'ln -s $EBROOTBLAT %(installdir)s/tools/blat',
-#    'ln -s $EBROOTBWA %(installdir)s/tools/bwa',
-#    'ln -s $EBROOTBBMAP %(installdir)s/tools/bbmap',
-#    'ln -s $EBROOTKENT_TOOLS/bin %(installdir)s/tools/liftover',
-#    'ln -s $EBROOTVELVET %(installdir)s/tools/velvet',
-#    'ln -s $EBROOTOASES %(installdir)s/tools/oases',
-#    'ln -s $EBROOTSAMTOOLS %(installdir)s/tools/samtools',
-#    'ln -s $EBROOTSTAR %(installdir)s/tools/star',
-#    'ln -s $EBROOTSRAMINTOOLKIT %(installdir)s/tools/sratoolkit',
-#    'ln -s $EBROOTSCIPYMINBUNDLE/lib/python%(pyshortver)s/site-packages/numpy %(installdir)s/tools/numpy',
-#    'ln -s $EBROOTBIOPYTHON/lib/python%(pyshortver)s/site-packages/Bio %(installdir)s/tools/biopython',
-#    'ln -s $EBROOTPYTHON/lib/python%(pyshortver)s/site-packages/xlrd %(installdir)s/tools/xlrd',
-#    'ln -s $EBROOTOPENPYXL/lib/python%(pyshortver)s/site-packages/openpyxl %(installdir)s/tools/openpyxl',
-#    'ln -s $EBROOTLZO %(installdir)s/tools/lzo',
-#    'ln -s $EBROOTPARALLEL %(installdir)s/tools/parallel',
-#    'ln -s $EBROOTPIGZ %(installdir)s/tools/pigz',
-#    'ln -s $EBROOTPICARD %(installdir)s/tools/picard',
-#    # Required Ensembl database - check https://github.com/ndaniel/fusioncatcher/blob/master/doc/manual.md
-#    'mkdir %(installdir)s/data/human_v95',
-#    'cd %(installdir)s/data/human_v95',
-#    '%(installdir)/bin/fusioncatcher-build -g homo_sapiens -o .',
-#    'cd .. && ln -s human_v95 current',
-#]
+postinstallcmds = [
+    # Set paths in the configuration file
+    'sed -i "s|/apps/fusioncatcher|%(installdir)s|g" %(installdir)s/etc/configuration.cfg',
+    'sed -i "s|python = /usr/bin/|python = $EBROOTPYTHON/bin/|g" %(installdir)s/etc/configuration.cfg',
+    'sed -i "s|java = /usr/bin/|python = $EBROOTJAVA/bin/|g" %(installdir)s/etc/configuration.cfg',
+    # Create symlinks to installed dependencies
+    'cd %(installdir)s/data && ln -s human_v95 current',
+    'ln -s $EBROOTBOWTIE %(installdir)s/tools/bowtie',
+    'ln -s $EBROOTBOWTIE2 %(installdir)s/tools/bowtie2',
+    'ln -s $EBROOTBLAT %(installdir)s/tools/blat',
+    'ln -s $EBROOTBWA %(installdir)s/tools/bwa',
+    'ln -s $EBROOTBBMAP %(installdir)s/tools/bbmap',
+    'ln -s $EBROOTKENT_TOOLS/bin %(installdir)s/tools/liftover',
+    'ln -s $EBROOTVELVET %(installdir)s/tools/velvet',
+    'ln -s $EBROOTOASES %(installdir)s/tools/oases',
+    'ln -s $EBROOTSAMTOOLS %(installdir)s/tools/samtools',
+    'ln -s $EBROOTSTAR %(installdir)s/tools/star',
+    'ln -s $EBROOTSRAMINTOOLKIT %(installdir)s/tools/sratoolkit',
+    'ln -s $EBROOTSCIPYMINBUNDLE/lib/python%(pyshortver)s/site-packages/numpy %(installdir)s/tools/numpy',
+    'ln -s $EBROOTBIOPYTHON/lib/python%(pyshortver)s/site-packages/Bio %(installdir)s/tools/biopython',
+    'ln -s $EBROOTPYTHON/lib/python%(pyshortver)s/site-packages/xlrd %(installdir)s/tools/xlrd',
+    'ln -s $EBROOTOPENPYXL/lib/python%(pyshortver)s/site-packages/openpyxl %(installdir)s/tools/openpyxl',
+    'ln -s $EBROOTLZO %(installdir)s/tools/lzo',
+    'ln -s $EBROOTPARALLEL %(installdir)s/tools/parallel',
+    'ln -s $EBROOTPIGZ %(installdir)s/tools/pigz',
+    'ln -s $EBROOTPICARD %(installdir)s/tools/picard',
+    # Required Ensembl database - check https://github.com/ndaniel/fusioncatcher/blob/master/doc/manual.md
+    'mkdir %(installdir)s/data/human_v95',
+    '%(installdir)s/bin/fusioncatcher-build -g homo_sapiens -o %(installdir)s/data/human_v95',
+    'ln -s %(installdir)s/data/human_v95 %(installdir)s/data/current',
+]
 
 sanity_check_paths = {
     'files': ['bin/fusioncatcher', 'bin/fusioncatcher-batch', 'bin/fusioncatcher-build', 'etc/configuration.cfg'],
