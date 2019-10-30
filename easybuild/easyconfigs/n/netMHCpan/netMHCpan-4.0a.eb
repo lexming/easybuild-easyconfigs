@@ -31,7 +31,7 @@ checksums = [
 
 postinstallcmds = [
     'sed -i -e "s|setenv[[:space:]]NMHOME.*|setenv NMHOME \$EBROOTNETMHCPAN|" %(installdir)s/netMHCpan',
-    'sed -i -e "s|setenv[[:space:]]TMPDIR.*|setenv TMPDIR /tmp|" %(installdir)s/netMHCpan',
+    'sed -i -e "s|setenv[[:space:]]*TMPDIR.*|setenv TMPDIR /tmp|" %(installdir)s/netMHCpan',
 ]
 
 modextrapaths = {'PATH': ''}
