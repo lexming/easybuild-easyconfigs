@@ -16,7 +16,7 @@ dependencies = [
     ('Python', '2.7.15'),
     ('SciPy-bundle', '2019.03'),
     ('Biopython', '1.73', versionsuffix),
-    ('openpyxl','2.6.2'),
+    ('openpyxl', '2.6.2'),
     ('BBMap', '38.56'),
     ('BLAT', '3.5'),
     ('Bowtie', '1.2.2'),
@@ -29,14 +29,12 @@ dependencies = [
     ('SRA-Toolkit', '2.9.6', '-centos_linux64', True),
     ('STAR', '2.7.1a'),
     ('Velvet', '1.2.10', '-mt-kmer_191'),
-    ('Oases','0.2.08', '-mt-kmer_191'),
+    ('Oases', '0.2.08', '-mt-kmer_191'),
     ('LZO', '2.10'),
-    ('pigz','2.4'),
+    ('pigz', '2.4'),
     ('zlib', '1.2.11'),
-    ('parallel','20190622'),
+    ('parallel', '20190622'),
 ]
-
-github_account = 'ndaniel'
 
 components = [
     (name, version, {
@@ -50,12 +48,13 @@ components = [
         'checksums': ['fd0d304b756455c5d495931a6421c30c80eb7de3623cf3773c5c72b0f8d62570'],
         'start_dir': '%(namelower)s_v%(version)s',
     }),
+
     # FusionCatcher is based on a fork of seqtk with features not available upstream
-    ('seqtk','1.2-r101c', {
+    ('seqtk', '1.2-r101c', {
         'easyblock': 'MakeCp',
         'source_urls': ['http://github.com/ndaniel/seqtk/archive'],
-        'sources': [{ 'download_filename': '%(version)s.tar.gz', 'filename': '%(name)s-%(version)s.tar.gz' }],
-        'checksums': ['4a57fbe828eccaa4f0122c84bf9c4c5409a024ad9deace31ec7bee6d25cf5e49'], # seqtk-1.2-r101c.tar.gz
+        'sources': [{'download_filename': '%(version)s.tar.gz', 'filename': '%(name)s-%(version)s.tar.gz'}],
+        'checksums': ['4a57fbe828eccaa4f0122c84bf9c4c5409a024ad9deace31ec7bee6d25cf5e49'],
         'start_dir': '%(name)s-%(version)s',
         'files_to_copy': [(['seqtk'], 'tools/%(name)s')],
     }),
@@ -66,6 +65,7 @@ postinstallcmds = [
     'sed -i "s|/apps/fusioncatcher|%(installdir)s|g" %(installdir)s/etc/configuration.cfg',
     'sed -i "s|python = /usr/bin/|python = $EBROOTPYTHON/bin/|g" %(installdir)s/etc/configuration.cfg',
     'sed -i "s|java = /usr/bin/|python = $EBROOTJAVA/bin/|g" %(installdir)s/etc/configuration.cfg',
+
     # Create symlinks to installed dependencies
     'cd %(installdir)s/data && ln -s human_v95 current',
     'ln -s $EBROOTBOWTIE %(installdir)s/tools/bowtie',
@@ -87,10 +87,11 @@ postinstallcmds = [
     'ln -s $EBROOTPARALLEL %(installdir)s/tools/parallel',
     'ln -s $EBROOTPIGZ %(installdir)s/tools/pigz',
     'ln -s $EBROOTPICARD %(installdir)s/tools/picard',
-    # Required Ensembl database - check https://github.com/ndaniel/fusioncatcher/blob/master/doc/manual.md
-    'mkdir %(installdir)s/data/human_v95',
-    '%(installdir)s/bin/fusioncatcher-build -g homo_sapiens -o %(installdir)s/data/human_v95',
-    'ln -s %(installdir)s/data/human_v95 %(installdir)s/data/current',
+
+    # Link the required Ensembl database
+    # Database can be created after install with `fusioncatcher-build -g homo_sapiens -o /path/to/human_v95`
+    # More information at https://github.com/ndaniel/fusioncatcher/blob/master/doc/manual.md
+    'ln -s /databases/bio/human_v95.fusioncatcherv1.10 %(installdir)s/data/human_v95',
 ]
 
 sanity_check_paths = {
@@ -98,6 +99,7 @@ sanity_check_paths = {
     'dirs': ['data'],
 }
 
+# Tests need 16 cores and 64 GB of RAM
 sanity_check_commands = ["test/test.sh"]
 
 moduleclass = 'bio'
