@@ -53,8 +53,13 @@ exts_list = [
 
 modextrapaths = {'R_LIBS': ''}
 
+# Path to the data files of antigen.garnish
+# Data files can be downloaded from http://get.rech.io/antigen.garnish.tar.gz
+modextravars = {'AG_DATA_DIR': '/databases/bio/%(name)s-%(version)s'}
+
 sanity_check_paths = {
     'files': [],
-    'dirs': ['antigen.garnish', 'dt.inflix', 'future.apply'],
+    'dirs': ['antigen.garnish', 'magrittr', 'dt.inflix', 'future.apply'],
 }
+
 moduleclass = 'bio'
