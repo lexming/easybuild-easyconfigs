@@ -14,12 +14,11 @@ toolchain = SYSTEM
 sources = [
     {
         'filename': '%(name)s-%(version)s.Linux.tar.gz',
-        'extract_cmd': 'tar --strip-components=1 -xzf %s && chmod -R +rX *',
+        'extract_cmd': 'tar --strip-components=1 -xzf %s',
     },
     {
         'download_filename': 'data.Linux.tar.gz',
         'filename': '%(name)s-%(version)s-data.Linux.tar.gz',
-        'extract_cmd': 'tar -xzf %s && chmod -R +rX data'
     },
 ]
 
@@ -31,15 +30,17 @@ checksums = [
 postinstallcmds = [
     'sed -i -e "s|setenv[[:space:]]NMHOME.*|setenv NMHOME \$EBROOTNETMHCPAN|" %(installdir)s/netMHCpan',
     'sed -i -e "s|setenv[[:space:]]*TMPDIR.*|setenv TMPDIR /tmp|" %(installdir)s/netMHCpan',
+    'cd %(installdir)s/Linux_x86_64 && rm -rf data && ln -s ../data',
+    'chmod -R +rX %(installdir)s',
 ]
-
-modextrapaths = {'PATH': ''}
 
 sanity_check_paths = {
     'files': ['netMHCpan', 'Linux_x86_64/bin/netMHCpan'],
-    'dirs': [],
+    'dirs': ['data'],
 }
 
 sanity_check_commands = ['netMHCpan -h']
+
+modextrapaths = {'PATH': ''}
 
 moduleclass = 'bio'
