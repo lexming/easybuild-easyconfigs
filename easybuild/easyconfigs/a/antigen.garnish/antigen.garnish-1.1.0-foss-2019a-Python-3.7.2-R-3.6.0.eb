@@ -39,6 +39,11 @@ exts_list = [
         'source_urls': ['https://github.com/andrewrech/dt.inflix/archive/'],
         'checksums': ['14dcf0adf15afd5b96bbc53be4dd6adeeb77be37810e1963e38c0dcc07853448'],
     }),
+    ('magrittr', '4104d6b', {
+        'source_tmpl': '%(version)s.tar.gz',
+        'source_urls': ['https://github.com/tidyverse/magrittr/archive/'],
+        'checksums': ['71abe36950c6e92bf9acd95106986a6bbbfd2821a739838d01c20526aa75e15c'],
+    }),
     (name, version, {
         'source_tmpl': '%(version)s.tar.gz',
         'source_urls': ['https://github.com/%(github_account)s/%(name)s/archive'],
