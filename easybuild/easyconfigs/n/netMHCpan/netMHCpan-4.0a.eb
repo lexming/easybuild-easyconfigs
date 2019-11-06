@@ -3,15 +3,14 @@ easyblock = 'Tarball'
 name = 'netMHCpan'
 version = '4.0a'
 
-homepage = 'http://www.cbs.dtu.dk/cgi-bin/nph-sw_request?netMHCpan'
-description = """ The NetMHCpan software predicts  binding of peptides  to any known MHC
- molecule using artificial neural networks (ANNs). """
+homepage = 'https://www.cbs.dtu.dk/services/NetMHCpan/'
+description = """The NetMHCpan software predicts binding of peptides to any known MHC
+ molecule using artificial neural networks (ANNs)."""
 
 toolchain = SYSTEM
 
-# netMHCpan is proprietary software, but free for academcs
-# see: http://www.cbs.dtu.dk/cgi-bin/nph-sw_request?netMHCpan
-source_urls = ['http://www.cbs.dtu.dk/services/NetMHCpan-4.0']
+# netMHCpan is proprietary software, but free for academics.
+# It can be requested at https://www.cbs.dtu.dk/cgi-bin/nph-sw_request?netMHCpan
 sources = [
     {
         'filename': '%(name)s-%(version)s.Linux.tar.gz',
