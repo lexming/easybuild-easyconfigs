@@ -19,7 +19,7 @@ sources = [
     {
         'download_filename': 'data.Linux.tar.gz',
         'filename': '%(name)s-%(version)s-data.Linux.tar.gz',
-        'extract_cmd': 'tar -xzf %s -C Linux_x86_64 && chmod -R +rX Linux_x86_64/data'
+        'extract_cmd': 'tar -xzf %s && chmod -R +rX data'
     },
 ]
 
