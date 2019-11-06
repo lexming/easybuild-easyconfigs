@@ -27,7 +27,7 @@
 -threads = 1
 -aligners = blat,star
 +threads = 0
-+aligners = blat,star,bbmap
++aligners = blat,star,bowtie2
  
  [versions]
  fusioncatcher = 1.10
