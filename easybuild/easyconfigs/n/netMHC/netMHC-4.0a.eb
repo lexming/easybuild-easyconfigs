@@ -26,18 +26,21 @@ checksums = [
     'f3fb6d77ec11bc51de963e96fd75a0622f5098a2d1e37d750afa3709d5b876d1',  # netMHC-4.0a-data.tar.gz
 ]
 
+keepsymlinks = True
+
 postinstallcmds = [
     'sed -i -e "s|setenv[[:space:]]NMHOME.*|setenv NMHOME \$EBROOTNETMHC|" %(installdir)s/netMHC',
     'sed -i -e "s|setenv[[:space:]]*TMPDIR.*|setenv TMPDIR /tmp|" %(installdir)s/netMHC',
+    'chmod -R +rX %(installdir)s',
 ]
-
-modextrapaths = {'PATH': ''}
 
 sanity_check_paths = {
     'files': ['netMHC', 'Linux_x86_64/bin/netMHC'],
-    'dirs': [],
+    'dirs': ['data'],
 }
 
 sanity_check_commands = ['netMHC -h']
+
+modextrapaths = {'PATH': ''}
 
 moduleclass = 'bio'
