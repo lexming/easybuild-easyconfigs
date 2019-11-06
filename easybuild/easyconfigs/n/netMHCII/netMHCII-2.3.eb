@@ -16,12 +16,11 @@ toolchain = SYSTEM
 sources = [
     {
         'filename': '%(name)s-%(version)s.Linux.tar.gz',
-        'extract_cmd': 'tar --strip-components=1 -xzf %s && chmod -R +rX *',
+        'extract_cmd': 'tar --strip-components=1 -xzf %s',
     },
     {
         'download_filename': 'data.Linux.tar.gz',
         'filename': '%(name)s-%(version)s-data.Linux.tar.gz',
-        'extract_cmd': 'tar -xzf %s -C Linux_x86_64 && chmod -R +rX Linux_x86_64/data'
     },
 ]
 checksums = [
@@ -29,18 +28,21 @@ checksums = [
     '6bf8af9e2e89d96b8fe9a2752164606417c4583872bdc2e81637f6668dee30a0',  # netMHCII-2.3-data.Linux.tar.gz
 ]
 
+keepsymlinks = True
+
 postinstallcmds = [
     'sed -i -e "s|setenv[[:space:]]NMHOME.*|setenv NMHOME \$EBROOTNETMHCII|" %(installdir)s/netMHCII-%(version)s',
     'sed -i -e "s|setenv[[:space:]]*TMPDIR.*|setenv TMPDIR \$TMPDIR|" %(installdir)s/netMHCII-%(version)s',
+    'chmod -R +rX %(installdir)s',
 ]
-
-modextrapaths = {'PATH': ''}
 
 sanity_check_paths = {
     'files': ['netMHCII-%(version)s', 'Linux_x86_64/bin/netMHCII'],
-    'dirs': [],
+    'dirs': ['data'],
 }
 
 sanity_check_commands = ['netMHCII-%(version)s -h']
+
+modextrapaths = {'PATH': ''}
 
 moduleclass = 'bio'
