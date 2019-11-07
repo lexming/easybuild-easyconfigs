@@ -17,7 +17,6 @@ dependencies = [
     ('h5py', '2.9.0'),
     ('Biopython', '1.73'),
     ('mhcflurry', '1.4.0', '-Python-3.7.2'),
-    ('mhcnuggets', '2.3', '-Python-3.7.2'),
     ('R', '3.6.0'),
     ('R-bundle-Bioconductor', '3.9', '-R-3.6.0'),
     ('BLAST+', '2.9.0'),
