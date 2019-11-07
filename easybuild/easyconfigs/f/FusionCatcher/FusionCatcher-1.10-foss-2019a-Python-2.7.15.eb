@@ -91,7 +91,7 @@ postinstallcmds = [
     # Link the required Ensembl database
     # Database can be created after install with `fusioncatcher-build -g homo_sapiens -o /path/to/human_v95`
     # More information at https://github.com/ndaniel/fusioncatcher/blob/master/doc/manual.md
-    'ln -s /databases/bio/human_v95.fusioncatcherv1.10 %(installdir)s/data/human_v95',
+    'ln -s /databases/bio/%(namelower)s-%(version)s/human_v95 %(installdir)s/data/human_v95',
 ]
 
 sanity_check_paths = {
