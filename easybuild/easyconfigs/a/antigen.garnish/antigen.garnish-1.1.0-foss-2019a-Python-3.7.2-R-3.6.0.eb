@@ -62,4 +62,6 @@ sanity_check_paths = {
     'dirs': ['antigen.garnish', 'magrittr', 'dt.inflix', 'future.apply'],
 }
 
+modloadmsg = "Data files are located in /databases/bio/%(name)s-%(version)s\n"
+
 moduleclass = 'bio'
