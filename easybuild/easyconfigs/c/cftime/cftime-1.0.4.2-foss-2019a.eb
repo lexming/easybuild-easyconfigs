@@ -1,0 +1,23 @@
+easyblock = 'PythonPackage'
+
+name = 'cftime'
+version = '1.0.4.2'
+
+homepage = 'https://github.com/Unidata/cftime'
+description = """Time-handling functionality from netcdf4-python"""
+
+toolchain = {'name': 'foss', 'version': '2019a'}
+
+github_account = 'Unidata'
+source_urls = [GITHUB_SOURCE]
+sources = ['v%(version)srel.tar.gz']
+checksums = ['6ffe26d797c5ef8fca048630638766fcb79d84226f1fd086325e44d43a72f7c9']
+
+multi_deps = {'Python': ['3.7.2', '2.7.15']}
+
+dependencies = [('SciPy-bundle', '2019.03')]
+
+use_pip = True
+download_dep_fail = True
+
+moduleclass = 'data'
