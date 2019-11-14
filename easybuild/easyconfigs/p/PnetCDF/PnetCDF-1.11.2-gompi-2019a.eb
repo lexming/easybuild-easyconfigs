@@ -3,18 +3,24 @@ easyblock = 'ConfigureMake'
 name = 'PnetCDF'
 version = '1.11.2'
 
-homepage = 'https://trac.mcs.anl.gov/projects/parallel-netcdf'
-description = """Parallel netCDF: A Parallel I/O Library for NetCDF File Access"""
+homepage = 'https://parallel-netcdf.github.io'
+description = """PnetCDF is a parallel I/O library for accessing Unidata's
+ NetCDF files in classic formats."""
 
 toolchain = {'name': 'gompi', 'version': '2019a'}
 
-source_urls = ['https://parallel-netcdf.github.io/Release/']
-sources = [SOURCELOWER_TAR_GZ]
-checksums = ['d2c18601b364c35b5acb0a0b46cd6e14cae456e0eb854e5c789cf65f3cd6a2a7']
+github_account = 'Parallel-NetCDF'
+source_urls = [GITHUB_SOURCE]
+sources = ['checkpoint.%(version)s.tar.gz']
+checksums = ['66362609789490b72397a08dee170b3e0826121735e61c0b847addf5412d61bb']
+
+preconfigopts = "autoreconf -i && "
 
 sanity_check_paths = {
-    'files': ['bin/pnetcdf_version'],
-    'dirs': ['include', 'lib'],
+    'files': ['bin/%s' % x for x in ['ncmpidiff', 'ncmpidump', 'ncmpigen', 'ncoffsets',
+                                     'ncvalidator', 'pnetcdf-config', 'pnetcdf_version']] +
+             ['include/%(namelower)s', 'lib/lib%(namelower)s.a'],
+    'dirs': [],
 }
 
 modextravars = {'PNETCDF': '%(installdir)s'}
