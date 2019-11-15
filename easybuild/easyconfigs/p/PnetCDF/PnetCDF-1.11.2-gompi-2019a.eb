@@ -16,10 +16,12 @@ checksums = ['66362609789490b72397a08dee170b3e0826121735e61c0b847addf5412d61bb']
 
 preconfigopts = "autoreconf -i && "
 
+configopts = ['', '--enable-shared']
+
 sanity_check_paths = {
     'files': ['bin/%s' % x for x in ['ncmpidiff', 'ncmpidump', 'ncmpigen', 'ncoffsets',
                                      'ncvalidator', 'pnetcdf-config', 'pnetcdf_version']] +
-             ['include/%(namelower)s', 'lib/lib%(namelower)s.a'],
+             ['lib/lib%(namelower)s.a', 'lib/lib%%(namelower)s.%s' % SHLIB_EXT, 'include/%(namelower)s'],
     'dirs': [],
 }
 
