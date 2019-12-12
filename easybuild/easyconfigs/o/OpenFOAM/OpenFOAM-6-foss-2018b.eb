@@ -36,4 +36,10 @@ builddependencies = [
     ('flex', '2.6.4'),
 ]
 
+hidden = True
+
+modloadmsg = "\n\nWARNING: this build of OpenFOAM-6 with OpenMPI-3.1.1 is affected by OF bug 3071\n"
+modloadmsg += "         https://bugs.openfoam.org/view.php?id=3071\n"
+modloadmsg += "         Please, consider using OpenFOAM-6-foss-2019b or OpenFOAM-6-intel-2018a.\n\n"
+
 moduleclass = 'cae'
