@@ -23,18 +23,18 @@ dependencies = [
 ]
 
 use_pip = True
+sanity_pip_check = True
+
+exts_default_options = {'source_urls': [PYPI_SOURCE]}
 
 exts_list = [
     ('appdirs', '1.4.3', {
-        'source_urls': ['https://pypi.python.org/packages/source/a/appdirs/'],
         'checksums': ['9e5896d1372858f8dd3344faf4e5014d21849c756c8d5701f78f8a103b372d92'],
     }),
     ('mhcnames', '0.4.8', {
-        'source_urls': ['https://pypi.python.org/packages/source/m/mhcnames/'],
         'checksums': ['0a18de129eaa4bf8ce802e5e2d856806639ab17b392688ea13dc20ec6d3cc8a2'],
     }),
     (name, version, {
-        'source_urls': ['https://pypi.python.org/packages/source/m/mhcflurry/'],
         'checksums': ['469bab44f6fff5dc78dcc5b032b67917b36d68c6e71f6baadf42847ee203ca96'],
     }),
 ]
