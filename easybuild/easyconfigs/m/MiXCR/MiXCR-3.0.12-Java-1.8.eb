@@ -1,0 +1,32 @@
+# This file is an EasyBuild reciPY as per https://easybuilders.github.io/easybuild/
+# Author: Pablo Escobar Lopez
+# sciCORE - University of Basel
+# SIB Swiss Institute of Bioinformatics
+
+easyblock = 'Tarball'
+
+name = 'MiXCR'
+version = '3.0.12'
+versionsuffix = '-Java-%(javaver)s'
+
+homepage = 'https://milaboratory.com/software/mixcr/'
+description = """ MiXCR processes big immunome data from raw sequences
+to quantitated clonotypes """
+
+toolchain = SYSTEM
+
+source_urls = ['https://github.com/milaboratory/mixcr/releases/download/v%(version)s/']
+sources = ['%(namelower)s-%(version)s.zip']
+checksums = ['5492a18425e739b3b5024b7284abe136a49f4691600f58bf2aa35be808279904']
+
+dependencies = [('Java', '1.8', '', True)]
+
+sanity_check_paths = {
+    'files': ['mixcr', 'mixcr.jar'],
+    'dirs': ['libraries']
+}
+
+# add install dir to PATH
+modextrapaths = {'PATH': ''}
+
+moduleclass = 'bio'
