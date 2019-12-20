@@ -28,6 +28,9 @@ sanity_pip_check = True
 exts_default_options = {'source_urls': [PYPI_SOURCE]}
 
 exts_list = [
+    ('np_utils', '0.5.11.1', {
+        'checksums': ['5b75f329eb686923a467ee7ce6e3210051ea09953a6cdd8620908290eb546f9b'],
+    }),
     ('appdirs', '1.4.3', {
         'checksums': ['9e5896d1372858f8dd3344faf4e5014d21849c756c8d5701f78f8a103b372d92'],
     }),
