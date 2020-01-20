@@ -29,9 +29,9 @@ checksums = [
 keepsymlinks = True
 
 postinstallcmds = [
-    'sed -i -e "s|setenv[[:space:]]NMHOME.*|setenv NMHOME \$EBROOTNETMHC|" %(installdir)s/netMHC',
-    'sed -i -e "s|setenv[[:space:]]*TMPDIR.*|setenv TMPDIR /tmp|" %(installdir)s/netMHC',
-    'chmod -R +rX %(installdir)s',
+    "sed -i -e 's|setenv[[:space:]]NMHOME.*|setenv NMHOME $EBROOTNETMHC|' %(installdir)s/netMHC",
+    "sed -i -e 's|setenv[[:space:]]*TMPDIR.*|setenv TMPDIR /tmp|' %(installdir)s/netMHC",
+    "chmod -R +rX %(installdir)s",
 ]
 
 sanity_check_paths = {
