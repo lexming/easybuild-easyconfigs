@@ -1,0 +1,37 @@
+easyblock = 'Tarball'
+
+name = 'ADF'
+version = '2019.103'
+
+homepage = 'https://www.scm.com/ADF/'
+description = """ADF is an accurate, parallelized, powerful computational chemistry program to understand and
+ predict chemical structure and reactivity with density functional theory (DFT)."""
+
+toolchain = {'name': 'intel', 'version': '2019a'}
+
+sources = ['adf%(version)s.pc64_linux.intelmpi.bin.tgz']
+
+dependencies = [('libGLU', '9.0.0')]
+
+group = 'badf'
+
+keepsymlinks = True
+
+sanity_check_paths = {
+    'files': [],
+    'dirs': ['atomicdata', 'bin', 'examples'],
+}
+
+sanity_check_commands = ['dirac check']
+
+modextravars = {
+    'ADFHOME': '%(installdir)s',
+    'ADFBIN': '%(installdir)s/bin',
+    'ADFRESOURCES': '%(installdir)s/atomicdata',
+    # Update with path to the license file
+    'SCMLICENSE': '/apps/brussel/commercial/adf/software/license.txt',
+}
+
+modluafooter = 'setenv("SCM_TMPDIR", os.getenv("TMPDIR") or pathJoin("/tmp", os.getenv("USER")))'
+
+moduleclass = 'chem'
