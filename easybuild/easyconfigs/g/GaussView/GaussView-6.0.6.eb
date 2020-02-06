@@ -17,8 +17,6 @@ multi_deps = {'Gaussian': ['G16.A.03-intel-2017b', 'G16.B.01']}
 
 group = 'gaussian'
 
-#postinstallcmds = ["cd g16 && ./bsd/install"]
-
 sanity_check_paths = {
     'files': ['gview.sh'],
     'dirs': ['bin', 'exec', 'lib']
