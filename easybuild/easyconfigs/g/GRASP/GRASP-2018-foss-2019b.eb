@@ -46,4 +46,7 @@ sanity_check_paths = {
     'dirs': ['grasptest'],
 }
 
+modloadmsg = "GRASP optimal performance is achieved with MPI (using mpirun) and "
+modloadmsg += "setting the environment variable OMP_NUM_THREADS=1\n"
+
 moduleclass = 'chem'
