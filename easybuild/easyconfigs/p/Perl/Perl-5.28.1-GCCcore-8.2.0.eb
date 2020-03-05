@@ -1599,10 +1599,6 @@ exts_list = [
         'source_tmpl': 'Storable-%(version)s.tar.gz',
         'source_urls': ['https://cpan.metacpan.org/authors/id/X/XS/XSAWYERX'],
     }),
-    ('Capture::Tiny', '0.48', {
-        'source_tmpl': 'Capture-Tiny-%(version)s.tar.gz',
-        'source_urls': ['https://cpan.metacpan.org/authors/id/D/DA/DAGOLDEN'],
-    }),
     ('ExtUtils::ParseXS', '3.35', {
         'source_tmpl': 'ExtUtils-ParseXS-%(version)s.tar.gz',
         'source_urls': ['https://cpan.metacpan.org/authors/id/S/SM/SMUELLER'],
