@@ -1687,8 +1687,8 @@ exts_list = [
         'source_tmpl': 'AutoLoader-%(version)s.tar.gz',
         'source_urls': ['https://cpan.metacpan.org/authors/id/S/SM/SMUELLER'],
     }),
-    ('URI::Escape', '1.76', {
-        'source_tmpl': 'URI-%(version)s.tar.gz',
+    ('URI::Escape', '3.31', {
+        'source_tmpl': 'URI-1.76.tar.gz',
         'source_urls': ['https://cpan.metacpan.org/authors/id/O/OA/OALDERS'],
     }),
     ('Set::IntervalTree', '0.12', {
