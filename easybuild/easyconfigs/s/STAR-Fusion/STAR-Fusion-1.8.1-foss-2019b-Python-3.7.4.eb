@@ -29,7 +29,7 @@ dependencies = [
     ('Perl', '5.30.0'),
     ('DB', '18.1.32'),
     ('GMAP-GSNAP', '2019-09-12'),
-    ('SAMtools', '1.10'),  # a single test fails with v1.10 due to issue #191 in STAR-Fusion
+    ('SAMtools', '1.9'),  # v1.10 is affected by issue #191 in STAR-Fusion
     ('STAR', '2.7.2b'),
     ('Trinity', '2.9.1', versionsuffix),
     ('BLAST+', '2.9.0'),  # needed to build CTAT Genome library
@@ -90,6 +90,6 @@ modextravars = {'STAR_FUSION_HOME': '%(installdir)s'}
 
 # Required databases for this version of STAR-Fusion and STAR are available at
 # https://data.broadinstitute.org/Trinity/CTAT_RESOURCE_LIB/__genome_libs_StarFv1.8/
-# modloadmsg = "Reference database located in /path/to/database/%(name)s-%(version)s\n"
+modloadmsg = "Reference databases located in /databases/bio/starfusion-1.8\n"
 
 moduleclass = 'bio'
