@@ -1495,6 +1495,206 @@ exts_list = [
         'source_urls': ['https://cpan.metacpan.org/authors/id/J/JD/JDHEDDEN/'],
         'checksums': ['9dfd6ca2822724347e0eb6759d00709425814703ad5c66bdb6214579868bcac4'],
     }),
+    ('ExtUtils::MakeMaker', '7.36', {
+        'source_tmpl': 'ExtUtils-MakeMaker-%(version)s.tar.gz',
+        'source_urls': ['https://cpan.metacpan.org/authors/id/B/BI/BINGOS'],
+    }),
+    ('List::Util', '1.54', {
+        'source_tmpl': 'Scalar-List-Utils-%(version)s.tar.gz',
+        'source_urls': ['https://cpan.metacpan.org/authors/id/P/PE/PEVANS'],
+    }),
+    ('Module::CoreList', '5.20190524', {
+        'source_tmpl': 'Module-CoreList-%(version)s.tar.gz',
+        'source_urls': ['https://cpan.metacpan.org/authors/id/B/BI/BINGOS'],
+    }),
+    ('Module::Metadata', '1.000036', {
+        'source_tmpl': 'Module-Metadata-%(version)s.tar.gz',
+        'source_urls': ['https://cpan.metacpan.org/authors/id/E/ET/ETHER'],
+    }),
+    ('version', '0.9924', {
+        'source_tmpl': 'version-%(version)s.tar.gz',
+        'source_urls': ['https://cpan.metacpan.org/authors/id/J/JP/JPEACOCK'],
+    }),
+    ('Params::Check', '0.38', {
+        'source_tmpl': 'Params-Check-%(version)s.tar.gz',
+        'source_urls': ['https://cpan.metacpan.org/authors/id/B/BI/BINGOS'],
+    }),
+    ('Locale::Maketext::Simple', '0.21', {
+        'source_tmpl': 'Locale-Maketext-Simple-%(version)s.tar.gz',
+        'source_urls': ['https://cpan.metacpan.org/authors/id/J/JE/JESSE'],
+    }),
+    ('Test::Harness', '3.42', {
+        'source_tmpl': 'Test-Harness-%(version)s.tar.gz',
+        'source_urls': ['https://cpan.metacpan.org/authors/id/L/LE/LEONT'],
+    }),
+    ('Perl::OSType', '1.010', {
+        'source_tmpl': 'Perl-OSType-%(version)s.tar.gz',
+        'source_urls': ['https://cpan.metacpan.org/authors/id/D/DA/DAGOLDEN'],
+    }),
+    ('IPC::Cmd', '1.02', {
+        'source_tmpl': 'IPC-Cmd-%(version)s.tar.gz',
+        'source_urls': ['https://cpan.metacpan.org/authors/id/B/BI/BINGOS'],
+    }),
+    ('Pod::Escapes', '1.07', {
+        'source_tmpl': 'Pod-Escapes-%(version)s.tar.gz',
+        'source_urls': ['https://cpan.metacpan.org/authors/id/N/NE/NEILB'],
+    }),
+    ('if', '0.0608', {
+        'source_tmpl': 'if-%(version)s.tar.gz',
+        'source_urls': ['https://cpan.metacpan.org/authors/id/X/XS/XSAWYERX'],
+    }),
+    ('Test', '1.26', {
+        'source_tmpl': 'Test-%(version)s.tar.gz',
+        'source_urls': ['https://cpan.metacpan.org/authors/id/J/JE/JESSE'],
+    }),
+    ('ExtUtils::Constant', '0.25', {
+        'source_tmpl': 'ExtUtils-Constant-%(version)s.tar.gz',
+        'source_urls': ['https://cpan.metacpan.org/authors/id/N/NW/NWCLARK'],
+    }),
+    ('ExtUtils::CBuilder', '0.280231', {
+        'source_tmpl': 'ExtUtils-CBuilder-%(version)s.tar.gz',
+        'source_urls': ['https://cpan.metacpan.org/authors/id/A/AM/AMBS'],
+    }),
+    ('File::Path', '2.16', {
+        'source_tmpl': 'File-Path-%(version)s.tar.gz',
+        'source_urls': ['https://cpan.metacpan.org/authors/id/J/JK/JKEENAN'],
+    }),
+    ('Carp::Heavy', '1.50', {
+        'source_tmpl': 'Carp-%(version)s.tar.gz',
+        'source_urls': ['https://cpan.metacpan.org/authors/id/X/XS/XSAWYERX'],
+    }),
+    ('IO::Handle', '1.42', {
+        'source_tmpl': 'IO-%(version)s.tar.gz',
+        'source_urls': ['https://cpan.metacpan.org/authors/id/T/TO/TODDR'],
+    }),
+    ('IO::Seekable', '1.42', {
+        'source_tmpl': 'IO-%(version)s.tar.gz',
+        'source_urls': ['https://cpan.metacpan.org/authors/id/T/TO/TODDR'],
+    }),
+    ('Pod::Simple', '3.38', {
+        'source_tmpl': 'Pod-Simple-%(version)s.tar.gz',
+        'source_urls': ['https://cpan.metacpan.org/authors/id/K/KH/KHW'],
+    }),
+    ('IO::File', '1.39', {
+        'source_tmpl': 'IO-%(version)s.tar.gz',
+        'source_urls': ['https://cpan.metacpan.org/authors/id/T/TO/TODDR'],
+    }),
+    ('IO::Select', '1.39', {
+        'source_tmpl': 'IO-%(version)s.tar.gz',
+        'source_urls': ['https://cpan.metacpan.org/authors/id/T/TO/TODDR'],
+    }),
+    ('IO::Socket', '1.39', {
+        'source_tmpl': 'IO-%(version)s.tar.gz',
+        'source_urls': ['https://cpan.metacpan.org/authors/id/T/TO/TODDR'],
+    }),
+    ('Socket', '2.029', {
+        'source_tmpl': 'Socket-%(version)s.tar.gz',
+        'source_urls': ['https://cpan.metacpan.org/authors/id/P/PE/PEVANS'],
+    }),
+    ('Time::Local', '1.28', {
+        'source_tmpl': 'Time-Local-%(version)s.tar.gz',
+        'source_urls': ['https://cpan.metacpan.org/authors/id/D/DR/DROLSKY'],
+    }),
+    ('Storable', '3.15', {
+        'source_tmpl': 'Storable-%(version)s.tar.gz',
+        'source_urls': ['https://cpan.metacpan.org/authors/id/X/XS/XSAWYERX'],
+    }),
+    ('Capture::Tiny', '0.48', {
+        'source_tmpl': 'Capture-Tiny-%(version)s.tar.gz',
+        'source_urls': ['https://cpan.metacpan.org/authors/id/D/DA/DAGOLDEN'],
+    }),
+    ('ExtUtils::ParseXS', '3.35', {
+        'source_tmpl': 'ExtUtils-ParseXS-%(version)s.tar.gz',
+        'source_urls': ['https://cpan.metacpan.org/authors/id/S/SM/SMUELLER'],
+    }),
+    ('File::Temp', '0.2309', {
+        'source_tmpl': 'File-Temp-%(version)s.tar.gz',
+        'source_urls': ['https://cpan.metacpan.org/authors/id/E/ET/ETHER'],
+    }),
+    ('Pod::Man', '4.12', {
+        'source_tmpl': 'podlators-%(version)s.tar.gz',
+        'source_urls': ['https://cpan.metacpan.org/authors/id/R/RR/RRA'],
+    }),
+    ('File::Spec', '3.75', {
+        'source_tmpl': 'PathTools-%(version)s.tar.gz',
+        'source_urls': ['https://cpan.metacpan.org/authors/id/X/XS/XSAWYERX'],
+    }),
+    ('Test::More', '1.302162', {
+        'source_tmpl': 'Test-Simple-%(version)s.tar.gz',
+        'source_urls': ['https://cpan.metacpan.org/authors/id/E/EX/EXODIST'],
+    }),
+    ('Module::Load', '0.34', {
+        'source_tmpl': 'Module-Load-%(version)s.tar.gz',
+        'source_urls': ['https://cpan.metacpan.org/authors/id/B/BI/BINGOS'],
+    }),
+    ('Module::Load::Conditional', '0.68', {
+        'source_tmpl': 'Module-Load-Conditional-%(version)s.tar.gz',
+        'source_urls': ['https://cpan.metacpan.org/authors/id/B/BI/BINGOS'],
+    }),
+    ('parent', '0.237', {
+        'source_tmpl': 'parent-%(version)s.tar.gz',
+        'source_urls': ['https://cpan.metacpan.org/authors/id/C/CO/CORION'],
+    }),
+    ('Net::Domain', '3.11', {
+        'source_tmpl': 'libnet-%(version)s.tar.gz',
+        'source_urls': ['https://cpan.metacpan.org/authors/id/S/SH/SHAY'],
+    }),
+    ('Scalar::Util', '1.50', {
+        'source_tmpl': 'Scalar-List-Utils-%(version)s.tar.gz',
+        'source_urls': ['https://cpan.metacpan.org/authors/id/P/PE/PEVANS'],
+    }),
+    ('Text::ParseWords', '3.30', {
+        'source_tmpl': 'Text-ParseWords-%(version)s.tar.gz',
+        'source_urls': ['https://cpan.metacpan.org/authors/id/C/CH/CHORNY'],
+    }),
+    ('Encode', '3.01', {
+        'source_tmpl': 'Encode-%(version)s.tar.gz',
+        'source_urls': ['https://cpan.metacpan.org/authors/id/D/DA/DANKOGAI'],
+    }),
+    ('constant', '1.33', {
+        'source_tmpl': 'constant-%(version)s.tar.gz',
+        'source_urls': ['https://cpan.metacpan.org/authors/id/R/RJ/RJBS'],
+    }),
+    ('Data::Dumper', '2.173', {
+        'source_tmpl': 'Data-Dumper-%(version)s.tar.gz',
+        'source_urls': ['https://cpan.metacpan.org/authors/id/X/XS/XSAWYERX'],
+    }),
+    ('Cwd', '3.75', {
+        'source_tmpl': 'PathTools-%(version)s.tar.gz',
+        'source_urls': ['https://cpan.metacpan.org/authors/id/X/XS/XSAWYERX'],
+    }),
+    ('MIME::Base64', '3.15', {
+        'source_tmpl': 'MIME-Base64-%(version)s.tar.gz',
+        'source_urls': ['https://cpan.metacpan.org/authors/id/G/GA/GAAS'],
+    }),
+    ('ExtUtils::CppGuess', '0.19', {
+        'source_tmpl': 'ExtUtils-CppGuess-%(version)s.tar.gz',
+        'source_urls': ['https://cpan.metacpan.org/authors/id/E/ET/ETJ'],
+    }),
+    ('XSLoader', '0.24', {
+        'source_tmpl': 'XSLoader-%(version)s.tar.gz',
+        'source_urls': ['https://cpan.metacpan.org/authors/id/S/SA/SAPER'],
+    }),
+    ('Carp', '1.50', {
+        'source_tmpl': 'Carp-%(version)s.tar.gz',
+        'source_urls': ['https://cpan.metacpan.org/authors/id/X/XS/XSAWYERX'],
+    }),
+    ('Exporter', '5.74', {
+        'source_tmpl': 'Exporter-%(version)s.tar.gz',
+        'source_urls': ['https://cpan.metacpan.org/authors/id/T/TO/TODDR'],
+    }),
+    ('AutoLoader', '5.74', {
+        'source_tmpl': 'AutoLoader-%(version)s.tar.gz',
+        'source_urls': ['https://cpan.metacpan.org/authors/id/S/SM/SMUELLER'],
+    }),
+    ('URI::Escape', '1.76', {
+        'source_tmpl': 'URI-%(version)s.tar.gz',
+        'source_urls': ['https://cpan.metacpan.org/authors/id/O/OA/OALDERS'],
+    }),
+    ('Set::IntervalTree', '0.12', {
+        'source_tmpl': 'Set-IntervalTree-%(version)s.tar.gz',
+        'source_urls': ['https://cpan.metacpan.org/authors/id/S/SL/SLOYD'],
+    }),
 ]
 
 moduleclass = 'lang'
