@@ -41,7 +41,7 @@ dependencies = [
     ('kallisto', '0.46.1'),
     ('ncurses', '6.1'),
     ('Salmon', '1.1.0'),
-    ('SAMtools', '1.10'),
+    ('SAMtools', '1.9'),
     ('zlib', '1.2.11'),
 ]
 
