@@ -1,0 +1,27 @@
+name = 'Gurobi'
+version = '9.0.1'
+versionsuffix = '-Python-%(pyver)s'
+
+homepage = 'https://www.gurobi.com'
+description = """The Gurobi Optimizer is a state-of-the-art solver for mathematical programming.
+The solvers in the Gurobi Optimizer were designed from the ground up to exploit modern 
+architectures and multi-core processors, using the most advanced implementations of the 
+latest algorithms."""
+
+toolchain = {'name': 'GCCcore', 'version': '8.3.0'}
+
+source_urls = ['https://packages.gurobi.com/%(version_major_minor)s/']
+sources = ['%(namelower)s%(version)s_linux64.tar.gz']
+checksums = ['17e2facda111180eee61eeded0b8716230bbe09faa7c61356dc79f002ff86cb7']
+
+builddependencies = [
+    ('binutils', '2.32'),
+]
+
+dependencies = [
+    ('Python', '3.7.4'),
+]
+
+license_file = HOME + '/.local/easybuild/.licenses/%(name)s.lic'
+
+moduleclass = 'math'
