@@ -1,0 +1,42 @@
+easyblock = 'PythonBundle'
+
+name = 'geopandas'
+version = '0.4.1'
+versionsuffix = "-Python-%(pyver)s"
+
+homepage = 'https://github.com/geopandas/geopandas'
+description = """GeoPandas is a project to add support for geographic data to pandas objects.
+It currently implements GeoSeries and GeoDataFrame types which are subclasses of pandas.Series
+and pandas.DataFrame respectively. GeoPandas objects can act on shapely geometry objects and
+perform geometric operations.
+This module bundles geopandas with geopy, contextily, geoplot, descartes and matplotlib."""
+
+toolchain = {'name': 'foss', 'version': '2018b'}
+
+dependencies = [
+    ('Python', '3.6.6'),
+    ('Shapely', '1.6.4', versionsuffix),
+    ('Fiona', '1.8.6', versionsuffix),
+    ('pyproj', '1.9.6', versionsuffix),
+    ('matplotlib', '3.0.2', versionsuffix),   # required by geoplots, optional for geopandas
+    ('Cartopy', '0.17.0', versionsuffix),     # required by geoplots
+    ('descartes', '1.1.0', versionsuffix),    # optional
+    ('geopy', '1.18.1', versionsuffix),       # optional
+    ('contextily', '1.0rc1', versionsuffix),  # optional
+    ('Rtree', '0.8.3', versionsuffix),        # optional
+]
+
+use_pip = True
+
+exts_list = [
+    ('geoplot', '0.2.4', {
+        'source_urls': ['https://pypi.python.org/packages/source/g/geoplot'],
+        'checksums': ['5e42912016c88d48e44fe0603e9f0250cb29a539fc3e99ac30b9dd41893217af'],
+    }),
+    (name, version, {
+        'source_urls': ['https://pypi.python.org/packages/source/g/geopandas/'],
+        'checksums': ['a59345c7ee9c4532101342bf31f5c576c32f901f16a5aaf0637c7e1f5ac8939c'],
+    }),
+]
+
+moduleclass = 'geo'
