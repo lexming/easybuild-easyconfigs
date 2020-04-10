@@ -1,0 +1,41 @@
+Add missing types for several variables used in dispdftd3.f90
+Type definitions are taken from src/standalone/particles.f90
+Author: Alex Domingo (Vrije Universiteit Brussel)
+--- a/src/potentials/dispersion/dispdftd3.f90	2019-11-18 21:20:26.000000000 +0100
++++ b/src/potentials/dispersion/dispdftd3.f90	2020-04-10 12:28:50.565382000 +0200
+@@ -105,6 +105,35 @@
+      module procedure dispdftd3_register
+   endinterface
+ 
++  public :: eVA_to_fs_sq, sqrt_eVA_to_fs_sq
++
++  real(DP), parameter  :: eVA_to_fs_sq = 1000.0_DP/(6.0221415_DP*1.60217646_DP) ! femtoseconds
++  real(DP), parameter  :: sqrt_eVA_to_fs_sq = 10.1805056398418_DP
++
++  integer, parameter  :: NA            = 0
++  integer, parameter  :: eV_A          = 1
++  integer, parameter  :: eV_A_fs       = 2
++  integer, parameter  :: H_Bohr        = 3
++  integer, parameter  :: n_units       = 4
++  integer, parameter  :: len_unit_str  = 20
++
++  public :: system_of_units, centered_box, length_to_A, length_to_Bohr
++  public :: energy_to_eV, K_to_energy
++  public :: time_to_fs, velocity_to_Afs, pressure_to_GPa
++  public :: mass_to_g_mol
++
++  integer,       target :: system_of_units = NA
++  logical(BOOL), target :: centered_box = .false.
++  
++  real(DP)            :: length_to_A      = 1.0_DP
++  real(DP)            :: length_to_Bohr   = 1.0_DP/Bohr
++  real(DP)            :: energy_to_eV     = 1.0_DP
++  real(DP)            :: K_to_energy      = Boltzmann_K
++  real(DP)            :: time_to_fs       = sqrt_eVA_to_fs_sq
++  real(DP)            :: velocity_to_Afs  = 1.0_DP/sqrt_eVA_to_fs_sq
++  real(DP)            :: pressure_to_GPa  = elem_charge * 1d21
++  real(DP)            :: mass_to_g_mol    = 1.0_DP
++
+ contains
+ 
+ 
