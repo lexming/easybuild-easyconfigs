@@ -2,7 +2,7 @@ Fix makefiles to respect compilations flags in the environment and use Easybuild
 Author: Alex Domingo (Vrije Universiteit Brussel)
 --- a/build_lammps/Makefile.gnu	2020-04-14 15:28:26.543767000 +0200
 +++ b/build_lammps/Makefile.gnu	2020-04-14 15:30:26.578403000 +0200
-@@ -11,11 +11,11 @@
+@@ -11,10 +11,10 @@
  #
  # Serial / OpenMP execution (GNU)
  #
@@ -10,16 +10,14 @@ Author: Alex Domingo (Vrije Universiteit Brussel)
 -F90C      = gfortran
 -CC        = gcc
 -CXX       = g++
--LD        = gfortran
 +FC        ?= gfortran
-+F90C      ?= gfortran
++F90C      := $(FC)
 +CC        ?= gcc
 +CXX       ?= g++
-+LD        ?= gfortran
+ LD        = gfortran
  #
  # OpenMP parallelization or hybrid MPI/OpenMP
- #
-@@ -33,7 +33,7 @@
+@@ -33,14 +33,16 @@
  # *** Extra includes and libraries
  #
  #
@@ -28,7 +26,17 @@ Author: Alex Domingo (Vrije Universiteit Brussel)
  EXTRA_LIB += -cxxlib
  #
  # *** LAPACK and BLAS link options here.
-@@ -51,7 +51,7 @@
+ #
+ # cygwin lapack/blas
+ #
+-#EXTRA_LIB += -llapack -lblas
++DEFINES += -DHAVE_LAPACK
++EXTRA_LIB += -lopenblas
++EXTRA_INCLUDE += -I$(EBROOTOPENBLAS)/include
+ 
+ #
+ # *** Other settings that rarely need to be touched
+@@ -51,7 +53,7 @@
  #
  # Normal (GNU)
  #
@@ -37,16 +45,23 @@ Author: Alex Domingo (Vrije Universiteit Brussel)
  #
  # Debug (GNU)
  #
-@@ -92,7 +92,7 @@
+@@ -92,7 +94,14 @@
  #
  # - Would be nice to have all explained eventually.
  #
 -DEFINES  = \
++HAVE_FFTW3 = 0
++ifneq ($(HAVE_FFTW3),0)
++DEFINES += -DHAVE_FFTW3
++EXTRA_INCLUDE += -I$(EBROOTFFTW)/include
++EXTRA_LIB += -L$(EBROOTFFTW)/lib -lfftw3
++endif
++
 +DEFINES  += \
  	-D_MPI \
  	-DLAMMPS \
  	-DNO_BIND_C_OPTIONAL
-@@ -111,16 +111,16 @@
+@@ -111,16 +120,16 @@
  # GNU
  #
  GFFLAGS += -fPIC
@@ -79,7 +94,7 @@ Author: Alex Domingo (Vrije Universiteit Brussel)
 -CC        = gcc
 -CXX       = g++
 +FC        ?= gfortran
-+F90C      ?= gfortran
++F90C      := $(FC)
 +CC        ?= gcc
 +CXX       ?= g++
  LD        = gfortran
