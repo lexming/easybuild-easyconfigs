@@ -17,7 +17,7 @@ patches = ['Atomistica-%(version)s_easybuildize-makefiles-gnu.patch']
 checksums = [
     '8eb32e7e920ab4db062e7a9d924cad598f7aca26b503dfe38b370e83baf8fdab',  # 0.10.1.tar.gz
     # Atomistica-0.10.1_easybuildize-makefiles-gnu.patch
-    '1bee827ebeef471985e5cabf32cf2106e0d418d45a228b1e4f2842ef0d9787d0',
+    'ce291668427485b35ad86aa831933258d11f9ed064d08a17b3196e849005e420',
 ]
 
 builddependencies = [
