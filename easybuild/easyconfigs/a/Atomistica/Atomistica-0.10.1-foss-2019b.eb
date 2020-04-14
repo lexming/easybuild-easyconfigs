@@ -13,11 +13,11 @@ toolchain = {'name': 'foss', 'version': '2019b'}
 github_account = 'Atomistica'
 source_urls = [GITHUB_SOURCE]
 sources = ['%(version)s.tar.gz']
-patches = ['Atomistica-%(version)s_easybuildize-makefile-gnu.patch']
+patches = ['Atomistica-%(version)s_easybuildize-makefiles-gnu.patch']
 checksums = [
     '8eb32e7e920ab4db062e7a9d924cad598f7aca26b503dfe38b370e83baf8fdab',  # 0.10.1.tar.gz
-    # Atomistica-0.10.1_easybuildize-makefile-gnu.patch
-    'bff8df2d9f41e11baf16b56e443db85d07ca86cfd0fefda2cd65ac7b8c6b46ff',
+    # Atomistica-0.10.1_easybuildize-makefiles-gnu.patch
+    '1bee827ebeef471985e5cabf32cf2106e0d418d45a228b1e4f2842ef0d9787d0',
 ]
 
 builddependencies = [
@@ -33,7 +33,8 @@ start_dir = 'build_standalone'
 
 prebuildopts = "cp Makefile.gnu Makefile &&"
 
-buildopts = "factories HAVE_FFTW3=1 HAVE_DFTD3=1 && make mdcore HAVE_FFTW3=1 HAVE_DFTD3=1"
+local_defines = "HAVE_FFTW3=1 HAVE_DFTD3=1"
+buildopts = "factories %s && make mdcore %s" % (local_defines, local_defines)
 
 files_to_copy = [
     (['mdcore*'], 'bin'),
