@@ -15,7 +15,7 @@ sources = ['gv-6016-Linux-x86_64.tbz']
 
 multi_deps = {'Gaussian': ['G16.A.03-intel-2017b', 'G16.B.01']}
 
-group = 'gaussian'
+group = 'brusselall'
 
 sanity_check_paths = {
     'files': ['gview.sh'],
@@ -31,5 +31,15 @@ modextravars = {
     'GV_DIR': '%(installdir)s',
     'LC_ALL': 'C',  # GaussView fails to start with other locales
 }
+
+modluafooter = """
+if ( isloaded("Gaussian/G16.A.03-intel-2017b") ) then
+    load("freeglut/3.0.0-intel-2017b")
+end
+
+if ( isloaded("Gaussian/G16.B.01") ) then
+    load("freeglut/3.0.0-GCCcore-8.2.0")
+end
+"""
 
 moduleclass = 'chem'
