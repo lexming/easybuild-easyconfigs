@@ -40,15 +40,16 @@ buildopts = "lammps_factories %s && make atomistica %s" % (local_compvars, local
 
 files_to_copy = [
     (['libatomistica.a'], 'lib'),
-    (['src/lammps/pair_style/pair_atomistica.*', 'src/support/ptrdict.h', 'potentials_factory_c.h'], 'include'),
+    (['src/support/ptrdict.h', 'potentials_factory_c.h'], 'include'),
     (['AUTHORS.md', 'ChangeLog.md', 'README.md', 'LICENSE'], 'share'),
     (['doc/*'], 'share/doc'),
+    (['src/lammps/pair_style/pair_atomistica.*'], 'share/lammps'),
     (['examples/LAMMPS/*'], 'share/examples'),
 ]
 
 sanity_check_paths = {
-    'files': ['lib/libatomistica.a'] +
-             ['include/%s.h' % h for h in ['pair_atomistica', 'ptrdict', 'potentials_factory_c']],
+    'files': ['lib/libatomistica.a'] + ['include/%s.h' % h for h in ['ptrdict', 'potentials_factory_c']] +
+             ['share/lammps/pair_atomistica.%s' % e for e in ['cpp', 'h']],
     'dirs': ['share', 'share/doc', 'share/examples'],
 }
 
