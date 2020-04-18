@@ -25,6 +25,7 @@ dependencies = [
     ('Python', '3.7.4'),
     ('SciPy-bundle', '2019.10', versionsuffix),
     ('ASE', '3.19.0', versionsuffix),
+    ('dftd3-lib', '0.9'),
 ]
 
 use_pip = False
@@ -34,6 +35,9 @@ prebuildopts = "cp setup.cfg.gnu_omp setup.cfg && "
 # Enable FFTW from EB
 prebuildopts += 'sed -i "s|-cpp-input|-cpp-input -DHAVE_FFTW3 -I$EBROOTFFTW/include|g" setup.cfg && '
 prebuildopts += 'sed -i "s|libraries=|libraries=fftw3,fftw3_threads,|" setup.cfg && '
+# Enable dftd3-lib from EB
+prebuildopts += 'sed -i "s|-cpp-input|-cpp-input -DHAVE_DFTD3 -I$EBROOTDFTD3MINLIB/include|g" setup.cfg && '
+prebuildopts += 'sed -i "s|libraries=|libraries=dftd3,|" setup.cfg && '
 
 # Copy documentation, tests and tools to installation directory
 postinstallcmds = ["mkdir -p %(installdir)s/share/examples && cp -r examples/ASE/* %(installdir)s/share/examples/"]
