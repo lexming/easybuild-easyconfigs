@@ -1,4 +1,4 @@
-Fix makefiles to respect compilations flags in the environment and use Easybuild libraries
+Fix makefiles for gnu to respect flags in the environment and use Easybuild libraries
 Author: Alex Domingo (Vrije Universiteit Brussel)
 --- a/build_lammps/Makefile.gnu	2020-04-14 15:28:26.543767000 +0200
 +++ b/build_lammps/Makefile.gnu	2020-04-14 15:30:26.578403000 +0200

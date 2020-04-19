@@ -13,11 +13,10 @@ toolchain = {'name': 'foss', 'version': '2019b'}
 github_account = 'Atomistica'
 source_urls = [GITHUB_SOURCE]
 sources = ['%(version)s.tar.gz']
-patches = ['Atomistica-%(version)s_easybuildize-makefiles-gnu.patch']
+patches = ['Atomistica-%(version)s_ebenv-makefiles-gnu.patch']
 checksums = [
     '8eb32e7e920ab4db062e7a9d924cad598f7aca26b503dfe38b370e83baf8fdab',  # 0.10.1.tar.gz
-    # Atomistica-0.10.1_easybuildize-makefiles-gnu.patch
-    'ce291668427485b35ad86aa831933258d11f9ed064d08a17b3196e849005e420',
+    '250d1b9efd19a35e3d92a2b57b7bb3fa0e1ee419a17e23cbbc48c8b0439de915',  # Atomistica-0.10.1_ebenv-makefiles-gnu.patch
 ]
 
 builddependencies = [
