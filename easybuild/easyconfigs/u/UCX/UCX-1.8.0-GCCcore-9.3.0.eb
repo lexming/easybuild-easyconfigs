@@ -35,12 +35,14 @@ builddependencies = [
 osdependencies = [('libibverbs-dev', 'libibverbs-devel', 'rdma-core-devel')]
 
 dependencies = [
-    ('numactl', '2.0.13'),
+    ('numactl', '2.0.12'),
 ]
 
 preconfigopts = 'autoreconf && '
 configopts = '--enable-optimizations --enable-cma --enable-mt --with-verbs '
 configopts += '--without-java --disable-doxygen-doc '
+# Disable OpenIB
+configopts += '--enable-mca-no-build=btl-uct '
 
 buildopts = 'V=1'
 
