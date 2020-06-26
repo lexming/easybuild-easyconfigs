@@ -26,4 +26,10 @@ sanity_check_paths = {
 
 sanity_check_commands = [('git-lfs', '--version')]
 
+# set up Git LFS for the user account
+modluafooter = """
+if mode() == "load" then
+    subprocess("git lfs install")
+end"""
+
 moduleclass = 'tools'
