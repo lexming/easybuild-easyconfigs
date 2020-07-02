@@ -1,7 +1,7 @@
 name = 'PETSc'
 version = '3.9.3'
 
-homepage = 'http://www.mcs.anl.gov/petsc'
+homepage = 'https://www.mcs.anl.gov/petsc'
 description = """PETSc, pronounced PET-see (the S is silent), is a suite of data structures and routines for the
  scalable (parallel) solution of scientific applications modeled by partial differential equations."""
 
@@ -27,7 +27,6 @@ dependencies = [
     ('METIS', '5.1.0'),
     ('ParMETIS', '4.0.3'),
     ('SCOTCH', '6.0.6'),
-    ('MUMPS', '5.1.2', '-metis'),
     ('SuiteSparse', '5.1.2', '-METIS-5.1.0'),
     ('Hypre', '2.14.0'),
 ]
