@@ -19,6 +19,8 @@ checksums = [
     '64cf9d5008d5e92117e65bdec5316d991b6a6b8c8ecf7ea46eb790a498266297',  # PETSc_ranlib-fix.patch
 ]
 
+osdependencies = [('numpy', 'python-numpy')]
+
 builddependencies = [('CMake', '3.15.3')]
 
 dependencies = [

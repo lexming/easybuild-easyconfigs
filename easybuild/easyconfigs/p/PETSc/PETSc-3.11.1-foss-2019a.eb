@@ -20,6 +20,8 @@ checksums = [
     'f11e3d7c36ec9939b10550c9913320e0ee4b34585bdf9458977548686f90bfa8',  # PETSc-3.9.3_fix-AVX512.patch
 ]
 
+osdependencies = [('numpy', 'python-numpy')]
+
 builddependencies = [('CMake', '3.13.3')]
 
 dependencies = [
