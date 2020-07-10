@@ -1,0 +1,42 @@
+easyblock = 'Tarball'
+
+name = 'ResMap'
+version = '1.1.4'
+versionsuffix = '-Python-%(pyver)s'
+
+homepage = 'http://resmap.sourceforge.net/'
+description = """ResMap (Resolution Map) is a Python (NumPy/SciPy) application with a Tkinter
+GUI. It is an easy to use software package for computing the local resolution
+of 3D density maps studied in structural biology, primarily electron
+cryo-microscopy (cryo-EM)."""
+
+toolchain = {'name': 'foss', 'version': '2019b'}
+
+source_urls = [SOURCEFORGE_SOURCE]
+sources = ['%(name)s-%(version)s-src.zip']
+
+dependencies = [
+    ('Python', '2.7.16'),
+    ('SciPy-bundle', '2019.10', versionsuffix),
+    ('matplotlib', '2.2.4', versionsuffix),
+    ('Tkinter', '%(pyver)s'),
+]
+
+postinstallcmds = ["chmod +x %(installdir)s/*.py"]
+
+fix_python_shebang_for = ['*.py']
+
+sanity_check_paths = {
+    'files': ['%s.py' % x for x in ['ResMap', 'ResMap_algorithm', 'ResMap_blocks', 'ResMap_fileIO', 'ResMap_helpers',
+                                    'ResMap_spectrumTools', 'ResMap_sphericalProfile', 'ResMap_toChimera', 'docopt']],
+    'dirs': [],
+}
+
+sanity_check_commands = ["ResMap.py --help"]
+
+modextrapaths = {
+    'PATH': '',
+    'PYTHONPATH': '',
+}
+
+moduleclass = 'vis'
