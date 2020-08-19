@@ -18,7 +18,8 @@ buildopts = '-f Makefile.AVX2.HYBRID.gcc CC="$CC"'
 
 files_to_copy = [(["raxmlHPC-HYBRID-AVX2"], "bin"), "usefulScripts", "README", "manual"]
 
-postinstallcmds = ["cd %(installdir)s/bin && ln -s raxmlHPC-HYBRID-AVX2 raxmlHPC"]
+postinstallcmds = ["cd %%(installdir)s/bin && ln -s raxmlHPC-HYBRID-AVX2 %s" % x
+                   for x in ['raxmlHPC', 'raxmlHPC-AVX', 'raxmlHPC-AVX2']]
 
 sanity_check_paths = {
     'files': ['bin/raxmlHPC'],
