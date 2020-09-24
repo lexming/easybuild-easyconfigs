@@ -1,0 +1,40 @@
+easyblock = 'MakeCp'
+
+name = 'NCIPLOT'
+version = '3.2.3'
+
+homepage = 'https://www.lct.jussieu.fr/pagesperso/contrera/index-nci.html'
+description = """ NCIPLOT is a program for revealing non covalent interactions
+ based on the reduced density gradient. """
+
+toolchain = {'name': 'intel', 'version': '2016b'}
+toolchainopts = {'openmp': True}
+
+sources = [
+    '%(namelower)s_%(version)s.tar.gz',
+    '%(namelower)s_%(version)s_dat.tar.gz',
+]
+checksums = [
+    'f07a54cb0b4488d29675c4892ba7f159bf6808bb83ac3f20f3e2a1bf4a16d730',
+    'fa6f112aaff725f460c0d700527b1aedc8190aebc662b07253e58b4dace53b96',
+]
+
+start_dir = 'src'
+
+prebuildopts = "make clean && "
+buildopts = 'FC="${FC}" FCFLAGS="-O2 -fopenmp" LDFLAGS="${LDFLAGS} -fopenmp"'
+
+files_to_copy = ['dat', 'test_cases', 'README_3.2.3', (['nciplot'], 'bin')]
+
+sanity_check_paths = {
+    'files': ['bin/nciplot'],
+    'dirs': ['dat', 'test_cases'],
+}
+
+modextrapaths = {'NCIPLOT_HOME': ''}
+
+modloadmsg = """
+Set environment variable OMP_NUM_THREADS equal to the number of available cores before running this program.
+"""
+
+moduleclass = 'chem'
