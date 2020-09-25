@@ -1,0 +1,28 @@
+easyblock = 'Tarball'
+
+name = 'XMVB'
+version = '3.0'
+
+homepage = 'http://www.xmvb.org'
+description = """
+Xiamen Valence Bond (XMVB) is a valence bond (VB) theory based quantum
+chemistry program for performing electronic structure calculations.
+"""
+
+toolchain = {'name': 'intel', 'version': '2017b'}
+
+sources = ['%(namelower)s-v%(version)s-linux-x86_64-intel.tar.bz2']
+checksums = ['1bf9490de91dc434245f1484a0202d60d7fee8cff88415c6b14724302805192a']
+
+postinstallcmds = [
+    'sed -i -e "s|VBDIR=.*|VBDIR=%(installdir)s|g" %(installdir)s/bin/xmvb',
+    'sed -i -e "s|VBDIR=.*|VBDIR=%(installdir)s|g" %(installdir)s/bin/preint',
+]
+
+sanity_check_paths = {
+    'files': ['bin/%s' % x for x in ['6d25d.exe', 'moldendat.exe', 'nboprep.exe',
+                                     'preint', 'preint.exe', 'xmvb', 'xmvb.exe']],
+    'dirs': ['data', 'basis', 'doc'],
+}
+
+moduleclass = 'chem'
