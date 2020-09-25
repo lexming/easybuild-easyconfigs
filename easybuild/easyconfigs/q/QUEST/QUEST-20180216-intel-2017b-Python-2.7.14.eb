@@ -1,0 +1,47 @@
+easyblock = 'CmdCp'
+
+name = 'QUEST'
+version = '20180216'
+versionsuffix = '-Python-%(pyver)s'
+
+homepage = 'https://quest.codes/'
+description = """ QUEST - QUantum Electronic Structure Techniques.
+ QUEST has been designed for molecular electronic structure calculations,
+ with emphasis on density-functional methodologies. """
+
+toolchain = {'name': 'intel', 'version': '2017b'}
+
+# Sources can be downloaded from https://gitlab.com/a_teale/QUEST/ after obtaining permission from the Teale group
+sources = [SOURCELOWER_TAR_GZ]
+
+patches = ['%(name)s-%(version)s.patch']
+
+dependencies = [
+    ('h5py', '2.7.1', versionsuffix),
+    ('libxc', '3.0.0'),
+    ('matplotlib', '2.1.1', versionsuffix),
+    ('numba', '0.37.0', versionsuffix),
+    ('Python', '2.7.14'),
+    ('psutil', '5.4.3', versionsuffix),
+    ('XCfun', '20180122', versionsuffix),
+]
+
+cmds_map = [('', '')]
+postinstallcmds = [
+    'chmod +x src/quest.py',
+    'rm src/quest.py.orig',
+]
+
+files_to_copy = ['*']
+
+modextrapaths = {
+    'PATH': ['src'],
+}
+
+
+sanity_check_paths = {
+    'files': ['src/quest.py'],
+    'dirs': [],
+}
+
+moduleclass = 'chem'
