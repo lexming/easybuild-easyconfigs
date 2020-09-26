@@ -10,7 +10,7 @@ toolchain = {'name': 'iccifort', 'version': '2020.1.217'}
 
 source_urls = ['https://registrationcenter-download.intel.com/akdlm/irc_nas/tec/16814/']
 sources = ['l_mpi_%(version)s.tgz']
-checksums = ['90383b0023f84ac003a55d8bb29dbcf0c639f43a25a2d8d8698a16e770ac9c07']
+checksums = ['fa163b4b79bd1b7509980c3e7ad81b354fc281a92f9cf2469bf4d323899567c0']
 
 osdependencies = [OS_PKG_IBVERBS_DEV]
 
