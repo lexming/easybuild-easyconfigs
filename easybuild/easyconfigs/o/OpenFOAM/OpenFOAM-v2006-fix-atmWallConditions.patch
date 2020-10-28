@@ -1,0 +1,87 @@
+Fix atmWallConditions producing double value entries
+See issue #1900: https://develop.openfoam.com/Development/openfoam/-/issues/1900
+Author: Maarten Van Craenenbroeck (Vrije Universiteit Brussel)
+diff -W 154 -Nru OpenFOAM-v2006-orig/src/atmosphericModels/derivedFvPatchFields/wallFunctions/atmEpsilonWallFunction/atmEpsilonWallFunctionFvPatchScalarField.C OpenFOAM-v2006/src/atmosphericModels/derivedFvPatchFields/wallFunctions/atmEpsilonWallFunction/atmEpsilonWallFunctionFvPatchScalarField.C
+--- OpenFOAM-v2006-orig/src/atmosphericModels/derivedFvPatchFields/wallFunctions/atmEpsilonWallFunction/atmEpsilonWallFunctionFvPatchScalarField.C	2020-06-29 19:16:22.000000000 +0200
++++ OpenFOAM-v2006/src/atmosphericModels/derivedFvPatchFields/wallFunctions/atmEpsilonWallFunction/atmEpsilonWallFunctionFvPatchScalarField.C	2020-10-26 17:01:40.609330000 +0100
+@@ -210,7 +210,7 @@
+     Ostream& os
+ ) const
+ {
+-    epsilonWallFunctionFvPatchScalarField::write(os);
++    fvPatchField<scalar>::write(os);
+     z0_->writeData(os);
+ }
+ 
+diff -W 154 -Nru OpenFOAM-v2006-orig/src/atmosphericModels/derivedFvPatchFields/wallFunctions/atmNutkWallFunction/atmNutkWallFunctionFvPatchScalarField.C OpenFOAM-v2006/src/atmosphericModels/derivedFvPatchFields/wallFunctions/atmNutkWallFunction/atmNutkWallFunctionFvPatchScalarField.C
+--- OpenFOAM-v2006-orig/src/atmosphericModels/derivedFvPatchFields/wallFunctions/atmNutkWallFunction/atmNutkWallFunctionFvPatchScalarField.C	2020-06-29 19:16:22.000000000 +0200
++++ OpenFOAM-v2006/src/atmosphericModels/derivedFvPatchFields/wallFunctions/atmNutkWallFunction/atmNutkWallFunctionFvPatchScalarField.C	2020-10-26 17:01:40.598193000 +0100
+@@ -198,7 +198,7 @@
+ 
+ void atmNutkWallFunctionFvPatchScalarField::write(Ostream& os) const
+ {
+-    nutkWallFunctionFvPatchScalarField::write(os);
++    fvPatchField<scalar>::write(os);
+     os.writeEntry("boundNut", boundNut_);
+     z0_->writeData(os);
+     writeEntry("value", os);
+diff -W 154 -Nru OpenFOAM-v2006-orig/src/atmosphericModels/derivedFvPatchFields/wallFunctions/atmNutkWallFunction/atmNutkWallFunctionFvPatchScalarField.H OpenFOAM-v2006/src/atmosphericModels/derivedFvPatchFields/wallFunctions/atmNutkWallFunction/atmNutkWallFunctionFvPatchScalarField.H
+--- OpenFOAM-v2006-orig/src/atmosphericModels/derivedFvPatchFields/wallFunctions/atmNutkWallFunction/atmNutkWallFunctionFvPatchScalarField.H	2020-06-29 19:16:22.000000000 +0200
++++ OpenFOAM-v2006/src/atmosphericModels/derivedFvPatchFields/wallFunctions/atmNutkWallFunction/atmNutkWallFunctionFvPatchScalarField.H	2020-10-26 17:01:40.599363000 +0100
+@@ -152,7 +152,6 @@
+         //- Calculate the turbulent viscosity
+         virtual tmp<scalarField> calcNut() const;
+ 
+-
+ public:
+ 
+     //- Runtime type information
+diff -W 154 -Nru OpenFOAM-v2006-orig/src/atmosphericModels/derivedFvPatchFields/wallFunctions/atmNutUWallFunction/atmNutUWallFunctionFvPatchScalarField.C OpenFOAM-v2006/src/atmosphericModels/derivedFvPatchFields/wallFunctions/atmNutUWallFunction/atmNutUWallFunctionFvPatchScalarField.C
+--- OpenFOAM-v2006-orig/src/atmosphericModels/derivedFvPatchFields/wallFunctions/atmNutUWallFunction/atmNutUWallFunctionFvPatchScalarField.C	2020-06-29 19:16:22.000000000 +0200
++++ OpenFOAM-v2006/src/atmosphericModels/derivedFvPatchFields/wallFunctions/atmNutUWallFunction/atmNutUWallFunctionFvPatchScalarField.C	2020-10-26 17:01:40.606464000 +0100
+@@ -190,7 +190,7 @@
+ 
+ void atmNutUWallFunctionFvPatchScalarField::write(Ostream& os) const
+ {
+-    nutUWallFunctionFvPatchScalarField::write(os);
++    fvPatchField<scalar>::write(os);
+     os.writeEntry("boundNut", boundNut_);
+     z0_->writeData(os);
+     writeEntry("value", os);
+diff -W 154 -Nru OpenFOAM-v2006-orig/src/atmosphericModels/derivedFvPatchFields/wallFunctions/atmNutWallFunction/atmNutWallFunctionFvPatchScalarField.C OpenFOAM-v2006/src/atmosphericModels/derivedFvPatchFields/wallFunctions/atmNutWallFunction/atmNutWallFunctionFvPatchScalarField.C
+--- OpenFOAM-v2006-orig/src/atmosphericModels/derivedFvPatchFields/wallFunctions/atmNutWallFunction/atmNutWallFunctionFvPatchScalarField.C	2020-06-29 19:16:22.000000000 +0200
++++ OpenFOAM-v2006/src/atmosphericModels/derivedFvPatchFields/wallFunctions/atmNutWallFunction/atmNutWallFunctionFvPatchScalarField.C	2020-10-26 17:01:40.603277000 +0100
+@@ -211,7 +211,7 @@
+ 
+ void atmNutWallFunctionFvPatchScalarField::write(Ostream& os) const
+ {
+-    nutkWallFunctionFvPatchScalarField::write(os);
++    fvPatchField<scalar>::write(os);
+     os.writeEntry("z0Min", z0Min_);
+     z0_->writeData(os);
+     writeEntry("value", os);
+diff -W 154 -Nru OpenFOAM-v2006-orig/src/atmosphericModels/derivedFvPatchFields/wallFunctions/atmOmegaWallFunction/atmOmegaWallFunctionFvPatchScalarField.C OpenFOAM-v2006/src/atmosphericModels/derivedFvPatchFields/wallFunctions/atmOmegaWallFunction/atmOmegaWallFunctionFvPatchScalarField.C
+--- OpenFOAM-v2006-orig/src/atmosphericModels/derivedFvPatchFields/wallFunctions/atmOmegaWallFunction/atmOmegaWallFunctionFvPatchScalarField.C	2020-06-29 19:16:22.000000000 +0200
++++ OpenFOAM-v2006/src/atmosphericModels/derivedFvPatchFields/wallFunctions/atmOmegaWallFunction/atmOmegaWallFunctionFvPatchScalarField.C	2020-10-26 17:01:40.604454000 +0100
+@@ -196,8 +196,8 @@
+     Ostream& os
+ ) const
+ {
+-    omegaWallFunctionFvPatchScalarField::write(os);
+-    z0_->writeData(os);
++    fvPatchField<scalar>::write(os);
++    os.writeEntry("z0", z0_);
+     writeEntry("value", os);
+ }
+ 
+diff -W 154 -Nru OpenFOAM-v2006-orig/src/atmosphericModels/derivedFvPatchFields/wallFunctions/atmOmegaWallFunction/atmOmegaWallFunctionFvPatchScalarField.H OpenFOAM-v2006/src/atmosphericModels/derivedFvPatchFields/wallFunctions/atmOmegaWallFunction/atmOmegaWallFunctionFvPatchScalarField.H
+--- OpenFOAM-v2006-orig/src/atmosphericModels/derivedFvPatchFields/wallFunctions/atmOmegaWallFunction/atmOmegaWallFunctionFvPatchScalarField.H	2020-06-29 19:16:22.000000000 +0200
++++ OpenFOAM-v2006/src/atmosphericModels/derivedFvPatchFields/wallFunctions/atmOmegaWallFunction/atmOmegaWallFunctionFvPatchScalarField.H	2020-10-26 17:01:40.605236000 +0100
+@@ -130,7 +130,6 @@
+             scalarField& omega
+         );
+ 
+-
+ public:
+ 
+     //- Runtime type information
