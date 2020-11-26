@@ -19,6 +19,7 @@ dependencies = [
 
 # disable MPI1 compatibility for now, see what breaks...
 # configopts = '--enable-mpi1-compatibility '
+configopts = '--with-ucx '
 
 # to enable SLURM integration (site-specific)
 # configopts += '--with-slurm --with-pmi=/usr/include/slurm --with-pmi-libdir=/usr'
