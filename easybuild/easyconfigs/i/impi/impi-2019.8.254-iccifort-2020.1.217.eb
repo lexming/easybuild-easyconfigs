@@ -12,6 +12,12 @@ source_urls = ['https://registrationcenter-download.intel.com/akdlm/irc_nas/tec/
 sources = ['l_mpi_%(version)s.tgz']
 checksums = ['fa163b4b79bd1b7509980c3e7ad81b354fc281a92f9cf2469bf4d323899567c0']
 
+dependencies = [
+    # needed by libfabric provider MLX introduced in Intel MPI v2019.6,
+    # https://software.intel.com/en-us/articles/improve-performance-and-stability-with-intel-mpi-library-on-infiniband
+    ('UCX', '1.8.0'),
+]
+
 osdependencies = [OS_PKG_IBVERBS_DEV]
 
 dontcreateinstalldir = True
