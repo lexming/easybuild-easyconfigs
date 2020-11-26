@@ -14,7 +14,7 @@ dependencies = [
     ('GCCcore', local_gccver),
     ('binutils', '2.34', '', ('GCCcore', local_gccver)),
     ('iccifort', local_compver),
-    ('impi', '2019.7.217', '', ('iccifort', local_compver)),
+    ('impi', '2019.8.254', '', ('iccifort', local_compver)),
     ('imkl', local_compver, '', ('iimpi', version)),
 ]
 
