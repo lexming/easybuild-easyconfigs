@@ -28,6 +28,7 @@ dependencies = [
     ('SCOTCH', '6.0.4'),
     ('CGAL', '4.8.1'),
     ('ParaView', '5.1.2', '-mpi'),
+    ('gnuplot', '5.0.5'),
 ]
 
 builddependencies = [

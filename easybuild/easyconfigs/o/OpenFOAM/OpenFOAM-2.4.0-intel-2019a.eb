@@ -33,6 +33,7 @@ dependencies = [
     ('ncurses', '6.1'),
     ('SCOTCH', '6.0.6'),
     ('Boost', '1.70.0'),
+    ('gnuplot', '5.2.6'),
 ]
 
 builddependencies = [
