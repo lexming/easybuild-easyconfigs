@@ -1,0 +1,36 @@
+easyblock = 'CMakeMake'
+
+name = 'Sylvan'
+version = '1.5.0'
+
+homepage = 'https://github.com/utwente-fmt/sylvan'
+description = """
+Sylvan is a parallel (multi-core) multi-terminal binary decision diagram
+library written in C. Sylvan implements typical binary decision diagram
+operations also found in libraries like CUDD, but provides scalable parallel
+execution of these operations and is more versatile thanks to supporting custom
+decision diagram terminal types."""
+
+toolchain = {'name': 'GCC', 'version': '9.3.0'}
+toolchainopts = {'pic': True}
+
+github_account = 'utwente-fmt'
+source_urls = [GITHUB_LOWER_SOURCE]
+sources = ['v%(version)s.tar.gz']
+checksums = ['20ddce6da58943655ded77795c82e34ccb329dc24b40a1fe39f6c7a764ae5452']
+
+builddependencies = [
+    ('CMake', '3.16.4'),
+    ('pkg-config', '0.29.2'),
+]
+
+dependencies = [
+    ('GMP', '6.2.0'),
+]
+
+sanity_check_paths = {
+    'files': ['lib/libsylvan.%s' % SHLIB_EXT],
+    'dirs': ['include', 'lib/pkgconfig'],
+}
+
+moduleclass = 'numlib'
