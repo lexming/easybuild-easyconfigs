@@ -1,0 +1,32 @@
+easyblock = 'PythonPackage'
+
+name = 'py-aiger-sat'
+version = '3.0.1'
+versionsuffix = '-Python-%(pyver)s'
+
+homepage = 'https://github.com/mvcisback/py-aiger-sat'
+description = "Pythonic interface between AIGs and SAT solvers."
+
+toolchain = {'name': 'GCC', 'version': '9.3.0'}
+
+source_urls = [PYPI_SOURCE]
+sources = [SOURCE_TAR_GZ]
+checksums = ['b2a3b42969e8f42ccb5291856fa934e52a8bda98294a0d04f43da48a9487ef1c']
+
+builddependencies = [
+    ('poetry', '1.0.9', versionsuffix),
+]
+
+dependencies = [
+    ('Python', '3.8.2'),
+    ('py-aiger', '6.1.1', versionsuffix),
+    ('PySAT', '0.1.6.dev11', versionsuffix),
+]
+
+use_pip = True
+download_dep_fail = True
+sanity_pip_check = True
+
+options = {'modulename': 'aiger_sat'}
+
+moduleclass = 'cae'
