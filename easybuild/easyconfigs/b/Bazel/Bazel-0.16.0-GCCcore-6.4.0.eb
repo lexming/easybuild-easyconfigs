@@ -9,10 +9,14 @@ toolchain = {'name': 'GCCcore', 'version': '6.4.0'}
 
 source_urls = ['https://github.com/bazelbuild/bazel/releases/download/%(version)s']
 sources = ['%(namelower)s-%(version)s-dist.zip']
-patches = ['%(name)s-%(version)s_remove_define_DATE.patch']
+patches = [
+    '%(name)s-%(version)s_remove_define_DATE.patch',
+    '%(name)s_extract-classes-jar.patch',
+]
 checksums = [
     'c730593916ef0ba62f3d113cc3a268e45f7e8039daf7b767c8641b6999bd49b1',  # bazel-0.16.0-dist.zip
     'e2ac95693835f71518133b664747365cc1cf1cd90fffa9b585799db967b1c951',  # Bazel-0.16.0_remove_define_DATE.patch
+    '772983035bd8111da1e63fcd067661c0f299fac2bbc5883249697daec15617b5',  # Bazel_extract-classes-jar.patch
 ]
 
 builddependencies = [('binutils', '2.28')]
