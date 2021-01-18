@@ -1,0 +1,18 @@
+Use the jar command to extract .jar files
+author: Alex Domingo (Vrije Universiteit Brussel)
+--- a/scripts/bootstrap/compile.sh	1980-01-01 00:00:00.000000000 +0100
++++ b/scripts/bootstrap/compile.sh	2021-01-18 01:18:11.059282344 +0100
+@@ -124,9 +124,12 @@
+       -encoding UTF-8 ${BAZEL_JAVAC_OPTS} "@${paramfile}"
+ 
+   log "Extracting helper classes for $name..."
++  library_jars_dir=$(pwd)
++  cd "${output}/classes"
+   for f in ${library_jars} ; do
+-    run unzip -qn ${f} -d "${output}/classes"
++    run "$JAR" xf ${library_jars_dir}/${f}
+   done
++  cd ${library_jars_dir}
+ }
+ 
+ # Create the deploy JAR
