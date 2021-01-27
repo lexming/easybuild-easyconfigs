@@ -1,0 +1,33 @@
+easyblock = 'PythonPackage'
+
+name = 'batchgenerators'
+version = '0.21'
+versionsuffix = '-Python-%(pyver)s'
+
+homepage = 'https://github.com/MIC-DKFZ/batchgenerators'
+description = """
+Data augmentation toolkit developed at the Division of Medical
+Image Computing at the German Cancer Research Center (DKFZ) to suit all our
+deep learning data augmentation needs."""
+
+toolchain = {'name': 'fosscuda', 'version': '2020a'}
+
+source_urls = [PYPI_SOURCE]
+sources = [SOURCE_TAR_GZ]
+checksums = ['7d75e52b709660bca41bdbbeda3758f707a03d254392d2bde3e36f183a559179']
+
+dependencies = [
+    ('Python', '3.8.2'),
+    ('SciPy-bundle', '2020.03', versionsuffix),
+    ('scikit-image', '0.17.1', versionsuffix),
+    ('scikit-learn', '0.23.1', versionsuffix),
+]
+
+# remove requirement on Pillow and unittest2, which are not actually used
+preinstallopts = "sed -i '12d;18d' setup.py &&"
+
+use_pip = True
+download_dep_fail = True
+sanity_pip_check = True
+
+moduleclass = 'bio'
