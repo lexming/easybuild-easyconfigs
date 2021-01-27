@@ -1,0 +1,59 @@
+easyblock = 'PythonPackage'
+
+name = 'nnU-Net'
+local_pkgname = name.replace('-','').lower()
+
+version = '1.6.6'
+local_pytorch_version = '1.6.0'
+local_python_suffix = '-Python-%(pyver)s'
+local_pytorch_suffix = '-PyTorch-%s' % local_pytorch_version
+versionsuffix = local_python_suffix + local_pytorch_suffix
+
+homepage = 'https://github.com/MIC-DKFZ/nnUNet'
+description = "Framework for out-of-the box biomedical image segmentation."
+
+toolchain = {'name': 'fosscuda', 'version': '2020a'}
+
+source_urls = ['https://pypi.python.org/packages/source/n/%s/' % local_pkgname]
+sources = ['%s-%%(version)s.tar.gz' % local_pkgname]
+checksums = ['7d328f975c59e94eb4d987f558b8b4356d59e379d6f0a9581316fd3e73d64a3c']
+
+dependencies = [
+    ('Python', '3.8.2'),
+    ('PyTorch', local_pytorch_version, local_python_suffix),
+    ('batchgenerators', '0.21', local_python_suffix),
+    ('dicom2nifti', '2.2.12', local_python_suffix),
+    ('scikit-image', '0.17.1', local_python_suffix),
+    ('scikit-learn', '0.23.1', local_python_suffix),
+    ('SimpleITK', '2.0.2', local_python_suffix),
+    ('MedPy', '0.4.0', local_python_suffix),
+    ('NiBabel', '3.2.0', local_python_suffix),
+    ('tqdm', '4.47.0'),
+]
+
+# fix requirement on scikit-learn
+preinstallopts = "sed -i 's/sklearn/scikit-learn/g' setup.py &&"
+
+use_pip = True
+download_dep_fail = True
+sanity_pip_check = True
+
+sanity_check_commands = ['nnUNet_train -h']
+
+options = {'modulename': local_pkgname}
+
+modluafooter = """
+setenv("nnUNet_raw_data_base", pathJoin(os.getenv("VSC_SCRATCH"), 'nnUNet_raw'))
+setenv("nnUNet_preprocessed", pathJoin(os.getenv("VSC_SCRATCH"), 'nnUNet_preprocessed'))
+setenv("RESULTS_FOLDER", pathJoin(os.getenv("VSC_SCRATCH"), 'nnUNet_trained_models'))
+"""
+
+modloadmsg = """
+Environment of %(name)s currently set to:
+- nnUNet_raw_data_base = $VSC_SCRATCH/nnUNet_raw
+- nnUNet_preprocessed = $VSC_SCRATCH/nnUNet_preprocessed
+- RESULTS_FOLDER = $VSC_SCRATCH/nnUNet_trained_models
+More information at https://github.com/MIC-DKFZ/nnUNet/blob/master/documentation/setting_up_paths.md
+"""
+
+moduleclass = 'bio'
