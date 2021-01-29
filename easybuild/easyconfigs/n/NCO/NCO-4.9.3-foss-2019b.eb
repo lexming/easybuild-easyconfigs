@@ -24,7 +24,7 @@ dependencies = [
     ('libdap', '3.20.6'),
     ('GSL', '2.6'),
     ('netCDF', '4.7.1'),
-    ('ESMF', '8.0.0'),
+    ('ESMF', '8.0.0'),  # ncremap needs ESMF_RegridWeightGen
 ]
 
 sanity_check_paths = {
