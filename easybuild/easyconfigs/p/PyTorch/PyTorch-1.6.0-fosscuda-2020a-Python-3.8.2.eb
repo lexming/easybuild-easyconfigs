@@ -6,7 +6,7 @@ homepage = 'https://pytorch.org/'
 description = """Tensors and Dynamic neural networks in Python with strong GPU acceleration.
 PyTorch is a deep learning framework that puts Python first."""
 
-toolchain = {'name': 'foss', 'version': '2020a'}
+toolchain = {'name': 'fosscuda', 'version': '2020a'}
 
 local_pytorchthirdpartydir = 'pytorch-%(version)s/third_party'
 local_extract_cmd_pattern = 'tar -C %s/%s --strip-components=1 -xf %%s'
@@ -277,7 +277,13 @@ dependencies = [
     ('numactl', '2.0.13'),
     ('FFmpeg', '4.2.2'),
     ('Pillow', '7.0.0', versionsuffix),
+    ('cuDNN', '8.0.4.30', '-CUDA-%(cudaver)s', True),
+    ('NCCL', '2.8.3', '-CUDA-%(cudaver)s', True),
+    ('magma', '2.5.4'),
 ]
+
+# default CUDA compute capabilities to use (override via --cuda-compute-capabilities)
+cuda_compute_capabilities = ['3.5', '3.7', '5.2', '6.0', '6.1', '7.0', '7.2', '7.5']
 
 excluded_tests = {
     'POWER': [
