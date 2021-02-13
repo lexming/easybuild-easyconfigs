@@ -1,0 +1,80 @@
+easyblock = 'Tarball'
+
+name = 'ilastik'
+version = '1.3.3post3'
+
+homepage = 'https://www.ilastik.org'
+description = """
+Leverage machine learning algorithms to easily segment, classify, track and
+count your cells or other experimental data. Most operations are interactive,
+even on large datasets: you just draw the labels and immediately see the
+result. No machine learning expertise required."""
+
+toolchain = SYSTEM
+
+source_urls = ['https://files.ilastik.org/']
+sources = ['%(name)s-%(version)s-Linux.tar.bz2']
+patches = ['%(name)s-%(version)s_cauterize_runscript.patch']
+checksums = [
+    'cfd208eb3e94c747c26991ea8ead199b1f8a1a44ab05a8f85c8c80f8dd392a4c',  # ilastik-1.3.3post3-Linux.tar.bz2
+    '9d370602d18c0970c754223007f41ad86ff999271be28465be28277545734d72',  # ilastik-1.3.3post3_cauterize_runscript.patch
+]
+
+dependencies = [
+    ('Gurobi', '8.1.1'),
+]
+
+keepsymlinks = True
+
+# Update symlinks to Gurobi
+local_gurobi_libs = ['gurobi81_light', 'gurobi81', 'GurobiJni81']
+local_gurobi_links = ["ln -sf ${EBROOTGUROBI}/lib/lib%s.so lib/lib%s.so" % (l, l) for l in local_gurobi_libs]
+
+# Make symlink to launch script in bin
+local_launcher_link = ["ln -s ../run_ilastik.sh bin/run_ilastik.sh"]
+
+preinstall_cmd = " && ".join(local_gurobi_links + local_launcher_link)
+
+sanity_check_paths = {
+    'files': ['bin/run_ilastik.sh'],
+    'dirs': ['ilastik-meta', 'lib'],
+}
+
+sanity_check_commands = [
+    "run_ilastik.sh --help",
+    "python -c 'import lazyflow'",
+    "python -c 'import volumina'",
+    "python -c 'import ilastik; print(ilastik.__version__)'",
+]
+
+modextrapaths = {
+    'PYTHONPATH': [
+        'ilastik-meta/ilastik', 'ilastik-meta/lazyflow', 'ilastik-meta/volumina', 'lib/python3.7/site-packages',
+    ],
+    'QT_PLUGIN_PATH': ['plugins'],
+    'QT_XKB_CONFIG_ROOT': ['lib'],
+    'FONTCONFIG_PATH': ['etc/fonts'],
+    'FONTCONFIG_FILE': ['etc/fonts/fonts.conf'],
+}
+
+local_bundle_pkgs = [
+    'ATK', 'Boost', 'bzip2', 'Cairo', 'CMake', 'DBus', 'GCCcore', 'Gdk-Pixbuf', 'gettext', 'GLib',
+    'GObject-Introspection', 'GStreamer', 'GTK+', 'expat', 'FFTW', 'fontconfig', 'freetype',
+    'FriBidi', 'HarfBuzz', 'HDF5', 'ICU', 'libjpeg-turbo', 'libpng', 'libreadline', 'LibTIFF',
+    'lz4', 'ncurses', 'OpenBLAS', 'OpenSSL', 'Pango', 'PCRE', 'Python', 'Qt5', 'ScaLAPACK',
+    'SQLite', 'Tk', 'util-linux', 'X11', 'zlib',
+]
+local_bundle_pip = [
+    'dask', 'h5py', 'imageio', 'matplotlib', 'networkx', 'SciPy-bundle', 'Pillow', 'PyQt5',
+    'scikit-image', 'scikit-learn'
+]
+modluafooter = """
+conflict(%s)
+""" % ', '.join(['"%s"' % p for p in local_bundle_pkgs + local_bundle_pip])
+
+modloadmsg = """
+Use ilastik in headless mode in your job scripts with the command `run_ilastik.sh --headless`
+More information at https://www.ilastik.org/documentation/basics/headless
+"""
+
+moduleclass = 'bio'
