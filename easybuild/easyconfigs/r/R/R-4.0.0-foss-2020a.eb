@@ -2705,6 +2705,12 @@ exts_list = [
     ('sensemakr', '0.1.3', {
         'checksums': ['2eccda4ac3752266779d9c8ae87154c9fbaf0f73e0a768692a836a29ceaeffdd'],
     }),
+    ('stringdist', '0.9.6.3', {
+        'checksums': ['cd6d98f982e9ae7c4154a040c3a3f959bce19abf0229d64d22efef41f85b3f1b'],
+    }),
+    ('image.binarization', '0.1.1', {
+        'checksums': ['f1d0c5e54b62b77249d6adf3e37b5fabec0dd6bb6a3b4a8a9c2152d59dab52b5'],
+    }),
 ]
 
 moduleclass = 'lang'
