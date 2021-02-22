@@ -1,0 +1,78 @@
+easyblock = 'Bundle'
+
+name = 'R-torch'
+local_rpkg = 'torch'
+version = '0.2.1'
+versionsuffix = '-R-%(rver)s'
+
+homepage = 'https://cran.r-project.org/web/packages/torch'
+description = """
+Provides functionality to define and train neural networks similar to PyTorch
+by Paszke et al (2019) <arXiv:1912.01703> but written entirely in R using the
+'libtorch' library. Also supports low-level tensor operations and GPU
+acceleration."""
+
+toolchain = {'name': 'foss', 'version': '2020a'}
+
+builddependencies = [
+    ('CMake', '3.16.4'),
+]
+
+dependencies = [
+    ('R', '4.0.0'),
+    ('LibTorch', '1.7.1'),
+]
+
+components = [
+    ('lantern', version, {
+        # lantern is distributed with torch, but only in the releases from github
+        'easyblock': 'CMakeMake',
+        'source_urls': ['https://github.com/mlverse/torch/archive/'],
+        'sources': [{'filename': SOURCE_TAR_GZ, 'download_filename': 'v%(version)s.tar.gz'}],
+        'patches': ['%(name)s-%(version)s_disable-libtorch-download.patch'],
+        'checksums': ['88de5a76767cb0aa36574859131722f27368d2dad978fc55a51bbe40e14191f0'],
+        'start_dir': local_rpkg + '-%(version)s/%(name)s',
+        'preconfigopts': 'TORCH_INSTALL_PREFIX=${EBROOTLIBTORCH}',
+        'skipsteps': 'install',
+    }),
+]
+
+exts_defaultclass = 'RPackage'
+
+exts_default_options = {
+    'source_urls': [
+        'https://cran.r-project.org/src/contrib/Archive/%(name)s',  # package archive
+        'https://cran.r-project.org/src/contrib/',  # current version of packages
+        'https://cran.freestatistics.org/src/contrib',  # mirror alternative for current packages
+    ],
+    'source_tmpl': '%(name)s_%(version)s.tar.gz',
+}
+
+exts_list = [
+    ('rlang', '0.4.9', {  # coro and torch need at least this version of rlang
+        'checksums': ['d92301424bd96b8c05c572d43d95c7b10a0ccb0cfbba504297188fffa2343d62'],
+    }),
+    ('coro', '1.0.1', {
+        'checksums': ['6e58920e09027694ef377bda1d18cb5b472bd1de62327db59e3417c7da68f164'],
+    }),
+    ('torch', version, {
+        'checksums': ['68127ec33c202e50a7b52f89dd5f573b2c65dee69308d940fa2baca51ec2ede3'],
+    }),
+]
+
+# torch expects libtorch and liblantern in its own special 'deps' folder
+local_torch_deps = '%(installdir)s/torch/deps'
+postinstallcmds = [
+    'mkdir -p %s' % local_torch_deps,
+    'cp %%(builddir)s/easybuild_obj/liblantern.so %s/' % local_torch_deps,
+    'ln -s $EBROOTLIBTORCH/lib/*.%s %s/' % (SHLIB_EXT, local_torch_deps),
+]
+
+sanity_check_paths = {
+    'files': ['%s/R/%s' % (local_rpkg, local_rpkg)],
+    'dirs': ['%s' % local_rpkg],
+}
+
+modextrapaths = {'R_LIBS': ''}
+
+moduleclass = 'vis'
