@@ -1,3 +1,9 @@
+<<<<<<< HEAD
+=======
+# Patch to build static and dynamic libraries. Based on PR by outpaddling:
+# https://github.com/ekg/filevercmp/pull/2
+# Updated: Denis Kristak (INUITS)
+>>>>>>> 4e3554a58b6db7e88ca8e47834fc2dc9d83b4dfb
 diff -ruN filevercmp-master_orig/Makefile filevercmp-master/Makefile
 --- filevercmp-master_orig/Makefile	2019-12-10 10:58:23.000000000 +0100
 +++ filevercmp-master/Makefile	2021-07-13 16:35:15.738330513 +0200
