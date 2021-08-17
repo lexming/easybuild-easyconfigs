@@ -1,0 +1,29 @@
+name = 'SOWFA'
+version = '20200706'
+local_commit = '103832ebbae07b62220858a1e3da4b5e7d6375bd'
+
+homepage = 'https://github.com/NREL/SOWFA'
+description = """
+SOWFA is the Simulator for Offshore Wind Farm Applications
+created at the National Renewable Energy Laboratory (NREL).
+"""
+
+toolchain = {'name': 'intel', 'version': '2019b'}
+
+github_account = 'NREL'
+source_urls = [GITHUB_LOWER_SOURCE]
+sources = [{'download_filename': '%s.tar.gz' % local_commit, 'filename': SOURCE_TAR_GZ}]
+checksums = ['d28d88a77348bdeafe1fc9f8d872a6a5f2436235e47241266d88a9dfe1e77ad0']
+
+builddependencies = [
+    ('flex', '2.5.39'),
+]
+
+dependencies = [
+    ('OpenFOAM', '2.4.0'),
+    ('CGAL', '4.14.1', '-Python-3.7.4'),
+    ('MPFR', '4.0.2'),
+    ('GMP', '6.1.2'),
+]
+
+moduleclass = 'cae'
