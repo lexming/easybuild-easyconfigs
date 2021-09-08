@@ -1,0 +1,20 @@
+name = 'OpenMPI'
+version = '4.0.5'
+
+homepage = 'https://www.open-mpi.org/'
+description = """The Open MPI Project is an open source MPI-3 implementation."""
+
+toolchain = SYSTEM
+
+source_urls = ['https://www.open-mpi.org/software/ompi/v%(version_major_minor)s/downloads']
+sources = [SOURCELOWER_TAR_BZ2]
+
+configopts = '--with-hwloc=external --with-libevent=external --without-ofi --with-pmix=external --with-ucx --without-verbs'
+
+# disable MPI1 compatibility for now, see what breaks...
+# configopts = '--enable-mpi1-compatibility '
+
+# to enable SLURM integration (site-specific)
+# configopts += '--with-slurm --with-pmi=/usr/include/slurm --with-pmi-libdir=/usr'
+
+moduleclass = 'mpi'
