@@ -1,0 +1,48 @@
+easyblock = 'ConfigureMake'
+
+name = 'OpenMPI'
+version = '2.1.6'
+
+homepage = 'https://www.open-mpi.org/'
+description = """The Open MPI Project is an open source MPI-2 implementation."""
+
+toolchain = {'name': 'GCC', 'version': '6.4.0-2.28'}
+
+source_urls = ['https://www.open-mpi.org/software/ompi/v%(version_major_minor)s/downloads']
+sources = [SOURCELOWER_TAR_GZ]
+checksums = ['4555a75cb32052f38ab27d1494b6e8091f60e454e3dfb45a1ec033502c7f3055']
+
+dependencies = [
+    ('hwloc', '1.11.8'),
+    ('libevent', '2.1.8'),
+]
+
+configopts = '--enable-shared --enable-mpi-thread-multiple --with-verbs '
+configopts += '--enable-mpirun-prefix-by-default '  # suppress failure modes in relation to mpirun path
+configopts += '--with-hwloc=$EBROOTHWLOC '  # hwloc support
+configopts += '--with-libevent=$EBROOTLIBEVENT '  # libevent support
+configopts += '--without-ucx '  # hard disable UCX, to dance around bug (https://github.com/open-mpi/ompi/issues/4345)
+
+# enable Torque integration (requires pbs-config, libs and headers)
+#configopts += '--with-tm '
+
+# enable SLURM integration (site-specific)
+configopts += '--with-slurm --with-pmi --with-pmi-libdir=/usr/lib64/slurmpmi '
+configopts += '--with-munge=yes '
+
+postinstallcmds = [
+    "for libpmi in /usr/lib64/slurmpmi/*.so*; do ln -s $libpmi %(installdir)s/lib/$(basename $libpmi); done"
+]
+
+# needed for --with-verbs
+osdependencies = [('libibverbs-dev', 'libibverbs-devel', 'rdma-core-devel')]
+
+local_libs = ["mpi_mpifh", "mpi", "ompitrace", "open-pal", "open-rte"]
+sanity_check_paths = {
+    'files': ["bin/%s" % x for x in ["ompi_info", "opal_wrapper", "orterun"]] +
+             ["lib/lib%s.%s" % (x, SHLIB_EXT) for x in local_libs] +
+             ["include/%s.h" % x for x in ["mpi-ext", "mpif-config", "mpif", "mpi", "mpi_portable_platform"]],
+    'dirs': [],
+}
+
+moduleclass = 'mpi'
