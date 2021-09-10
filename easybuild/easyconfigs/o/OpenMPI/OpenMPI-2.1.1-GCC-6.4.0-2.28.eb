@@ -16,15 +16,24 @@ checksums = [
     '662d7ef1d0cd0890d2dc4ecb5243012be29bf6b4003da0f006e7cd2125d40e4c',  # OpenMPI-2.1_fix-ib-query.patch
 ]
 
-dependencies = [('hwloc', '1.11.7')]
+dependencies = [
+    ('hwloc', '1.11.7'),
+    ('libevent', '2.1.8'),
+]
 
 configopts = '--enable-shared --enable-mpi-thread-multiple --with-verbs '
 configopts += '--enable-mpirun-prefix-by-default '  # suppress failure modes in relation to mpirun path
 configopts += '--with-hwloc=$EBROOTHWLOC '  # hwloc support
+configopts += '--with-libevent=$EBROOTLIBEVENT '  # libevent support
 configopts += '--without-ucx '  # hard disable UCX, to dance around bug (https://github.com/open-mpi/ompi/issues/4345)
 
 # to enable SLURM integration (site-specific)
-# configopts += '--with-slurm --with-pmi=/usr/include/slurm --with-pmi-libdir=/usr'
+configopts += '--with-slurm --with-pmi --with-pmi-libdir=/usr/lib64/slurmpmi '
+configopts += '--with-munge=yes '
+
+postinstallcmds = [
+    "for libpmi in /usr/lib64/slurmpmi/*.so*; do ln -s $libpmi %(installdir)s/lib/$(basename $libpmi); done"
+]
 
 # needed for --with-verbs
 osdependencies = [('libibverbs-dev', 'libibverbs-devel', 'rdma-core-devel')]
