@@ -17,8 +17,19 @@ source_urls = ['https://www.open-mpi.org/software/hwloc/v%(version_major_minor)s
 sources = [SOURCE_TAR_GZ]
 checksums = ['da2c780fce9b5440a1a7d1caf78f637feff9181a9d1ca090278cae4bea71b3df']
 
-dependencies = [('numactl', '2.0.11')]
+dependencies = [
+    ('numactl', '2.0.11'),
+    ('libxml2', '2.9.4'),
+    ('libpciaccess', '0.14'),
+]
 
-configopts = "--enable-libnuma=$EBROOTNUMACTL"
+configopts = "--enable-libnuma=$EBROOTNUMACTL "
+configopts += "--disable-cairo --disable-opencl --disable-cuda --disable-nvml --disable-gl --disable-libudev "
+
+sanity_check_paths = {
+    'files': ['bin/lstopo', 'include/hwloc/linux.h',
+              'lib/libhwloc.%s' % SHLIB_EXT],
+    'dirs': ['share/man/man3'],
+}
 
 moduleclass = 'system'
