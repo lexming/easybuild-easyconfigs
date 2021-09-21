@@ -25,13 +25,21 @@ dependencies = [
     ('GMP', '6.2.0'),
 ]
 
-configopts = '-DZ3_USE_LIB_GMP=ON -DZ3_LINK_TIME_OPTIMIZATION=ON '
-configopts += '-DZ3_BUILD_PYTHON_BINDINGS:BOOL=ON -DZ3_INSTALL_PYTHON_BINDINGS:BOOL=ON '
-configopts += '-DCMAKE_INSTALL_LIBDIR:PATH=lib '
-configopts += '-DCMAKE_INSTALL_PYTHON_PKG_DIR:PATH=%(installdir)s/lib/python%(pyshortver)s/site-packages '
+local_py_srcdir = '%(builddir)s/z3-z3-%(version)s/src/api/python'
+local_py_installdir = '%(installdir)s/lib/python%(pyshortver)s/site-packages'
+
+configopts = "-DZ3_USE_LIB_GMP=ON -DZ3_LINK_TIME_OPTIMIZATION=ON "
+configopts += "-DZ3_BUILD_PYTHON_BINDINGS:BOOL=ON -DZ3_INSTALL_PYTHON_BINDINGS:BOOL=ON "
+configopts += "-DCMAKE_INSTALL_LIBDIR:PATH=lib "
+configopts += "-DCMAKE_INSTALL_PYTHON_PKG_DIR:PATH=%(installdir)s/lib/python%(pyshortver)s/site-packages "
+
+postinstallcmds = [
+    # install egg-info of the python bindings to make pip aware of them
+    "cd %s && python setup.py install_egg_info -d %s" % (local_py_srcdir, local_py_installdir)
+]
 
 sanity_check_paths = {
-    'files': ['bin/z3', 'lib/libz3.%s' % SHLIB_EXT],
+    'files': ['bin/z3', 'include/z3_api.h', 'lib/libz3.%s' % SHLIB_EXT],
     'dirs': ['include', 'lib/python%(pyshortver)s/site-packages'],
 }
 
