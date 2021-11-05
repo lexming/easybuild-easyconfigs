@@ -1,0 +1,31 @@
+avoid downloading TensorFlow during the build, add placeholder to inject location of pre-downloaded TensorFlow sources
+author: Denis Kristak (INUITS)
+author: updated for jaxlib 0.1.72 by Alex Domingo (Vrije Universiteit Brussel)
+--- jax-jaxlib-v0.1.72/WORKSPACE.orig	2021-10-15 00:16:17.991721000 +0200
++++ jax-jaxlib-v0.1.72/WORKSPACE	2021-10-15 00:18:47.371403000 +0200
+@@ -5,13 +5,18 @@
+ # b) get the sha256 hash of the commit by running:
+ #    curl -L https://github.com/tensorflow/tensorflow/archive/<git hash>.tar.gz | sha256sum
+ #    and update the sha256 with the result.
+-http_archive(
+-    name = "org_tensorflow",
+-    sha256 = "012c5ed99c7369a967eecad89c06a31663255e5307e407f8b625457e7c137781",
+-    strip_prefix = "tensorflow-3a7587c9ff5cd365643b6fbc1b7c20c8c97e0976",
+-    urls = [
+-        "https://github.com/tensorflow/tensorflow/archive/3a7587c9ff5cd365643b6fbc1b7c20c8c97e0976.tar.gz",
+-    ],
++#http_archive(
++#    name = "org_tensorflow",
++#    sha256 = "012c5ed99c7369a967eecad89c06a31663255e5307e407f8b625457e7c137781",
++#    strip_prefix = "tensorflow-3a7587c9ff5cd365643b6fbc1b7c20c8c97e0976",
++#    urls = [
++#        "https://github.com/tensorflow/tensorflow/archive/3a7587c9ff5cd365643b6fbc1b7c20c8c97e0976.tar.gz",
++#    ],
++#)
++
++local_repository(
++     name = "org_tensorflow",
++     path = "pathToSed",
+ )
+ 
+ # For development, one can use a local TF repository instead.
