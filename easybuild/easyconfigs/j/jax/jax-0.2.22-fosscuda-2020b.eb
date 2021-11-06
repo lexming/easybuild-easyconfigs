@@ -71,7 +71,7 @@ components = [
         'patches': [
             'jaxlib-0.1.70_add-bazel-args-to-shutdown.patch',
             'jaxlib-0.1.72_no-tensorflow-download.patch',
-            ('TensorFlow-2.7.0_use-noncanonical-include-paths-cuda.patch', '../' + local_tf_dir),
+            ('TensorFlow-2.7.0_cuda-noncanonical-include-paths.patch', '../' + local_tf_dir),
             #('TensorFlow-2.7.0_add-binutils-prefix.patch', '../' + local_tf_dir),
         ],
         'checksums': [
@@ -85,7 +85,7 @@ components = [
             '489897f57fed3c2e7d425ecd7fa38abec4f8267c89769082c758009266aaa106',
             # TensorFlow-2.7.0_add-binutils-prefix.patch
             #'a3033ccf13d8dc757ea12ef51678525ab4fc3cace5e5eeab2e79e4a53332dcd6',
-            # TensorFlow-2.7.0_use-noncanonical-include-paths-cuda.patch
+            # TensorFlow-2.7.0_cuda-noncanonical-include-paths.patch
             '0a759010c253d49755955cd5f028e75de4a4c447dcc8f5a0d9f47cce6881a9db',
         ],
         'start_dir': 'jax-jaxlib-v%(version)s',
