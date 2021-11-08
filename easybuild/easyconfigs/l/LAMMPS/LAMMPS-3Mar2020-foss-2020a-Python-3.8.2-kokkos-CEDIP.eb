@@ -16,8 +16,6 @@ simulation domain. The code is designed to be easy to modify or extend with new
 functionality.
 """
 
-group = 'vsc10001'
-
 toolchain = {'name': 'foss', 'version': '2020a'}
 toolchainopts = {'openmp': True, 'usempi': True, 'cstd': 'c++11'}
 
