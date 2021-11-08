@@ -92,6 +92,8 @@ components = [
             '0a759010c253d49755955cd5f028e75de4a4c447dcc8f5a0d9f47cce6881a9db',
         ],
         'start_dir': 'jax-jaxlib-v%(version)s',
+        # disable Intel MKL-DNN on AMD nodes
+        'use_mkl_dnn': False,
         'prebuildopts': local_jax_prebuildopts,
     }),
 ]
