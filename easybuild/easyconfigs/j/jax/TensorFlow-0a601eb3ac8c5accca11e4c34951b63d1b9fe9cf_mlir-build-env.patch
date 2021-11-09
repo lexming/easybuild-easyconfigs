@@ -1,0 +1,12 @@
+make TensorFlow pick up on build environment defined by EasyBuild
+author: Denis Kristak, Pavel Grochal (INUITS)
+--- tensorflow-0a601eb3ac8c5accca11e4c34951b63d1b9fe9cf/third_party/mlir/tblgen.bzl.orig	2021-11-09 00:47:17.689216622 +0100
++++ tensorflow-0a601eb3ac8c5accca11e4c34951b63d1b9fe9cf/third_party/mlir/tblgen.bzl	2021-11-09 00:47:25.440410156 +0100
+@@ -153,6 +153,7 @@
+         inputs = trans_srcs,
+         executable = ctx.executable.tblgen,
+         arguments = [args],
++        use_default_shell_env = True,
+         mnemonic = "TdGenerate",  # Kythe extractor hook.
+     )
+ 

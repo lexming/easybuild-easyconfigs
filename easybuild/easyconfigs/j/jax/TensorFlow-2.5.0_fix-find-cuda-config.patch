@@ -1,0 +1,23 @@
+fix header version detection
+author: Alex Domingo (Vrije Universiteit Brussel)
+--- tensorflow-0a601eb3ac8c5accca11e4c34951b63d1b9fe9cf/third_party/gpus/find_cuda_config.py.orig	2021-05-24 16:32:15.000000000 +0200
++++ tensorflow-0a601eb3ac8c5accca11e4c34951b63d1b9fe9cf/third_party/gpus/find_cuda_config.py	2021-11-09 01:04:49.697699000 +0100
+@@ -520,15 +520,9 @@
+       return None  # Versions not found, make _matches_version returns False.
+     return ".".join(version)
+ 
+-  try:
+-    header_path, header_version = _find_header(base_paths, "NvInfer.h",
+-                                               required_version,
+-                                               get_header_version)
+-  except ConfigError:
+-    # TensorRT 6 moved the version information to NvInferVersion.h.
+-    header_path, header_version = _find_header(base_paths, "NvInferVersion.h",
+-                                               required_version,
+-                                               get_header_version)
++  header_path, header_version = _find_header(base_paths, "NvInferVersion.h",
++                                             required_version,
++                                             get_header_version)
+ 
+   tensorrt_version = header_version.split(".")[0]
+   library_path = _find_library(base_paths, "nvinfer", tensorrt_version)
