@@ -109,9 +109,14 @@ exts_list = [
     (name, version, {
         'source_tmpl': '%(name)s-v%(version)s.tar.gz',
         'source_urls': ['https://github.com/google/jax/archive/'],
-        'patches': ['jax-0.2.19_fix-update-of-cache-access-time.patch'],
+        'patches': [
+            'jax-0.2.14_fix-lax-vmap-test.patch',
+            'jax-0.2.19_fix-update-of-cache-access-time.patch',
+        ],
         'checksums': [
             'a1082245cb310e312d011d43f6ff05e19a0eaa533137b0fdfec4a69661f83e75',  # jax-v0.2.14.tar.gz
+            # jax-0.2.14_fix-lax-vmap-test.patch
+            '260deaa79bfc0db7a50b868cc2eaa4e88e8b05df319f48241872d6cd258cd70b',
             # jax-0.2.19_fix-update-of-cache-access-time.patch
             'e20562f67d63cc7e3478f7a92940291b2c8e328d605426bbabf89d8c2e1dd806',
         ],
