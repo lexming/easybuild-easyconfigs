@@ -19,15 +19,16 @@ builddependencies = [
 ]
 
 dependencies = [
+    ('CUDA', '11.3.1', '', True),
     ('Python', '3.9.5'),
     ('SciPy-bundle', '2021.05'),
     ('PyYAML', '5.4.1'),
-    ('TensorFlow', '2.4.1'),
+    ('TensorFlow', '2.5.0', versionsuffix),
     ('Biopython', '1.79'),
     ('HH-suite', '3.3.0'),
     ('HMMER', '3.3.2'),
     ('Kalign', '3.3.1'),
-    ('jax', '0.2.14'),  # also provides absl-py
+    ('jax', '0.2.14', versionsuffix),  # also provides absl-py
 ]
 local_openmm_preinstallopts = "export OPENMM_INCLUDE_PATH=%(installdir)s/include && "
 local_openmm_preinstallopts += " export OPENMM_LIB_PATH=%(installdir)s/lib && "
