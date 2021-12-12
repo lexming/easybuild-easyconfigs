@@ -183,7 +183,7 @@ modextrapaths = {
 modextravars = {
     'TF_FORCE_UNIFIED_MEMORY': '1',
     'XLA_PYTHON_CLIENT_MEM_FRACTION': '4.0',
-    # 'ALPHAFOLD_DATA_DIR': '/path/to/AlphaFold_DBs',  # please adapt
+    'ALPHAFOLD_DATA_DIR': '/databases/bio/alphafold-%(version)s',
     'OPENMM_RELAX': 'CUDA'  # unset or set to 'CPU' in order not to run the energy minimization on GPU; PR#189
 }
 
