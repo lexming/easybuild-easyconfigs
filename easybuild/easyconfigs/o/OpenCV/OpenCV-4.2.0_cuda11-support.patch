@@ -1,0 +1,74 @@
+From 206c843f36c26e7dcc4caed5d2dea83b19663afc Mon Sep 17 00:00:00 2001
+From: cyy <cyyever@outlook.com>
+Date: Sun, 28 Jun 2020 04:34:44 +0800
+Subject: [PATCH] Merge pull request #17499 from cyyever:fix_CUDA11
+
+Fix cuda11
+
+* use cudnn_version.h to detect version when it is available
+
+* remove nppi from CUDA11
+
+* use ocv_list_filterout
+
+* dnn(cuda): temporary disable CUDNN 8.0
+---
+ cmake/FindCUDNN.cmake        |  6 +++++-
+ cmake/OpenCVDetectCUDA.cmake |  5 +++++
+ modules/dnn/CMakeLists.txt   | 10 +++++++++-
+ 3 files changed, 19 insertions(+), 2 deletions(-)
+
+diff --git a/cmake/FindCUDNN.cmake b/cmake/FindCUDNN.cmake
+index e115f803478..90d8b2ea78f 100644
+--- a/cmake/FindCUDNN.cmake
++++ b/cmake/FindCUDNN.cmake
+@@ -65,7 +65,11 @@ endif()
+ 
+ # extract version from the include
+ if(CUDNN_INCLUDE_DIR)
+-  file(READ "${CUDNN_INCLUDE_DIR}/cudnn.h" CUDNN_H_CONTENTS)
++  if(EXISTS "${CUDNN_INCLUDE_DIR}/cudnn_version.h")
++    file(READ "${CUDNN_INCLUDE_DIR}/cudnn_version.h" CUDNN_H_CONTENTS)
++  else()
++    file(READ "${CUDNN_INCLUDE_DIR}/cudnn.h" CUDNN_H_CONTENTS)
++  endif()
+ 
+   string(REGEX MATCH "define CUDNN_MAJOR ([0-9]+)" _ "${CUDNN_H_CONTENTS}")
+   set(CUDNN_MAJOR_VERSION ${CMAKE_MATCH_1} CACHE INTERNAL "")
+diff --git a/cmake/OpenCVDetectCUDA.cmake b/cmake/OpenCVDetectCUDA.cmake
+index 58807bc0f13..3d5c409cc3b 100644
+--- a/cmake/OpenCVDetectCUDA.cmake
++++ b/cmake/OpenCVDetectCUDA.cmake
+@@ -31,6 +31,11 @@ endif()
+ 
+ if(CUDA_FOUND)
+   set(HAVE_CUDA 1)
++  if(CUDA_VERSION VERSION_GREATER_EQUAL "11.0")
++    # CUDA 11.0 removes nppicom
++    ocv_list_filterout(CUDA_nppi_LIBRARY "nppicom")
++    ocv_list_filterout(CUDA_npp_LIBRARY "nppicom")
++  endif()
+ 
+   if(WITH_CUFFT)
+     set(HAVE_CUFFT 1)
+diff --git a/modules/dnn/CMakeLists.txt b/modules/dnn/CMakeLists.txt
+index e8c23f6a44f..ed1557520ab 100644
+--- a/modules/dnn/CMakeLists.txt
++++ b/modules/dnn/CMakeLists.txt
+@@ -21,7 +21,15 @@ if(OPENCV_DNN_OPENCL AND HAVE_OPENCL)
+   add_definitions(-DCV_OCL4DNN=1)
+ endif()
+ 
+-ocv_option(OPENCV_DNN_CUDA "Build with CUDA support" HAVE_CUDA AND HAVE_CUBLAS AND HAVE_CUDNN)
++if(NOT DEFINED OPENCV_DNN_CUDA AND HAVE_CUDNN AND CUDNN_VERSION VERSION_LESS 8.0)
++  message(STATUS "DNN: CUDNN 8.0 is not supported yes. Details: https://github.com/opencv/opencv/issues/17496")
++endif()
++ocv_option(OPENCV_DNN_CUDA "Build with CUDA support"
++    HAVE_CUDA
++    AND HAVE_CUBLAS
++    AND HAVE_CUDNN
++    AND CUDNN_VERSION VERSION_LESS 8.0
++)
+ 
+ if(OPENCV_DNN_CUDA AND HAVE_CUDA AND HAVE_CUBLAS AND HAVE_CUDNN)
+   add_definitions(-DCV_CUDA4DNN=1)
