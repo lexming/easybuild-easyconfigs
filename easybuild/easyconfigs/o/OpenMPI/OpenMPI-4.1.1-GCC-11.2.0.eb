@@ -37,7 +37,7 @@ dependencies = [
     ('libevent', '2.1.12'),
     ('UCX', '1.11.2'),
     ('libfabric', '1.13.2'),
-    ('PMIx', '4.1.0'),
+    ('PMIx', '3.2.3'),
 ]
 
 # disable MPI1 compatibility for now, see what breaks...
