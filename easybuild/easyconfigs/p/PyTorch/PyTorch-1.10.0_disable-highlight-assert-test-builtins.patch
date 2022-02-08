@@ -1,0 +1,31 @@
+disable assertions by highlight on test_del() and just do a regular match
+workaround for issue: https://github.com/pytorch/pytorch/issues/72516
+author: Alex Domingo (Vrije Universiteit Brussel)
+--- a/test/jit/test_builtins.py	2022-02-06 01:17:12.309254000 +0100
++++ b/test/jit/test_builtins.py	2022-02-06 01:18:07.725523924 +0100
+@@ -86,14 +86,14 @@
+ 
+         self.checkScript(fn, ([1, 2, 3],))
+ 
+-        with self.assertRaisesRegexWithHighlight(RuntimeError, "undefined value", "a"):
++        with self.assertRaisesRegex(RuntimeError, "undefined value a"):
+             @torch.jit.script
+             def fn(x):
+                 a = x ** 2
+                 del a
+                 return a
+ 
+-        with self.assertRaisesRegexWithHighlight(RuntimeError, "undefined value", "a"):
++        with self.assertRaisesRegex(RuntimeError, "undefined value a"):
+             @torch.jit.script
+             def fn(x):
+                 a = x ** 2
+@@ -101,7 +101,7 @@
+                     del a
+                 return a
+ 
+-        with self.assertRaisesRegexWithHighlight(RuntimeError, "undefined value", "b"):
++        with self.assertRaisesRegex(RuntimeError, "undefined value b"):
+             @torch.jit.script
+             def fn(x):
+                 a = x ** 2
