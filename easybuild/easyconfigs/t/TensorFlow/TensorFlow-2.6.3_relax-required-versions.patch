@@ -1,0 +1,32 @@
+TF introduced a change pinning versions to fixed major.minor or even patch versions
+Loosen those a bit so we can build it with our versions.
+See https://github.com/tensorflow/tensorflow/issues/44654
+
+Author: Alexander Grund (TU Dresden)
+Update v2.6.3: Alex Domingo (Vrije Universiteit Brussel)
+
+--- a/tensorflow/tools/pip_package/setup.py	2022-02-06 02:20:15.955635000 +0100
++++ a/tensorflow/tools/pip_package/setup.py	2022-02-06 02:21:30.877715730 +0100
+@@ -78,18 +78,18 @@
+     # NOTE: As numpy has releases that break semver guarantees and several other
+     # deps depend on numpy without an upper bound, we must install numpy before
+     # everything else.
+-    'numpy ~= 1.19.2',
++    'numpy >= 1.19.2',
+     # Install other dependencies
+     'absl-py ~= 0.10',
+     'astunparse ~= 1.6.3',
+     'clang ~= 5.0',
+-    'flatbuffers ~= 1.12.0',
++    'flatbuffers >= 1.12.0',
+     'google_pasta ~= 0.2',
+-    'h5py ~= 3.1.0',
++    'h5py >= 3.1.0',
+     'keras_preprocessing ~= 1.1.2',
+     'opt_einsum ~= 3.3.0',
+     'protobuf >= 3.9.2',
+-    'six ~= 1.15.0',
++    'six >= 1.15.0',
+     'termcolor ~= 1.1.0',
+     # Some packages like black and pylint require typing-extensions >= 3.10, so
+     # we allow higher typing-extensions versions here to prevent conflicts
