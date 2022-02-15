@@ -1,0 +1,22 @@
+easyblock = 'PythonPackage'
+
+name = 'NLTK'
+version = '3.4.1'
+versionsuffix = '-Python-%(pyver)s'
+
+homepage = 'https://www.nltk.org/'
+description = "NLTK is a leading platform for building Python programs to work with human language data."
+
+toolchain = {'name': 'foss', 'version': '2019a'}
+
+sources = [SOURCELOWER_ZIP]
+checksums = ['3a64b1cb685bbf344adec416871fee07996671c876ff313b3e504158fa1500e1']
+
+dependencies = [
+    ('Python', '3.7.2'),
+]
+
+use_pip = True
+sanity_pip_check = True
+
+moduleclass = 'devel'
