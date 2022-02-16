@@ -1,0 +1,76 @@
+easyblock = 'PythonBundle'
+
+name = 'MLPrimitives'
+version = '0.3.2'
+
+homepage = "https://mlbazaar.github.io/MLPrimitives/"
+description = "Pipelines and primitives for machine learning and data science."
+
+toolchain = {'name': 'foss', 'version': '2021a'}
+
+dependencies = [
+    ('Python', '3.9.5'),
+    ('SciPy-bundle', '2021.05'),
+    ('Graphviz', '2.47.2'),  # needed by mlblocks
+    ('Keras', '2.4.3', '-TensorFlow-2.4.4'),
+    ('networkx', '2.5.1'),
+    ('NLTK', '3.6.7'),
+    ('OpenCV', '4.5.3', '-contrib'),
+    ('scikit-image', '0.18.3'),
+    ('scikit-learn', '0.24.2'),
+    ('statsmodels', '0.12.2'),
+    ('XGBoost', '1.5.0'),
+]
+
+use_pip = True
+sanity_pip_check = True
+
+# relax version requirements
+_relax_python_req = """sed -i "s/python_requires=.*/python_requires='==%(pyver)s',/" setup.py && """
+_relax_xgboost_req = """sed -i "s/xgboost.*/xgboost',/" setup.py && """
+
+# remove opencv-python from requirements: since pip is not aware of cv2 in OpenCV from EB, manually check it
+_del_opencv_req = """sed -i "s/opencv-python/# opencv-python/" setup.py && """
+
+exts_list = [
+    ('featuretools', '0.22.0', {
+        'checksums': ['968f92eb94b723a7ef2c54e742660196e3a35760e6e731e9640b36e69aefd6ba'],
+    }),
+    ('iso639', '0.1.4', {
+        'checksums': ['88b70cf6c64ee9c2c2972292818c8beb32db9ea6f4de1f8471a9b081a3d92e98'],
+    }),
+    ('langdetect', '1.0.9', {
+        'checksums': ['cbc1fef89f8d062739774bd51eda3da3274006b3661d199c2655f6b3f6d605a0'],
+    }),
+    ('lightfm', '1.16', {
+        'checksums': ['41950fd8affde192c10b517148aa7f6d016ae2f75a2ec1187335f1c4d21876ac'],
+    }),
+    ('python-louvain', '0.13', {
+        'modulename': 'community.community_louvain',
+        'checksums': ['b4938f20063bc53e68d5b182dcea0634dfb63a0e3489f929d4083c24a920b2fe'],
+    }),
+    ('graphviz', '0.19.1', {
+        'source_tmpl': '%(name)s-%(version)s.zip',
+        'checksums': ['09ed0cde452d015fe77c4845a210eb642f28d245f5bc250d4b97808cb8f49078'],
+    }),
+    ('mlblocks', '0.4.1', {
+        'checksums': ['8fd5f6b5680496267f9478dd12535edf7adc674f485a46086662b0ad5705a4ac'],
+        'preinstallopts': _relax_python_req,
+    }),
+    ('mlprimitives', version, {
+        'checksums': ['dff2fadcde6132ea968f8dbc76a94a4e7f585cf849d486540260524af279d097'],
+        'preinstallopts': _relax_python_req + _relax_xgboost_req + _del_opencv_req,
+    }),
+]
+
+sanity_check_paths = {
+    'files': ['bin/mlprimitives'],
+    'dirs': ['lib/python%(pyshortver)s/site-packages'],
+}
+
+sanity_check_commands = [
+    ('python', "-c 'import cv2'"),  # manually check for opencv-python
+    ('mlprimitives', '--help'),
+]
+
+moduleclass = 'tools'
