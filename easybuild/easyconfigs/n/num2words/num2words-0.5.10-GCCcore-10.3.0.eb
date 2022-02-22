@@ -1,0 +1,26 @@
+easyblock = 'PythonPackage'
+
+name = 'num2words'
+version = '0.5.10'
+
+homepage = 'https://github.com/savoirfairelinux/num2words'
+description = """num2words is a library that converts numbers like 42 to words like forty-two.
+It supports multiple languages (see the list below for full list of languages)
+and can even generate ordinal numbers like forty-second (although this last
+feature is a bit buggy for some languages at the moment)."""
+
+toolchain = {'name': 'GCCcore', 'version': '10.3.0'}
+
+sources = [SOURCE_TAR_GZ]
+checksums = ['37cd4f60678f7e1045cdc3adf6acf93c8b41bf732da860f97d301f04e611cc57']
+
+dependencies = [
+    ('Python', '3.9.5'),
+]
+
+download_dep_fail = True
+use_pip = True
+
+sanity_pip_check = True
+
+moduleclass = 'lib'
