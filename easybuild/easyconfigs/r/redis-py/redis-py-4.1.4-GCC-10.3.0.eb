@@ -1,0 +1,32 @@
+easyblock = 'PythonBundle'
+
+name = 'redis-py'
+version = '4.1.4'
+
+homepage = 'https://github.com/redis/redis-py'
+description = "The Python interface to the Redis key-value store."
+
+toolchain = {'name': 'GCC', 'version': '10.3.0'}
+
+dependencies = [
+    ('Python', '3.9.5'),
+    ('Redis', '6.2.6'),
+]
+
+use_pip = True
+
+exts_list = [
+    ('wrapt', '1.13.3', {
+        'checksums': ['1fea9cd438686e6682271d36f3481a9f3636195578bab9ca3382e2f5f01fc185'],
+    }),
+    ('Deprecated', '1.2.13', {
+        'checksums': ['43ac5335da90c31c24ba028af536a91d41d53f9e6901ddb021bcc572ce44e38d'],
+    }),
+    ('redis', version, {
+        'checksums': ['1d9a0cdf89fdd93f84261733e24f55a7bbd413a9b219fdaf56e3e728ca9a2306'],
+    }),
+]
+
+sanity_pip_check = True
+
+moduleclass = 'lib'
