@@ -1,0 +1,14 @@
+PROJ deprecated proj_api.h sinve v6.0.0, force enable it
+author: Alex Domingo (Vrije Universiteit Brussel)
+diff --git a/src/utils/geom/GeoConvHelper.h.orig b/src/utils/geom/GeoConvHelper.h
+index 937260a..9380827 100644
+--- a/src/utils/geom/GeoConvHelper.h.orig
++++ b/src/utils/geom/GeoConvHelper.h
+@@ -31,6 +31,7 @@
+ #include <utils/geom/Boundary.h>
+ 
+ #ifdef HAVE_PROJ
++#define ACCEPT_USE_OF_DEPRECATED_PROJ_API_H 1
+ #include <proj_api.h>
+ #endif
+ 
