@@ -1,0 +1,15 @@
+name = 'Java'
+version = '11.0.14'
+
+homepage = 'http://openjdk.java.net'
+description = """Java Platform, Standard Edition (Java SE) lets you develop and deploy
+ Java applications on desktops and servers."""
+
+toolchain = SYSTEM
+
+# download the tar.gz directly from
+# http://www.oracle.com/technetwork/java/javase/downloads/index.html
+sources = ['jdk-%(version)s_linux-x64_bin.tar.gz']
+checksums = ['9732bdd946b393ec527e4d5ff1f7e4667dc5150685bc3c9c7b1d042c657929db']
+
+moduleclass = 'lang'
