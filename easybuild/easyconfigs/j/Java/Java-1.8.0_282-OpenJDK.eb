@@ -1,0 +1,34 @@
+name = 'Java'
+local_java_version = '8'
+local_patch_version = '282'
+local_build_version = '08'
+version = '1.%s.0_%s' % (local_java_version, local_patch_version)
+versionsuffix = '-OpenJDK'
+
+homepage = 'https://openjdk.java.net'
+description = """Java Platform, Standard Edition (Java SE) lets you develop and deploy
+ Java applications on desktops and servers."""
+
+toolchain = SYSTEM
+
+local_jdk_version = 'jdk%su%s-b%s' % (local_java_version, local_patch_version, local_build_version)
+source_urls = ['https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/%s' % local_jdk_version]
+
+local_tarball_version = '%su%sb%s' % (local_java_version, local_patch_version, local_build_version)
+local_tarball_tmpl = '_'.join(
+    ['OpenJDK%sU-jdk' % local_java_version, '%s', 'linux', 'hotspot', '%s.tar.gz' % local_tarball_version]
+)
+
+sources = [local_tarball_tmpl % '%(jdkarch)s']
+checksums = [
+    {
+        local_tarball_tmpl % 'x64':
+            'e6e6e0356649b9696fa5082cfcb0663d4bef159fc22d406e3a012e71fce83a5c',
+        local_tarball_tmpl % 'ppc64le':
+            'd69bd545691058b55337d2a5eb1092880a5cab0753ede4d82b181242aac8a8fe',
+        local_tarball_tmpl % 'aarch64':
+            '9c07cf2099bbc6c850c46fd870bd243f5fcb6635181eabb312bdffe43ffc5080',
+    }
+]
+
+moduleclass = 'lang'
