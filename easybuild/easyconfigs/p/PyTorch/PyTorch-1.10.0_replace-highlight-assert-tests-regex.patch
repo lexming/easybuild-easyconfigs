@@ -1,8 +1,8 @@
-disable assertions by highlight on test_del() and just do a regular match
+replace assertions by highlight on JIT tests to regular expression match
 workaround for issue: https://github.com/pytorch/pytorch/issues/72516
 author: Alex Domingo (Vrije Universiteit Brussel)
---- a/test/jit/test_builtins.py	2022-02-06 01:17:12.309254000 +0100
-+++ b/test/jit/test_builtins.py	2022-02-06 01:18:07.725523924 +0100
+--- a/test/jit/test_builtins.py
++++ b/test/jit/test_builtins.py
 @@ -86,14 +86,14 @@
  
          self.checkScript(fn, ([1, 2, 3],))
@@ -29,3 +29,14 @@ author: Alex Domingo (Vrije Universiteit Brussel)
              @torch.jit.script
              def fn(x):
                  a = x ** 2
+--- a/test/test_jit.py
++++ b/test/test_jit.py
+@@ -13161,7 +13161,7 @@ dedent """
+             if isinstance(t, tuple):
+                 a, b = t
+             return a + b
+-        with self.assertRaisesRegexWithHighlight(RuntimeError, "Provided tuple is not fully defined/refined", "t"):
++        with self.assertRaisesRegex(RuntimeError, "Provided tuple is not fully defined/refined"):
+             s = torch.jit.script(fn)
+ 
+     def test_augmented_assign(self):
