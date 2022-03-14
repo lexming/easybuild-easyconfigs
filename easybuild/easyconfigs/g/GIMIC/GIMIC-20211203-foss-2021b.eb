@@ -1,0 +1,51 @@
+easyblock = "CMakeMake"
+
+name = 'GIMIC'
+version = '20211203'
+local_commit = '26302ed55972fd4cae394ca29ca0aa54cb5812de'
+
+homepage = 'https://gimic.readthedocs.io'
+description = """The GIMIC program calculates magnetically induced currents in molecules.
+ You need to provide this program with a density matrix in atomic-orbital (AO) basis
+ and three (effective) magnetically perturbed AO density matrices in the proper format.
+Currently ACES2, Turbomole, G09, QChem, FERMION++, and LSDalton can produce these matrices."""
+
+toolchain = {'name': 'foss', 'version': '2021b'}
+
+github_account = 'qmcurrents'
+source_urls = [GITHUB_LOWER_SOURCE]
+sources = ['%s.tar.gz' % local_commit]
+patches = ['GIMIC-%(version)s_fix-install-prefix.patch']
+checksums = [
+    # 26302ed55972fd4cae394ca29ca0aa54cb5812de.tar.gz
+    '61c8a5b9f945bbfccd05b02a0209e2243923d09d53d055973b84d7cfdcbeeb2e',
+    '6e09bcebc2756a00a75ff6b16cde52124a339bdeb9781b1da004618837ee68b8',  # GIMIC-20211203_fix-install-prefix.patch
+]
+
+builddependencies = [
+    ('CMake', '3.21.1'),
+]
+
+dependencies = [
+    ('Python', '3.9.6'),
+    ('SciPy-bundle', '2021.10'),
+    ('PyYAML', '5.4.1'),
+]
+
+# allow mismatches (old GCC behaviour up to version 9)
+preconfigopts = 'FCFLAGS="$FCFLAGS -fallow-argument-mismatch" '
+# enable OpenMP and disable MPI (see qmcurrents/gimic#169)
+configopts = '-DENABLE_OPENMP=ON -DENABLE_MPI=OFF '
+# enable numerical libraries in this toolchain
+configopts += '-DENABLE_MKL_FLAG=OFF -DENABLE_BLAS=ON -DENABLE_LAPACK=ON '
+
+sanity_check_paths = {
+    'files': ['bin/gimic', 'lib/libgimic2.a'],
+    'dirs': ['include', 'bin/QCTools', 'lib/python/site-packages'],
+}
+
+modextrapaths = {
+    'PYTHONPATH': ['lib/python/site-packages', 'bin/QCTools'],
+}
+
+moduleclass = 'chem'
