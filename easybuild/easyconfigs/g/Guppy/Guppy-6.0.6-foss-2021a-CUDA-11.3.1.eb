@@ -1,0 +1,30 @@
+easyblock = 'Tarball'
+
+name = 'Guppy'
+version = '6.0.6'
+versionsuffix = '-CUDA-%(cudaver)s'
+
+homepage = 'https://community.nanoporetech.com'
+description = """ Guppy basecalling software for MinION sequencing data """
+
+toolchain = {'name': 'foss', 'version': '2021a'}
+
+# download sources from https://community.nanoporetech.com/downloads (requires login)
+sources = [{'filename': 'ont-guppy_%(version)s_linux64.tar.gz', 'extract_cmd': 'tar -xzf %s --strip-components=1'}]
+checksums = ['1bc6d3345ef8d233297a7532cd51fe0710d526a011f78bb446af11e5ca3a8a9d']
+
+dependencies = [
+    ('CUDA', '11.3.1', '', True),
+    ('Python', '3.9.5'),
+]
+
+preinstall_cmd = "mv bin/THIRD_PARTY_LICENSES ./ && mv bin/*.pdf ./"
+
+sanity_check_paths = {
+    'files': ['bin/guppy_aligner', 'bin/guppy_barcoder', 'bin/guppy_basecaller'],
+    'dirs': [],
+}
+
+group = 'bguppy'
+
+moduleclass = 'bio'
