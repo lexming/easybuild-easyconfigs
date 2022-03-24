@@ -12,7 +12,7 @@ mechanisms: 1) the management of multiple parallel calculations to automatically
 of the entire computational process along with the extraction and plotting of relevant information from large amounts of
 data; and 3) the analysis and presentation of these data in a clear and informative way.
 
-This recipy only installs the Activation Strain Analysis (ASA) Module of PyFrag 2019
+This module provides the Activation Strain Analysis (ASA) Module of PyFrag 2019
 """
 
 toolchain = {'name': 'intel', 'version': '2020b'}
@@ -20,7 +20,12 @@ toolchain = {'name': 'intel', 'version': '2020b'}
 github_account = 'sunxb05'
 source_urls = [GITHUB_LOWER_SOURCE]
 sources = ['%s.tar.gz' % _commit]
-checksums = ['b987a94c21ddc828167209be3439f13d4f284c56aeb672f8f0bf4c8ae8b25e67']
+patches = ['PyFrag-2019_fix_flaky_input_fetch.patch']
+checksums = [
+    # 5618d5518a8f4a1fc22805feac57b6e6717a08dc.tar.gz
+    'b987a94c21ddc828167209be3439f13d4f284c56aeb672f8f0bf4c8ae8b25e67',
+    'f93f5496caa75fe8886f03605f82b8520842c6b99abbaf4ad830f78b616bfe48',  # PyFrag-2019_fix_flaky_input_fetch.patch
+]
 
 dependencies = [
     ('Python', '3.8.6'),
