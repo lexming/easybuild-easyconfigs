@@ -1,0 +1,44 @@
+easyblock = 'MakeCp'
+
+name = 'MEMSAT-SVM'
+version = '1.3'
+
+homepage = 'http://bioinfadmin.cs.ucl.ac.uk/index.html'
+description = "SVM Transmembrane protein structure prediction"
+
+toolchain = {'name': 'GCC', 'version': '11.2.0'}
+
+source_urls = ['http://bioinfadmin.cs.ucl.ac.uk/downloads/%(namelower)s']
+sources = ['%(namelower)s%(version)s.tar.gz']
+checksums = ['14cb8a3d93038a60ab8dfefde8932ee5ee79b6968a7b638e316e04124ac9d995']
+
+dependencies = [
+    ('Perl', '5.34.0'),
+    ('BLAST', '2.2.26', '-Linux_x86_64', True)  # provides blastpgp and makemat
+]
+
+buildopts = 'all CC=$CC CPP=$CXX LD=$CC CFLAGS="$CFLAGS" LFLAGS="$LDFLAGS" LIBS="$LIBS"'
+
+files_to_copy = [
+    (['bin', 'data', 'examples', 'lib', 'models', 'run_memsat-svm.pl'], '.'),
+    (['README', 'VERSION'], 'share'),
+]
+
+fix_perl_shebang_for = ['bin/run_memsat-svm.pl']
+
+postinstallcmds = [
+    "sed -i \"s|^my \$mem_dir.*|my \$mem_dir = '%(installdir)s';|\" %(installdir)s/run_memsat-svm.pl",
+    "sed -i \"s|^my \$ncbidir.*|my \$ncbidir = '$EBROOTBLAST/bin';|\" %(installdir)s/run_memsat-svm.pl",
+    "cd %(installdir)s/bin && ln -s ../run_memsat-svm.pl",
+]
+
+_exe_files = ['globmem', 'mem_pred', 'memsat-svm', 'nnsat', 'svm_classify', 'run_memsat-svm.pl']
+
+sanity_check_paths = {
+    'files': ['bin/%s' % x for x in _exe_files],
+    'dirs': ['data', 'examples', 'lib', 'models', 'share'],
+}
+
+modextrapaths = {'PERL5LIB': 'lib'}
+
+moduleclass = 'bio'
