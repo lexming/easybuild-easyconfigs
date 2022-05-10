@@ -1,0 +1,35 @@
+# This file is an EasyBuild reciPY as per https://github.com/easybuilders/easybuild
+# Author: Pablo Escobar Lopez
+# sciCORE - University of Basel
+# SIB Swiss Institute of Bioinformatics 
+
+easyblock = 'Tarball'
+
+name = "PGDSpider"
+version = "2.1.1.5"
+versionsuffix = "-Java-%(javaver)s"
+
+homepage = 'http://cmpg.unibe.ch/software/PGDSpider/'
+description = """An automated data conversion tool for connecting population genetics and genomics programs"""
+
+toolchain = SYSTEM
+
+source_urls = ['http://cmpg.unibe.ch/software/PGDSpider/']
+sources = ['%(name)s_%(version)s.zip']
+checksums = ['8564427caf1f5c6200ba8f22a2bc2ef0fa87ae7c6571e4df3b8438cc00fa121c']
+
+dependencies = [
+    ('Java', '1.8', '', True),
+]
+
+sanity_check_paths = {
+    'files': ['PGDSpider2-cli.jar', 'PGDSpider2.jar'],
+    'dirs': [],
+}
+
+modloadmsg = """
+%(name)s GUI command: java -jar $EBROOTPGDSPIDER/PGDSpider2.jar
+%(name)s CLI command: java -jar $EBROOTPGDSPIDER/PGDSpider2-cli.jar
+"""
+
+moduleclass = 'bio'
