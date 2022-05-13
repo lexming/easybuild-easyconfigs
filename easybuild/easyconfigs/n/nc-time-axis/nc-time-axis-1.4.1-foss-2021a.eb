@@ -1,0 +1,31 @@
+easyblock = 'PythonBundle'
+
+name = 'nc-time-axis'
+version = '1.4.1'
+
+homepage = 'https://nc-time-axis.readthedocs.io'
+description = """nc-time-axis is a package that enables making plots in matplotlib with axes
+made up of cftime.datetime dates with any calendar type."""
+
+toolchain = {'name': 'foss', 'version': '2021a'}
+
+dependencies = [
+    ('Python', '3.9.5'),
+    ('SciPy-bundle', '2021.05'),
+    ('matplotlib', '3.4.2'),
+]
+
+use_pip = True
+
+exts_list = [
+    ('cftime', '1.5.0', {
+        'checksums': ['b644bcb53346b6f4fe2fcc9f3b574740a2097637492dcca29632c817e0604f29'],
+    }),
+    (name, version, {
+        'checksums': ['72d80f492f34bbf59490838d8cb3d92f14e88900b0ee35498b2b33c82795eb81'],
+    }),
+]
+
+sanity_pip_check = True
+
+moduleclass = 'vis'
