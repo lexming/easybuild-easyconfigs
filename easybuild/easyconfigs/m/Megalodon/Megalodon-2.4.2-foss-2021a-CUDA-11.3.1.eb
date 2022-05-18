@@ -36,7 +36,13 @@ exts_list = [
         'checksums': ['ba1f7e7aa02830d1d4760f7871710b1d097a7ab9e5412b127c00474974c271fa'],
     }),
     ('megalodon', version, {
-        'checksums': ['b6fe6e40bf6f7a70250848de80c97f8845ce24771e20634617bbc1510f4bcbbb'],
+        'patches': ['Megalodon-%(version)s_fix-guppy-version-check.patch'],
+        'checksums': [
+            # megalodon-2.4.2.tar.gz
+            'b6fe6e40bf6f7a70250848de80c97f8845ce24771e20634617bbc1510f4bcbbb',
+            # Megalodon-2.4.2_fix-guppy-version-check.patch
+            '94be83b07b7cd353b53d283150240663280abfd97176198be538f74731063477',
+        ],
     }),
 ]
 

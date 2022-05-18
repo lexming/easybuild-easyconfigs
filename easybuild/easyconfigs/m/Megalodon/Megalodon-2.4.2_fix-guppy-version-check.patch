@@ -1,0 +1,25 @@
+Update the regex in GUPPY_VERSION_PAT to also match the version string
+from Guppy v6.0.6.
+author: Alex Domingo (Vrije Universiteit Brussel)
+diff --git a/megalodon/backends.py.orig b/megalodon/backends.py
+index 3cd18a6..a724a84 100755
+--- a/megalodon/backends.py.orig
++++ b/megalodon/backends.py
+@@ -73,7 +73,7 @@ PYGUPPY_MAX_RECONNECT_ATTEMPTS = 5
+ GUPPY_LOG_BASE = "guppy_log"
+ GUPPY_PORT_PAT = re.compile(r"Starting server on port:\s+(\S+)")
+ GUPPY_VERSION_PAT = re.compile(
+-    r"Oxford Nanopore Technologies, Limited. "
++    r"Oxford Nanopore Technologies(, Limited| plc). "
+     + r"Version\W+([0-9]+\.[0-9]+\.[0-9]+)\+[0-9a-z]+"
+ )
+ MIN_GUPPY_VERSION = LooseVersion("4.0")
+@@ -935,7 +935,7 @@ class ModelInfo(AbstractModelInfo):
+                 "Guppy version string does not match expected pattern: "
+                 f'"{version_out}"'
+             )
+-        guppy_version_str = version_match.groups()[0]
++        guppy_version_str = version_match.groups()[1]
+         LOGGER.debug('Guppy version: "{}"'.format(guppy_version_str))
+         LOGGER.debug('Pyguppy version: "{}"'.format(pyguppy_version_str))
+         guppy_version = LooseVersion(guppy_version_str)
