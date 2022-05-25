@@ -1,0 +1,28 @@
+easyblock = "Tarball"
+
+name = 'T-Coffee'
+version = '13.45.0'
+
+homepage = 'https://www.tcoffee.org/'
+description = """A collection of tools for Computing, Evaluating and Manipulating Multiple
+Alignments of DNA, RNA, Protein Sequences and Structures"""
+
+toolchain = SYSTEM
+
+source_urls = ['https://www.tcoffee.org/Packages/Stable/Latest']
+sources = ['T-COFFEE_installer_Version_%(version)s.4846264_linux_x64.tar.gz']
+checksums = ['336de4280d3fec10a342153fa479c8fd47f4c0f9f73c85b677dcf2425cf48f9b']
+
+sanity_check_paths = {
+    'files': ['bin/t_coffee'],
+    'dirs': ['mcoffee', 'perl', 'plugins', 'src'],
+}
+
+sanity_check_commands = ["t_coffee --help"]
+
+modextrapaths = {
+    'PATH': 'perl/bin',
+    'PERL5LIB': 'perl/lib/perl5',
+}
+
+moduleclass = 'bio'
