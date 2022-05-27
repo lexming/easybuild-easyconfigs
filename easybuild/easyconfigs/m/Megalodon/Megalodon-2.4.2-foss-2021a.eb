@@ -29,10 +29,10 @@ exts_list = [
     ('mappy', '2.24', {
         'checksums': ['35a2fb73ef14173283d5abb31e7a318429e0330c3be95851df38dd83d4ff9af9'],
     }),
-    ('ont-pyguppy-client-lib', '6.0.6', {
+    ('ont-pyguppy-client-lib', '5.1.16', {
         'modulename': 'pyguppy_client_lib',
         'source_tmpl': 'ont_pyguppy_client_lib-%(version)s-cp39-cp39-manylinux2014_x86_64.whl',
-        'checksums': ['ba1f7e7aa02830d1d4760f7871710b1d097a7ab9e5412b127c00474974c271fa'],
+        'checksums': ['7c6840746df846916d790fee234824327a74aa47274e53168489fe05ddeec57e'],
     }),
     ('megalodon', version, {
         'checksums': ['b6fe6e40bf6f7a70250848de80c97f8845ce24771e20634617bbc1510f4bcbbb'],
@@ -49,5 +49,11 @@ sanity_check_paths = {
 sanity_check_commands = [
     "megalodon -h",
 ]
+
+modluafooter = """
+if ( isloaded("Guppy/6.0.6-foss-2021a-CUDA-11.3.1") ) then
+    LmodError("Megalodon v2.4.2 is not compatible with Guppy v6.0.6")
+end
+"""
 
 moduleclass = 'bio'
