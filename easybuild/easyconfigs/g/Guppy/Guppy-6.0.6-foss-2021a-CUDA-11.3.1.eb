@@ -10,8 +10,14 @@ description = """ Guppy basecalling software for MinION sequencing data """
 toolchain = {'name': 'foss', 'version': '2021a'}
 
 # download sources from https://community.nanoporetech.com/downloads (requires login)
-sources = [{'filename': 'ont-guppy_%(version)s_linux64.tar.gz', 'extract_cmd': 'tar -xzf %s --strip-components=1'}]
-checksums = ['1bc6d3345ef8d233297a7532cd51fe0710d526a011f78bb446af11e5ca3a8a9d']
+sources = [
+    {'filename': 'ont-guppy_%(version)s_linux64.tar.gz', 'extract_cmd': 'tar -xzf %s --strip-components=1'},
+    'Guppy_bvo00006-extra-data.tar.gz',
+]
+checksums = [
+    '1bc6d3345ef8d233297a7532cd51fe0710d526a011f78bb446af11e5ca3a8a9d',  # ont-guppy_6.0.6_linux64.tar.gz
+    '625bfcc4887e1b2fff5bf4a3d30fc25e9cb41a29c7891f0b58ed84e866ecaad9',  # Guppy_bvo00006-extra-data.tar.gz
+]
 
 dependencies = [
     ('CUDA', '11.3.1', '', True),
@@ -21,7 +27,8 @@ dependencies = [
 preinstall_cmd = "mv bin/THIRD_PARTY_LICENSES ./ && mv bin/*.pdf ./"
 
 sanity_check_paths = {
-    'files': ['bin/guppy_aligner', 'bin/guppy_barcoder', 'bin/guppy_basecaller'],
+    'files': ['bin/guppy_aligner', 'bin/guppy_barcoder', 'bin/guppy_basecaller',
+              'data/res_dna_r941_min_modbases_5mC_CpG_v001.cfg', 'data/res_dna_r941_min_modbases_5mC_CpG_v001.jsn'],
     'dirs': [],
 }
 
