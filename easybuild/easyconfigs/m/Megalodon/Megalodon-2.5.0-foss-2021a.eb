@@ -35,7 +35,13 @@ exts_list = [
         'checksums': ['ba1f7e7aa02830d1d4760f7871710b1d097a7ab9e5412b127c00474974c271fa'],
     }),
     ('megalodon', version, {
-        'checksums': ['60ad1f1191b86d9a1423dcb9c934c7577cf1ce083689337646937be2538953a3'],
+        'patches': ['Megalodon-2.5.0_fix-samtools-test.patch'],
+        'checksums': [
+            # megalodon-2.5.0.tar.gz
+            '60ad1f1191b86d9a1423dcb9c934c7577cf1ce083689337646937be2538953a3',
+            # Megalodon-2.5.0_fix-samtools-test.patch
+            'd90ec766e459a1c657ab8db94a208432845f091550e6bac197ec2d99d7058faa',
+        ],
     }),
 ]
 
