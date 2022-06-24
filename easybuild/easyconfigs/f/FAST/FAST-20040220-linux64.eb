@@ -1,0 +1,29 @@
+easyblock = 'PackedBinary'
+
+name = 'FAST'
+version = '20040220'
+versionsuffix = '-linux64'
+
+homepage = 'https://bu.wenglab.org/FAST/index.htm'
+description = """FAST is a new algorithm for aligning three-dimensional structures of proteins.
+FAST employs an elimination heuristic to quickly and reliably detect the global
+optimum residue-residue alignment. The main application is detection of
+structural and functional similarities that are not available with traditional
+sequence alignment algorithms."""
+
+toolchain = SYSTEM
+
+source_urls = ['https://bu.wenglab.org/FAST/download']
+sources = [{'filename': SOURCE_TAR_GZ, 'download_filename': '%(namelower)s-linux-64.tar.gz'}]
+checksums = ['48d4dda40ed7f7f6297c1f19d6add2180d70c1e21ec6d092cf7f1c0212a8bdcb']
+
+postinstallcmds = ["cd %(installdir)s && ln -s fast-linux-64 fast"]
+
+sanity_check_paths = {
+    'files': ['fast', 'fast-linux-64'],
+    'dirs': []
+}
+
+sanity_check_commands = [('fast', '--help')]
+
+moduleclass = 'bio'
