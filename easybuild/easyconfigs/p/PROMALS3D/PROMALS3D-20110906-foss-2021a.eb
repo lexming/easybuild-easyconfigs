@@ -1,0 +1,70 @@
+easyblock = 'MakeCp'
+
+name = 'PROMALS3D'
+version = '20110906'
+
+homepage = 'http://prodata.swmed.edu/promals3d/info/promals3d_help.html'
+description = """PROMALS3D (PROfile Multiple Alignment with predicted Local Structures and 3D
+constraints) is a tool for aligning multiple protein sequences and/or
+structures, with enhanced information from database searches, secondary
+structure prediction, 3D structures or user-defined constraints."""
+
+toolchain = {'name': 'foss', 'version': '2021a'}
+
+source_urls = ['http://prodata.swmed.edu/download/pub/promals/promals3d/new']
+sources = [{'filename': SOURCE_TAR_GZ, 'download_filename': 'promals_package.tar.gz'}]
+patches = ['PROMALS3D-20110906_fix_exe_paths.patch']
+checksums = [
+    # PROMALS3D-20110906.tar.gz
+    'fc224bddcce908c3fffb702ff547488d82684fdcf1b21ea624c0a5459d35837e',
+    # PROMALS3D-20110906_fix_exe_paths.patch
+    '562aa9d62f40a601c79d8ca1e0be06420023be899edefedaf95496012b1d9dfb',
+]
+
+dependencies = [
+    ('Python', '2.7.18', '-bare'),
+    ('BLAST', '2.2.26', '-Linux_x86_64', True),
+    ('CD-HIT', '4.8.1'),
+    ('DaliLite', '4.1'),
+    ('FAST', '20040220', '-linux64', True),
+    ('MAFFT', '7.490', '-with-extensions'),
+    ('PSIPRED', '4.02'),
+    ('TM-align', '20180426'),
+    ('tcsh', '6.22.04'),
+]
+
+start_dir = 'src'
+
+prebuildopts = "sed -i 's|/home/jpei/tmp_promals_package/promals_package|%(installdir)s|' param.c && "
+prebuildopts += "make clean && "
+
+files_to_copy = [
+    (['promals', 'progress_for_web.py', 'promals_c', 'al2co_consensus'], 'bin'),
+    (['../prog/mafft/mafft_template', '../prog/psipred/runpsipred1'], 'bin'),
+]
+
+fix_python_shebang_for = ['bin/promals', 'bin/progress_for_web.py']
+
+postinstallcmds = [
+    # promals
+    'sed -i "s|^prog_dir = .*|prog_dir = \'%(installdir)s/bin\'|" %(installdir)s/bin/promals',
+    'chmod 755 %(installdir)s/bin/progress_for_web.py',
+    # mafft_template
+    'sed -i "s|prefix=/home.*|prefix=$MAFFT_BINARIES|" %(installdir)s/bin/mafft_template',
+    'mv %(installdir)s/bin/mafft_template %(installdir)s/bin/mafft',
+    # runpsipred1
+    'sed -i "s|/bin/tcsh|/usr/bin/env tcsh|" %(installdir)s/bin/runpsipred1',
+    'sed -i "s|^set ncbidir = .*|set ncbidir = $EBROOTBLAST/bin|" %(installdir)s/bin/runpsipred1',
+    'sed -i "s|^set execdir = .*|set execdir = $EBROOTPSIPRED/bin|" %(installdir)s/bin/runpsipred1',
+    'sed -i "s|^set datadir = .*|set datadir = $EBROOTPSIPRED/data|" %(installdir)s/bin/runpsipred1',
+    # database
+    'ln -s /databases/bio/%(name)s-%(version)s %(installdir)s/db',
+]
+
+sanity_check_paths = {
+    'files': ['bin/%s' % x for x in ['promals', 'progress_for_web.py', 'promals_c', 'al2co_consensus',
+                                     'mafft', 'runpsipred1']],
+    'dirs': [],
+}
+
+moduleclass = 'bio'
