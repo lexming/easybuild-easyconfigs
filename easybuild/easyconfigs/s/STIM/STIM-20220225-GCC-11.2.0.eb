@@ -1,0 +1,32 @@
+easyblock = "CMakeMake"
+
+name = 'STIM'
+version = '20220225'
+local_commit = 'c5537cebe0c85375e5e8aed1bb38c35ffb2f3c60'
+
+homepage = 'https://github.com/BoldingBruggeman/stim'
+description = """Simple Thermodynamic Ice Models (STIM) provides a common interface of ice
+models to hydrodynamic models. The aim is to separate the actual ice
+algoorithms from the hydrodynamic model such that only a well-defined small
+interface is needed in order to test and use a variaty of different ice models."""
+
+toolchain = {'name': 'GCC', 'version': '11.2.0'}
+toolchainopts = {'pic': True}
+
+github_account = 'BoldingBruggeman'
+source_urls = [GITHUB_LOWER_SOURCE]
+sources = ['%s.tar.gz' % local_commit]
+checksums = ['a043c323049238e5c449c89bc398b35d2d38b82c1920ebfd4590dc75eb9be8cd']
+
+builddependencies = [
+    ('CMake', '3.21.1'),
+]
+
+configopts = "-DBUILD_SHARED_LIBS=ON "
+
+sanity_check_paths = {
+    'files': ['lib/libstim.%s' % SHLIB_EXT],
+    'dirs': ['cmake2', 'include'],
+}
+
+moduleclass = 'geo'
