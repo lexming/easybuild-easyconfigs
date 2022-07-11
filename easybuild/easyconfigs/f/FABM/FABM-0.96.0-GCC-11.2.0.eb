@@ -1,0 +1,31 @@
+easyblock = "CMakeMake"
+
+name = 'FABM'
+version = '0.96.0'
+
+homepage = 'https://github.com/fabm-model/fabm/wiki'
+description = """The Framework for Aquatic Biogeochemical Models (FABM) is a Fortran 2003
+programming framework for biogeochemical models of marine and freshwater
+systems. It acts as match maker between a wide range of hydrodynamic and
+biogeochemical models, developed by research groups all over the world."""
+
+toolchain = {'name': 'GCC', 'version': '11.2.0'}
+toolchainopts = {'pic': True}
+
+github_account = 'fabm-model'
+source_urls = [GITHUB_LOWER_SOURCE]
+sources = ['v%(version)s.tar.gz']
+checksums = ['220e7fc2efb8138ada218f75d074ed42a6154ffa56c8cd8b12dfb70b68bcdc4a']
+
+builddependencies = [
+    ('CMake', '3.21.1'),
+]
+
+configopts = '-DBUILD_SHARED_LIBS=ON'
+
+sanity_check_paths = {
+    'files': ['lib/libfabm.%s' % SHLIB_EXT],
+    'dirs': ['cmake', 'include'],
+}
+
+moduleclass = 'geo'
