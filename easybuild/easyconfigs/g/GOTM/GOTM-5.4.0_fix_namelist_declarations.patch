@@ -1,0 +1,28 @@
+Move namelist declaration after its symbols have been declared
+author: Alex Domingo (Vrije Universiteit Brussel)
+diff --git a/src/gotm/gotm.F90.orig b/src/gotm/gotm.F90
+index 8b5bb25..a935dc4 100644
+--- a/src/gotm/gotm.F90.orig
++++ b/src/gotm/gotm.F90
+@@ -174,10 +174,6 @@
+    class (type_settings), pointer :: branch, twig
+    integer, parameter :: rk = kind(_ONE_)
+ 
+-   namelist /model_setup/ title,nlev,dt,restart_offline,restart_allow_missing_variable, &
+-                          restart_allow_perpetual,cnpar,buoy_method
+-   namelist /station/     name,latitude,longitude,depth
+-   namelist /time/        timefmt,MaxN,start,stop
+    logical          ::    list_fields=.false.
+    logical          ::    restart_online=.false.
+    logical          ::    restart_offline = .false.
+@@ -186,6 +182,10 @@
+    integer          ::    rc
+    logical          ::    file_exists
+    logical          ::    config_only=.false.
++   namelist /model_setup/ title,nlev,dt,restart_offline,restart_allow_missing_variable, &
++                          restart_allow_perpetual,cnpar,buoy_method
++   namelist /station/     name,latitude,longitude,depth
++   namelist /time/        timefmt,MaxN,start,stop
+ !EOP
+ !-----------------------------------------------------------------------
+ !BOC

@@ -1,0 +1,44 @@
+Fix CMake build to use dependencies from EasyBuild
+author: Alex Domingo (Vrije Universiteit Brussel)
+diff --git a/CMakeLists.txt.orig b/CMakeLists.txt
+index fd4fa1c..ee9e3ac 100644
+--- a/CMakeLists.txt.orig
++++ b/CMakeLists.txt
+@@ -45,13 +45,14 @@ mark_as_advanced(GOTM_EXTRA_OUTPUT)
+ # Dependencies
+ # ----------------------------
+ 
+-if (NOT EXISTS "${CMAKE_CURRENT_LIST_DIR}/extern/flexout/src/CMakeLists.txt")
+-   message(FATAL_ERROR "Flexible output manager not found at extern/flexout. Please retrieve this submodule first by running \"git submodule update --init\" within your GOTM source directory.")
+-else()
+-   set(FLEXOUT_USE_NetCDF ${GOTM_USE_NetCDF} CACHE BOOL "Enable output in NetCDF format" FORCE)
+-   mark_as_advanced(FLEXOUT_USE_NetCDF)
+-   add_subdirectory("${CMAKE_CURRENT_LIST_DIR}/extern/flexout" extern/flexout)
+-endif()
++set(FLEXOUT_USE_NetCDF ${GOTM_USE_NetCDF} CACHE BOOL "Enable output in NetCDF format" FORCE)
++mark_as_advanced(FLEXOUT_USE_NetCDF)
++include_directories(SYSTEM
++    "$ENV{EBROOTFLEXOUT}/include"
++    "$ENV{EBROOTFORTRANMINYAML}/include"
++    "$ENV{EBROOTNETCDFMINFORTRAN}/include"
++)
++link_directories("$ENV{EBROOTFLEXOUT}/lib")
+ 
+ if(GOTM_USE_FABM)
+    mark_as_advanced(FORCE FABM_PREFIX FABM_BASE FABM_EMBED_VERSION)
+diff --git a/src/gotm/CMakeLists.txt.orig b/src/gotm/CMakeLists.txt
+index b58808c..620fd68 100644
+--- a/src/gotm/CMakeLists.txt.orig
++++ b/src/gotm/CMakeLists.txt
+@@ -5,7 +5,10 @@ add_library(gotm
+    deprecated_output.F90
+    print_version.F90
+ )
+-target_link_libraries(gotm PUBLIC util airsea_driver input_manager config meanflow turbulence output_manager input_manager)
++target_link_libraries(gotm PUBLIC util airsea_driver airsea config meanflow turbulence output_manager input_manager observations)
++if(GOTM_USE_NetCDF)
++   target_link_libraries(gotm PUBLIC netcdff)
++endif()
+ if(GOTM_USE_FABM)
+    target_link_libraries(gotm PUBLIC gotm_fabm gotm_fabm_io)
+ endif()
