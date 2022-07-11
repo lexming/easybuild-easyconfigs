@@ -1,0 +1,76 @@
+easyblock = "CMakeMake"
+
+name = 'GOTM'
+version = '5.4.0-20210127'
+versionsuffix = '-lake-stim'
+_lake_commit = '22dd70983da5d9e98ce2a1675fdfa8a7b188b1ff'
+_stim_commit = '53451fa48a646bc70d9ffb17135dc490145bbced'
+
+homepage = 'https://gotm.net'
+description = """GOTM - the General Ocean Turbulence Model is an ambitious name for a
+one-dimensional water column model for marine and limnological applications. It
+is coupled to a choice of traditional as well as state-of-the-art
+parameterisations for vertical turbulent mixing. The package consists of the
+FORTRAN source code, a number of idealised and realistic test cases, and a
+scientific documentation, all published under the GNU public license."""
+
+toolchain = {'name': 'gompi', 'version': '2021b'}
+toolchainopts = {'pic': True}
+
+source_urls = [
+    'https://github.com/gotm-model/code/archive',
+    'https://github.com/BoldingBruggeman/stim/archive',
+]
+sources = [
+    {
+        'download_filename': '%s.tar.gz' % _lake_commit,
+        'filename': SOURCE_TAR_GZ,
+    },
+    {
+        'download_filename': '%s.tar.gz' % _stim_commit,
+        'filename': 'STIM-%s.tar.gz' % _stim_commit[0:8],
+        'extract_cmd': 'tar -xzf %%s --strip-components 1 -C code-%s/extern/stim' % _lake_commit,
+    },
+]
+patches = [
+    'GOTM-5.4.0_use_eb_deps.patch',
+    'GOTM-5.4.0_fix_namelist_declarations.patch',
+]
+checksums = [
+    '66202d74f807d8a58ffa8481b33fe1075b285a7c97f652836b2732991485dc63',  # GOTM-5.4.0-20210127.tar.gz
+    'd73ff27a21f71dc5e16f58e23914c23a64ee5f2cf4a0bf255251aad3805af49c',  # STIM-53451fa4.tar.gz
+    '40af6f0c92969a877b48bf478e79d261ff6a071963fab0316de6cc9eae61f3af',  # GOTM-5.4.0_use_eb_deps.patch
+    '67352e153b63ed7ff0ab07cd73cffee2342cc1e00ef7346e24e8aa0faa1511a7',  # GOTM-5.4.0_fix_namelist_declarations.patch
+]
+
+builddependencies = [
+    ('CMake', '3.21.1'),
+]
+
+dependencies = [
+    ('FABM', '0.96.0'),
+    ('flexout', '20220209'),
+    ('netCDF-Fortran', '4.5.3'),
+]
+
+configopts = '-DBUILD_SHARED_LIBS=ON '
+# Use FABM from EasyBuild
+configopts += '-DGOTM_USE_FABM=ON -DFABM_PREFIX=$EBROOTFABM '
+# Enable STIM
+configopts += '-DGOTM_USE_STIM=ON '
+
+# Install extra libraries not covered in CMake build
+postinstallcmds = ["find %%(builddir)s -name '*.%s' -exec cp '{}' %%(installdir)s/lib/ \;" % SHLIB_EXT]
+
+_gotm_libs = ['airsea', 'config', 'gotm_fabm', 'input_manager', 'turbulence', 'util']
+_gotm_extra_libs = ['airsea_driver', 'meanflow', 'gotm', 'gotm_fabm_io', 'observations']
+_stim_libs = ['stim']
+
+sanity_check_paths = {
+    'files': ['bin/gotm'] + ['lib/lib%s.%s' % (l, SHLIB_EXT) for l in _gotm_libs + _gotm_extra_libs + _stim_libs],
+    'dirs': ['cmake', 'include'],
+}
+
+sanity_check_commands = ["gotm -h"]
+
+moduleclass = 'geo'
