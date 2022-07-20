@@ -20,6 +20,7 @@ modloadmsg = "This module of Q-Chem is a trial version only usable in node320 an
 modextrapaths = {
     'QC': '',
     'QCAUX': 'qcaux',
+    'BRIANQC_INSTALL_PATH': 'brianqc_qchem',  # GPU enabled installations
 }
 modextravars = {
     'QCPLATFORM': 'LINUX_Ix86_64',
