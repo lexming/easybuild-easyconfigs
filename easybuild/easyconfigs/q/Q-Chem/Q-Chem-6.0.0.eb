@@ -24,7 +24,7 @@ modextrapaths = {
 modextravars = {
     'QCPLATFORM': 'LINUX_Ix86_64',
     'QCLOCALSCR': '/local',
-    'QCMPI': 'seq',
+    'QCMPI': 'seq',  # switch to 'slurm' for MPI enabled installations
     'QCRSH': 'ssh',
 }
 modluafooter = 'setenv("QCSCRATCH", os.getenv("VSC_SCRATCH"))'
