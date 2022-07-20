@@ -1,0 +1,37 @@
+easyblock = 'Bundle'
+
+name = 'Q-Chem'
+version = '6.0.0'
+
+homepage = 'https://www.q-chem.com'
+description = """Q-Chem is a comprehensive ab initio quantum chemistry software for accurate
+predictions of molecular structures, reactivities, and vibrational, electronic
+and NMR spectra."""
+
+# Install a module setting up the environment for an existing installation of Q-Chem
+# This easyconfig does not install Q-Chem
+
+toolchain = SYSTEM
+
+hidden = True
+
+modloadmsg = "This module of Q-Chem is a trial version only usable in node320 and node404"
+
+modextrapaths = {
+    'QC': '',
+    'QCAUX': 'qcaux',
+}
+modextravars = {
+    'QCPLATFORM': 'LINUX_Ix86_64',
+    'QCLOCALSCR': '/local',
+    'QCMPI': 'seq',
+    'QCRSH': 'ssh',
+}
+modluafooter = 'setenv("QCSCRATCH", os.getenv("VSC_SCRATCH"))'
+
+sanity_check_paths = {
+    'files': ['bin/qchem'],
+    'dirs': ['qcaux'],
+}
+
+moduleclass = 'chem'
