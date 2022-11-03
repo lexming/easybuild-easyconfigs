@@ -1,8 +1,8 @@
 easyblock = 'ConfigureMake'
 
 name = 'nodejs'
-version = '14.17.6'  # LTS on 2020-08-31
-_libversion = '83'
+version = '16.15.1'  # LTS on 2022-06-12
+_libversion = '93'
 
 homepage = 'https://nodejs.org'
 description = """Node.js is a platform built on Chrome's JavaScript runtime
@@ -10,19 +10,19 @@ description = """Node.js is a platform built on Chrome's JavaScript runtime
  event-driven, non-blocking I/O model that makes it lightweight and efficient,
  perfect for data-intensive real-time applications that run across distributed devices."""
 
-toolchain = {'name': 'GCCcore', 'version': '11.2.0'}
+toolchain = {'name': 'GCCcore', 'version': '11.3.0'}
 
 source_urls = ['https://nodejs.org/dist/v%(version)s/']
 sources = ['node-v%(version)s.tar.gz']
-checksums = ['f64559c87faa2f1ce93c3d2cd09723af254ec320a53cbfd1a2ba8fba28e488d0']
+checksums = ['308aee7149c4092a53c87c28ef49e23a8d1606119e79ae68333062e2a1f94208']
 
 builddependencies = [
-    ('binutils', '2.37'),
-    ('Python', '3.9.6', '-bare'),
+    ('binutils', '2.38'),
+    ('Python', '3.10.4', '-bare'),
 ]
 
 dependencies = [
-    ('ICU', '69.1'),
+    ('ICU', '71.1'),
     ('OpenSSL', '1.1', '', SYSTEM),
 ]
 
