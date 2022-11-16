@@ -1,0 +1,42 @@
+easyblock = 'PythonBundle'
+
+name = 'MATLAB-Kernel'
+version = '0.17.1'
+
+homepage = 'https://github.com/Calysto/matlab_kernel'
+description = "Matlab kernel for Jupyter notebooks based on MetaKernel."
+
+toolchain = {'name': 'GCCcore', 'version': '10.3.0'}
+
+dependencies = [
+    ('Python', '3.9.5'),
+    ('IPython', '7.25.0'),
+    ('MATLAB-Engine', '2021a-9.10.1'),
+]
+
+use_pip = True
+
+exts_list = [
+    ('wurlitzer', '3.0.2', {
+        'checksums': ['36051ac530ddb461a86b6227c4b09d95f30a1d1043de2b4a592e97ae8a84fcdf'],
+    }),
+    ('metakernel', '0.28.2', {
+        'checksums': ['8811a4497444495639ef000902f4c6e8a7e2c57da1d47a8a24bcc9083548b389'],
+    }),
+    ('matlab_kernel', version, {
+        'checksums': ['a232b9293b7d7773cf760d925f760fc34d96af0796236eb27a84166edaa03f98'],
+    }),
+]
+
+sanity_pip_check = True
+
+sanity_check_paths = {
+    'files': ['share/jupyter/kernels/matlab/kernel.json'],
+    'dirs': ['lib/python%(pyshortver)s/site-packages'],
+}
+
+modextrapaths = {
+    'JUPYTER_PATH': 'share/jupyter',
+}
+
+moduleclass = 'tools'
