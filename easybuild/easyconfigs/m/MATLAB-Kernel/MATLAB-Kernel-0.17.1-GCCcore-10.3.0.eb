@@ -2,16 +2,20 @@ easyblock = 'PythonBundle'
 
 name = 'MATLAB-Kernel'
 version = '0.17.1'
+versionsuffix = '-GCCcore-10.3.0'
 
 homepage = 'https://github.com/Calysto/matlab_kernel'
 description = "Matlab kernel for Jupyter notebooks based on MetaKernel."
 
-toolchain = {'name': 'GCCcore', 'version': '10.3.0'}
+# MATLAB has to be loaded before the toolchain to avoid conflicts between the
+# libraries shipped with MATLAB and those in the toolchain of IPython
+toolchain = SYSTEM 
 
 dependencies = [
-    ('Python', '3.9.5'),
-    ('IPython', '7.25.0'),
-    ('MATLAB-Engine', '2021a-9.10.1'),
+    ('MATLAB', '2021a'),
+    ('MATLAB-Engine', '2021a-9.10.1', versionsuffix),
+    ('Python', '3.9.5', versionsuffix),
+    ('IPython', '7.25.0', versionsuffix),
 ]
 
 use_pip = True
