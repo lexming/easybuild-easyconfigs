@@ -24,6 +24,7 @@ dependencies = [
     ('libdap', '3.20.3'),
     ('GSL', '2.5'),
     ('netCDF', '4.6.1'),
+    ('ESMF', '7.1.0r'),
 ]
 
 sanity_check_paths = {

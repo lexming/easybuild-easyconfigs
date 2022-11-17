@@ -1,0 +1,32 @@
+name = 'netcdf4-python'
+version = '1.5.3'
+
+homepage = 'https://unidata.github.io/netcdf4-python/'
+description = """Python/numpy interface to netCDF."""
+
+toolchain = {'name': 'foss', 'version': '2019a'}
+toolchainopts = {'usempi': True}
+
+github_account = 'Unidata'
+source_urls = [GITHUB_SOURCE]
+sources = ['v%(version)srel.tar.gz']
+patches = ['netcdf4-python-1.1.8-avoid-diskless-test.patch']
+checksums = [
+    'c45d4ccc2e278635eaeb3afec657627c47bf3f92578f0217b12c61e50e6b059a',  # v1.5.3rel.tar.gz
+    # netcdf4-python-1.1.8-avoid-diskless-test.patch
+    'a8b262fa201d55f59015e1bc14466c1d113f807543bc1e05a22481ab0d216d72',
+]
+
+multi_deps = {'Python': ['3.7.2', '2.7.15']}
+
+dependencies = [
+    ('cftime', '1.0.4.2'),
+    ('netCDF', '4.6.2'),
+    ('libjpeg-turbo', '2.0.2'),
+    ('cURL', '7.63.0'),
+]
+
+download_dep_fail = True
+use_pip = True
+
+moduleclass = 'data'
