@@ -1,0 +1,66 @@
+easyblock = 'PythonBundle'
+
+name = 'CESM_postprocessing'
+version = '2.1.5'
+versionsuffix = '-Python-%(pyver)s'
+
+homepage = 'https://github.com/NCAR/CESM_postprocessing'
+description = """
+CESM python based post-processing code.
+Included packages: cesm_utils, timeseries"""
+
+toolchain = {'name': 'foss', 'version': '2019a'}
+
+github_account = 'NCAR'
+source_urls = [GITHUB_SOURCE]
+local_ncar_sources = '%s_v%s.tar.gz' % (name, version)
+
+dependencies = [
+    ('Python', '3.7.2'),
+    ('SciPy-bundle', '2019.03'),
+    ('ASAPTools', '0.6.2', versionsuffix),
+    ('PyReshaper', '1.1.1', versionsuffix),  # needed by timeseries, also provides netcdf4-python and cftime
+    ('lxml', '4.3.3'),
+    ('UDUNITS', '2.2.26'),  # needed by cf_units
+]
+
+use_pip = True
+sanity_pip_check = True
+
+exts_list = [
+    ('MarkupSafe', '1.1.1', {  # dependency of Jinja 2
+        'source_urls': [PYPI_SOURCE],
+        'checksums': ['29872e92839765e546828bb7754a68c418d927cd064fd4708fab9fe9c8bb116b'],
+    }),
+    ('Jinja2', '2.10.1', {  # dependency of cesm_utils
+        'source_urls': [PYPI_SOURCE],
+        'checksums': ['065c4f02ebe7f7cf559e49ee5a95fb800a9e4528727aec6f24402a5374c65013'],
+    }),
+    ('antlr4-python3-runtime', '4.7.2', {  # dependency of cf-units
+        'modulename': 'antlr4',
+        'source_urls': [PYPI_SOURCE],
+        'checksums': ['168cdcec8fb9152e84a87ca6fd261b3d54c8f6358f42ab3b813b14a7193bb50b'],
+    }),
+    ('cf-units', '2.1.2', {  # dependency of timeseries
+        'source_urls': [PYPI_SOURCE],
+        'checksums': ['47cc228e9b3d09fb47765584289af1ac340b05c78367f1012d77524f91e0e178'],
+    }),
+    ('cesm_utils', version, {
+        'sources': [local_ncar_sources],
+        'checksums': ['9ba5cf739bd7a663f128bda19c2fd1ff6e931b76a4584b9768324641bcc11a26'],
+        'start_dir': '%(name)s',
+    }),
+    ('timeseries', version, {
+        'sources': [local_ncar_sources],
+        'checksums': ['9ba5cf739bd7a663f128bda19c2fd1ff6e931b76a4584b9768324641bcc11a26'],
+        'start_dir': '%(name)s',
+    }),
+]
+
+sanity_check_paths = {
+    'files': ['bin/%s' % x for x in ['cesm_tseries_generator.py', 'chunking.py', 'create_f2py_remap', 'create_ocn_za',
+                                     'create_postprocess', 'get_machine', 'module_check']],
+    'dirs': ['lib/python%(pyshortver)s/site-packages'],
+}
+
+moduleclass = 'tools'

@@ -1,0 +1,28 @@
+easyblock = "PythonPackage"
+
+name = 'PyReshaper'
+version = '1.1.1'
+versionsuffix = '-Python-%(pyver)s'
+
+homepage = 'https://github.com/NCAR/PyReshaper'
+description = """
+A package for converting NetCDF files from time-slice (history) format to
+time-series (single-variable) format."""
+
+toolchain = {'name': 'foss', 'version': '2019a'}
+
+source_urls = [PYPI_SOURCE]
+sources = [SOURCE_TAR_GZ]
+checksums = ['2d33dc01d21e9131fdd0ddde3e61fbaa4255bfe639fa0ab255d32b5c9d93143f']
+
+dependencies = [
+    ('Python', '3.7.2'),
+    ('ASAPTools', '0.6.2', versionsuffix),
+    ('netcdf4-python', '1.5.3'),
+]
+
+use_pip = True
+download_dep_fail = True
+sanity_pip_check = True
+
+moduleclass = 'tools'

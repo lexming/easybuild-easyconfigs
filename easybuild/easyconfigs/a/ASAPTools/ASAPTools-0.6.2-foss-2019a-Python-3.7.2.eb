@@ -1,0 +1,29 @@
+easyblock = "PythonPackage"
+
+name = 'ASAPTools'
+version = '0.6.2'
+versionsuffix = '-Python-%(pyver)s'
+
+homepage = 'https://github.com/NCAR/ASAPPyTools'
+description = """
+The ASAP Python Toolbox is a collection of stand-alone tools for doing simple
+tasks, from managing print messages with a set verbosity level, to keeping
+timing information, to managing simple MPI communication."""
+
+toolchain = {'name': 'foss', 'version': '2019a'}
+toolchainopts = {'usempi': True}
+
+source_urls = [PYPI_SOURCE]
+sources = [SOURCE_TAR_GZ]
+checksums = ['f5b81f7680e4f8611502e5fa1defdf42f1a304d46cf9133bed9ed70bd1fdabda']
+
+dependencies = [
+    ('Python', '3.7.2'),
+    ('SciPy-bundle', '2019.03'),
+]
+
+use_pip = True
+download_dep_fail = True
+sanity_pip_check = True
+
+moduleclass = 'tools'
