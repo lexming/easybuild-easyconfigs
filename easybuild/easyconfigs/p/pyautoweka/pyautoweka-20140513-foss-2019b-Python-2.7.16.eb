@@ -1,0 +1,32 @@
+easyblock = 'PythonPackage'
+
+name = 'pyautoweka'
+version = '20140513'
+local_commit = 'f21fc24'
+versionsuffix = '-Python-%(pyver)s'
+
+homepage = 'https://github.com/automl/pyautoweka'
+description = """
+pyautoweka is a python wrapper for Auto-WEKA, a Java application for algorithm
+selection and hyperparameter optimizations, that is build on WEKA."""
+
+toolchain = {'name': 'foss', 'version': '2019b'}
+
+github_account = 'automl'
+source_urls = [GITHUB_SOURCE]
+sources = [{'filename': SOURCE_TAR_GZ, 'download_filename': '%s.tar.gz' % local_commit}]
+checksums = ['c5c2b0ed106aceeee270c9d4902ec42bea6274b992834ba8b7cb11288b6b3735']
+
+dependencies = [
+    ('Java', '1.8', '', True),
+    ('Python', '2.7.16'),
+    ('SciPy-bundle', '2019.10', versionsuffix),
+    ('lxml', '4.4.2'),
+]
+
+download_dep_fail = True
+use_pip = True
+
+sanity_pip_check = True
+
+moduleclass = 'data'
