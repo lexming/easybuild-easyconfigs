@@ -1,0 +1,53 @@
+easyblock = 'PythonBundle'
+
+name = 'auto-sklearn'
+version = '0.12.6'
+
+homepage = 'https://automl.github.io/auto-sklearn/master/'
+description = """
+auto-sklearn is an automated machine learning toolkit and a drop-in replacement
+for a scikit-learn estimator. auto-sklearn frees a machine learning user from
+algorithm selection and hyperparameter tuning. It leverages recent advantages
+in Bayesian optimization, meta-learning and ensemble construction."""
+
+toolchain = {'name': 'foss', 'version': '2020b'}
+
+builddependencies = [
+    ('SWIG', '4.0.2'),
+]
+
+dependencies = [
+    ('Python', '3.8.6'),
+    ('SciPy-bundle', '2020.11'),
+    ('scikit-learn', '0.24.2'),
+    ('dask', '2021.2.0'),
+    ('PyYAML', '5.3.1'),
+]
+
+use_pip = True
+sanity_pip_check = True
+
+exts_list = [
+    ('ConfigSpace', '0.4.18', {
+        'modulename': '%(name)s',
+        'checksums': ['42992801598fbccc2a81674ac16f2961b0f1e5698c2e2f91adb3b96260c07da1'],
+    }),
+    ('pynisher', '0.6.4', {
+        'checksums': ['111d91aad471375c0509a912415ff90053ef909100facf412511383af107c124'],
+    }),
+    ('pyrfr', '0.8.2', {
+        'checksums': ['c18a6e8f0bd971c1ea449b6dd0997a6ec1fe9a031883400bdcc95fa5ddd65975'],
+    }),
+    ('lazy_import', '0.2.2', {
+        'checksums': ['2149aef8579459407c62cfeccf118527939c9931ace124f355236360644f8a3d'],
+    }),
+    ('smac', '0.13.1', {
+        'checksums': ['134f272d3d1f1c410edf6ee44f065cfe59bcaa52822c5978e9fbcd0a64470dab'],
+    }),
+    (name, version, {
+        'modulename': 'autosklearn',
+        'checksums': ['bdd0c6885f7d575169a2dad01efe6fef8d73f627b9b288c86c8134a2c48ee71d'],
+    }),
+]
+
+moduleclass = 'data'
