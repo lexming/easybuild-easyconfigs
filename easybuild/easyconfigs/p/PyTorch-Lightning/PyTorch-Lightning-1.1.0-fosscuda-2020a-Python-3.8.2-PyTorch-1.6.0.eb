@@ -1,0 +1,35 @@
+easyblock = 'PythonBundle'
+
+name = 'PyTorch-Lightning'
+version = '1.1.0'
+local_pytorch_version = '1.6.0'
+versionsuffix = '-Python-%%(pyver)s-PyTorch-%s' % local_pytorch_version
+
+homepage = 'https://github.com/PyTorchLightning/pytorch-lightning'
+description = "Lightning disentangles PyTorch code to decouple the science from the engineering."
+
+toolchain = {'name': 'fosscuda', 'version': '2020a'}
+
+dependencies = [
+    ('Python', '3.8.2'),
+    ('PyTorch', local_pytorch_version, '-Python-%(pyver)s'),
+    ('PyYAML', '5.3'),
+    ('TensorFlow', '2.3.1', '-Python-%(pyver)s'),  # needed for tensorboard
+    ('tqdm', '4.47.0'),
+]
+
+use_pip = True
+sanity_pip_check = True
+
+exts_default_options = {'source_urls': [PYPI_LOWER_SOURCE]}
+
+exts_list = [
+    ('fsspec', '0.8.4', {
+        'checksums': ['e1e494d4814f6804769f3c7bfd7a722a15113cc0339d14755297f09306b8f21f'],
+    }),
+    ('pytorch-lightning', version, {
+        'checksums': ['851fdc5de1a6652ba6dc923222b1dd8ca53b33eefeb4d8a4973c8a99d40ee60c'],
+    }),
+]
+
+moduleclass = 'lang'
