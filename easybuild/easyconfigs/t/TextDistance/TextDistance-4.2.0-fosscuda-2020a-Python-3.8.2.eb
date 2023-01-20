@@ -1,0 +1,31 @@
+easyblock = 'PythonPackage'
+
+name = 'TextDistance'
+version = '4.2.0'
+versionsuffix = '-Python-%(pyver)s'
+
+homepage = 'https://github.com/life4/textdistance'
+description = """
+TextDistance is a python library for comparing distance between two or more
+sequences by many algorithms."""
+
+toolchain = {'name': 'fosscuda', 'version': '2020a'}
+
+source_urls = [PYPI_SOURCE]
+sources = [SOURCELOWER_TAR_GZ]
+checksums = ['6d2a398815aeed453cfb38a3b62da74e33fa6a5f4e42845fd1d2c9611836befd']
+
+dependencies = [
+    ('Python', '3.8.2'),
+    ('SciPy-bundle', '2020.03', versionsuffix),
+    ('Abydos', '0.5.0', versionsuffix),
+    ('python-jellyfish', '0.8.2', versionsuffix),
+    ('python-Levenshtein', '0.12.0', versionsuffix),
+    ('pyxDamerauLevenshtein', '1.6.1', versionsuffix),
+]
+
+download_dep_fail = True
+use_pip = True
+sanity_pip_check = True
+
+moduleclass = 'lib'

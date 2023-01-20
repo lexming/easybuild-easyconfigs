@@ -1,0 +1,27 @@
+easyblock = 'PythonPackage'
+
+name = 'pyxDamerauLevenshtein'
+version = '1.6.1'
+versionsuffix = '-Python-%(pyver)s'
+
+homepage = 'https://github.com/gfairchild/pyxDamerauLevenshtein'
+description = """
+pyxDamerauLevenshtein implements the Damerau-Levenshtein (DL) edit distance
+algorithm for Python in Cython for high performance."""
+
+toolchain = {'name': 'foss', 'version': '2020a'}
+
+source_urls = [PYPI_SOURCE]
+sources = [SOURCE_TAR_GZ]
+checksums = ['e4d8d414b91961613cf955d945247b39a3918b204e8ecb4ebd142ad363dd96da']
+
+dependencies = [
+    ('Python', '3.8.2'),
+    ('SciPy-bundle', '2020.03', versionsuffix),
+]
+
+download_dep_fail = True
+use_pip = True
+sanity_pip_check = True
+
+moduleclass = 'lib'

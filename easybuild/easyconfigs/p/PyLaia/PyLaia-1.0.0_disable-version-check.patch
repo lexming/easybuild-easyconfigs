@@ -1,0 +1,42 @@
+diff --git a/laia/__init__.py b/laia/__init__.py
+index bc70e01..eb27fe6 100644
+--- a/laia/__init__.py
++++ b/laia/__init__.py
+@@ -34,27 +34,17 @@ except subprocess.CalledProcessError:
+ 
+ 
+ def get_installed_versions() -> List[str]:
+-    requirements_path = __root__ / "requirements.txt"
+-    requirements = []
+-    with open(requirements_path) as f:
+-        for r in f.readlines():
+-            r = r.strip()
+-            r = r.split(" @ ")[0]  # support 'pkg @ git+https://...' notation
+-            r = r.split("==")[0]
+-            r = r.split(">=")[0]
+-            r = r.split("<")[0]
+-            r = r.split("[")[0]  # support 'pkg[extras]' notation
+-            requirements.append(r)
+-    freeze = subprocess.check_output(
+-        [sys.executable, "-m", "pip", "freeze", "--exclude-editable"]
+-    )
+-    freeze = freeze.decode().strip().split("\n")
+     versions = [
+-        r
+-        for r in freeze
+-        if r in requirements
+-        or ("==" in r and r[: r.index("==")] in requirements)
+-        or (" @ " in r and r[: r.index(" @ ")] in requirements)
++        'textdistance==4.2.0',
++        'natsort==7.1.0',
++        'numpy==1.18.3',
++        'scipy==1.4.1',
++        'matplotlib==3.2.1',
++        'torch==1.6.0',
++        'torchvision==0.7.0a0',
++        'nnutils-pytorch==1.6.0',
++        'pytorch-lightning==1.1.0',
++        'jsonargparse==3.1.0',
+     ]
+     versions.append(f"laia=={__version__}")
+     return versions

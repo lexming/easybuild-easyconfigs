@@ -1,0 +1,54 @@
+easyblock = 'PythonPackage'
+
+name = 'PyLaia'
+version = '1.0.0'
+local_pytorch_version = '1.6.0'
+local_python_suffix = '-Python-%(pyver)s'
+local_pytorch_suffix = '-PyTorch-%s' % local_pytorch_version
+versionsuffix = local_python_suffix + local_pytorch_suffix
+
+homepage = 'https://github.com/jpuigcerver/PyLaia'
+description = "PyLaia is a device agnostic, PyTorch based, deep learning toolkit for handwritten document analysis."
+
+toolchain = {'name': 'fosscuda', 'version': '2020a'}
+
+github_account = 'jpuigcerver'
+source_urls = [GITHUB_SOURCE]
+sources = ['v%(version)s.tar.gz']
+patches = ['%(name)s-%(version)s_disable-version-check.patch']
+checksums = [
+    '4a7119e2b258cbae8d5006de8644109c1327a679a95581f642cacc7c1991e4e3',  # v1.0.0.tar.gz
+    'afc911fb8f44b572f79242c334033a1d38c20af1b0cc2215dfca55a196ac9e72',  # PyLaia-1.0.0_disable-version-check.patch
+]
+
+dependencies = [
+    ('Python', '3.8.2'),
+    ('SciPy-bundle', '2020.03', local_python_suffix),
+    ('PyTorch', local_pytorch_version, local_python_suffix),
+    ('jsonargparse', '3.1.0', local_python_suffix),
+    ('natsort', '7.1.0', local_python_suffix),
+    ('matplotlib', '3.2.1', local_python_suffix),
+    ('TextDistance', '4.2.0', local_python_suffix),
+    ('nnutils-pytorch', '1.6.0', versionsuffix),
+    ('PyTorch-Lightning', '1.1.0', versionsuffix),
+    ('torchvision', '0.7.0', versionsuffix),
+]
+
+use_pip = True
+download_dep_fail = True
+
+# fix installation of scripts and models
+preinstallopts = "touch laia/scripts/__init__.py && "
+preinstallopts += "touch laia/models/__init__.py && "
+
+sanity_pip_check = True
+
+sanity_check_paths = {
+    'files': ['bin/%s' % x for x in ['pylaia-htr-create-model', 'pylaia-htr-decode-ctc',
+                                     'pylaia-htr-netout', 'pylaia-htr-train-ctc']],
+    'dirs': ['lib/python%(pyshortver)s/site-packages'],
+}
+
+options = {'modulename': 'laia'}
+
+moduleclass = 'vis'

@@ -1,0 +1,29 @@
+easyblock = 'PythonPackage'
+
+name = 'nnutils-pytorch'
+version = '1.6.0'
+versionsuffix = '-Python-%%(pyver)s-PyTorch-%s' % version
+
+homepage = 'https://github.com/jpuigcerver/nnutils'
+description = """
+Implementation of different neural network-related utilities for CPUs and GPUs (CUDA).
+Most utils are related to working with images of different sizes grouped into batches
+with padding."""
+
+toolchain = {'name': 'fosscuda', 'version': '2020a'}
+
+source_urls = [PYPI_SOURCE]
+sources = ['%s-%s.tar.gz' % (name.replace('-', '_'), version)]
+checksums = ['fb401a7cacc5e764037136ece8a29a33648cd54e2b55c457a8cb9f546146df4c']
+
+dependencies = [
+    ('Python', '3.8.2'),
+    ('PyTorch', version, '-Python-%(pyver)s'),
+]
+
+use_pip = True
+download_dep_fail = True
+
+sanity_pip_check = True
+
+moduleclass = 'vis'
