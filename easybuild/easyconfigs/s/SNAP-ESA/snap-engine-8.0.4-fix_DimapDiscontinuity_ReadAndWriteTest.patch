@@ -1,0 +1,16 @@
+Disable assertion on number of files in temporary folder "snap-core/target/test-data"
+The contents of that folder change depending on the previous tests run
+author: Alex Domingo (Vrije Universiteit Brussel)
+--- snap-engine-8.0.4/snap-core/src/test/java/org/esa/snap/core/dataio/dimap/DimapDiscontinuity_ReadAndWriteTest.java.orig	2021-06-12 00:02:30.257498000 +0200
++++ snap-engine-8.0.4/snap-core/src/test/java/org/esa/snap/core/dataio/dimap/DimapDiscontinuity_ReadAndWriteTest.java	2021-06-12 00:02:58.275601000 +0200
+@@ -75,8 +75,8 @@
+         final File productFile = new File(outDir, "prod.dim");
+         writerPlugin.createWriterInstance().writeProductNodes(product, productFile);
+ 
+-        final List<Path> collect = Files.list(outDir.toPath()).collect(Collectors.toList());
+-        assertThat(collect.size(), is(2));
++        // final List<Path> collect = Files.list(outDir.toPath()).collect(Collectors.toList());
++        // assertThat(collect.size(), is(2));
+ 
+         final Product product = readerPlugIn.createReaderInstance().readProductNodes(productFile, null);
+         assertThat(product.getTiePointGrid("dis_no").getDiscontinuity(), is(TiePointGrid.DISCONT_NONE));
