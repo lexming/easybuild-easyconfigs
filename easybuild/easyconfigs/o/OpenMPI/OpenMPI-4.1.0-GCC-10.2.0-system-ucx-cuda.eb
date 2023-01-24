@@ -1,5 +1,6 @@
 name = 'OpenMPI'
 version = '4.1.0'
+versionsuffix = '-system-ucx-cuda'
 
 homepage = 'https://www.open-mpi.org/'
 description = """The Open MPI Project is an open source MPI-3 implementation."""
