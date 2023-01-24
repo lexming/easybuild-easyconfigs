@@ -1,0 +1,45 @@
+easyblock = 'PythonBundle'
+
+name = 'PySAT'
+version = '0.1.7.dev10'
+
+homepage = 'https://pysathq.github.io/'
+description = """
+PySAT is a Python toolkit, which aims at providing a simple and unified
+interface to a number of state-of-art Boolean satisfiability (SAT) solvers as
+well as to a variety of cardinality and pseudo-Boolean encodings."""
+
+# PySAT includes solvers in C and C++
+toolchain = {'name': 'GCC', 'version': '10.3.0'}
+
+dependencies = [
+    ('Python', '3.9.2'),
+    ('py-aiger', '6.1.14'),
+]
+
+use_pip = True
+sanity_pip_check = True
+
+exts_list = [
+    ('pypblib', '0.0.4', {
+        'checksums': ['71dd930bf177ca38d6eeb473702d05df07e11f20382db0c766465297eaf49062'],
+    }),
+    ('python-sat', version, {
+        'modulename': 'pysat',
+        'checksums': ['6b6f9c3ef5f9df75568a034180a5c1f0f01b6353899408ab6b1fd8b0b044fafb'],
+    }),
+]
+
+# check provided examples and solvers
+local_examples = ['fm', 'genhard', 'lbx', 'lsu', 'mcsls', 'models', 'musx', 'rc2']
+local_solvers = ['Cadical', 'CNFPlus', 'Gluecard3', 'Gluecard4', 'Glucose3', 'Glucose4', 'Lingeling', 'MapleChrono',
+                 'MapleCM', 'Maplesat', 'Minicard', 'Minisat22', 'MinisatGH', 'Mergesat3']
+
+sanity_check_paths = {
+    'files': ['bin/%s.py' % x for x in local_examples],
+    'dirs': ['lib/python%(pyshortver)s/site-packages'],
+}
+
+sanity_check_commands = ["python -c 'from pysat.solvers import %s'" % s for s in local_solvers]
+
+moduleclass = 'cae'
