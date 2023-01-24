@@ -23,7 +23,6 @@ patches = [
     'PyTorch-1.8.1_increase-distributed-test-timeout.patch',
     'PyTorch-1.9.0_limit-world-size-for-zero-redundancy-opt-test.patch',
     'PyTorch-1.10.0_fix-test-dataloader-fixed-affinity.patch',
-    'PyTorch-1.10.0_fix-faulty-asserts-and-skip-test.patch',
     'PyTorch-1.10.0_fix-test-cond-cpu.patch',
     'PyTorch-1.10.0_fix-vnni-detection.patch',
     'PyTorch-1.10.0_increase_zero_optimizer_test_tolerance.patch',
@@ -43,8 +42,6 @@ checksums = [
     'ff573660913ce055e24cfd194ce747ba5685091c631cfd443eae2a99d56b57ea',
     # PyTorch-1.10.0_fix-test-dataloader-fixed-affinity.patch
     '313dca681f45ce3bc7c4557fdcdcbe0b77216d2c708fa30a2ec0e22c44876707',
-    # PyTorch-1.10.0_fix-faulty-asserts-and-skip-test.patch
-    '67152215e4530a9b1d7349fb20864445fd815288f04ab9e96e45c73b2d87827a',
     # PyTorch-1.10.0_fix-test-cond-cpu.patch
     '51f83f5d5ef69656ef35b73f17e0671e70113798421be11ea4c7b56ffcc4da03',
     # PyTorch-1.10.0_fix-vnni-detection.patch
