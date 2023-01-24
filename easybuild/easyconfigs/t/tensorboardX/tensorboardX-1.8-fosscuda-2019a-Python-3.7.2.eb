@@ -1,0 +1,41 @@
+easyblock = 'PythonBundle'
+
+name = 'tensorboardX'
+version = '1.8'
+versionsuffix = '-Python-%(pyver)s'
+
+homepage = 'https://github.com/lanpa/tensorboardX'
+description = "Tensorboard for PyTorch."
+
+toolchain = {'name': 'fosscuda', 'version': '2019a'}
+
+dependencies = [
+    ('Python', '3.7.2'),
+    ('PyTorch', '1.2.0', versionsuffix ),
+    ('torchvision', '0.4.0', versionsuffix ),
+    ('protobuf-python', '3.6.1', versionsuffix ),
+    ('matplotlib', '3.0.3', versionsuffix ),
+    ('Pillow', '6.0.0'), # needed by imageio
+]
+
+exts_list = [
+    ('imageio', '2.4.1', {
+        'source_urls': ['https://pypi.python.org/packages/source/i/imageio'],
+    }),
+    ('decorator', '4.3.2', {
+        'source_urls': ['https://pypi.python.org/packages/source/d/decorator'],
+    }),
+    ('tqdm', '4.28.1', {
+        'source_urls': ['https://pypi.python.org/packages/source/t/tqdm'],
+    }),
+    ('moviepy', '0.2.3.5', {
+        'source_urls': ['https://pypi.python.org/packages/source/m/moviepy'],
+    }),
+    (name, version, {
+        'source_urls': ['https://github.com/lanpa/%(name)s/archive'],
+        'source_tmpl': 'v%(version)s.tar.gz',
+        'modulename': '%(name)s',
+    }),
+]
+
+moduleclass = 'vis'
