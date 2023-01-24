@@ -1,0 +1,32 @@
+easyblock = 'PythonPackage'
+
+name = 'python-RSA'
+version = '4.7.2'
+
+homepage = 'https://stuvel.eu/software/rsa/'
+description = """
+Python-RSA is a pure-Python RSA implementation. It supports encryption and
+decryption, signing and verifying signatures, and key generation according to
+PKCS#1 version 1.5."""
+
+toolchain = {'name': 'GCCcore', 'version': '10.2.0'}
+
+github_account = 'sybrenstuvel'
+source_urls = [GITHUB_LOWER_SOURCE]
+sources = ['version-%(version)s.tar.gz']
+checksums = ['6717dd652021c1c90a4a5457042f9c0c3c0f50533065aa0f5ed3a8c6ab1d0e92']
+
+builddependencies = [('binutils', '2.35')]
+
+dependencies = [
+    ('Python', '3.8.6'),
+]
+
+use_pip = True
+download_dep_fail = True
+
+sanity_pip_check = True
+
+options = {'modulename': 'rsa'}
+
+moduleclass = 'tools'
