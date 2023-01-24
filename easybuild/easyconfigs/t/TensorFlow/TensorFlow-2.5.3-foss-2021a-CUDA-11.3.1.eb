@@ -19,8 +19,8 @@ builddependencies = [
     ('UnZip', '6.0'),
 ]
 dependencies = [
-    ('CUDA', '11.3.1', '', True),
-    ('cuDNN', '8.2.1.32', versionsuffix, True),
+    ('CUDA', '11.3.1', '', SYSTEM),
+    ('cuDNN', '8.2.1.32', versionsuffix, SYSTEM),
     ('NCCL', '2.10.3', versionsuffix),
     ('Python', '3.9.5'),
     ('h5py', '3.2.1'),
@@ -88,6 +88,7 @@ exts_list = [
     }),
     ('grpcio', '1.43.0', {
         'modulename': 'grpc',
+        'preinstallopts': "export GRPC_PYTHON_BUILD_EXT_COMPILER_JOBS=%(parallel)s && ",
         'checksums': ['735d9a437c262ab039d02defddcb9f8f545d7009ae61c0114e19dda3843febe5'],
     }),
     ('gviz-api', '1.10.0', {

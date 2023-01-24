@@ -19,13 +19,13 @@ sources = ['v%(version)s.tar.gz']
 patches = [
     'Mash-2.2_fix-hardcoding.patch',
     'Mash-2.1_disable-memcpy-wrap.patch',
-    'Mash-2.3_fix-gcc11-header-dependencies.patch',
+    'Mash-2.3_fix-GCC-11.patch',
 ]
 checksums = [
     'f96cf7305e010012c3debed966ac83ceecac0351dbbfeaa6cd7ad7f068d87fe1',  # v2.3.tar.gz
     '0c7315af727a06f408ab3ca69da0860fc671aa870b448a41a509b1e6d7027db5',  # Mash-2.2_fix-hardcoding.patch
     '40990cf3d192b533736374bc67a54dbd839d90b0310a0a66f994891da1f85b6e',  # Mash-2.1_disable-memcpy-wrap.patch
-    '8f7120208aa0a5b62c12ce3b2010fed58fa4c035139293f75605d2a70f705738',  # Mash-2.3_fix-gcc11-header-dependencies.patch
+    '47a55459d4e8c57949648e0f33f3ffc3529563db0efe60f495fdec046f48d94e',  # Mash-2.3_fix-GCC-11.patch
 ]
 
 builddependencies = [('Autotools', '20210726')]

@@ -1,5 +1,6 @@
 Avoid false matches by requiring that input keywords are a full line.
 Use sed pattern matching to remove arbitrary limit to 200 lines
+see issue https://github.com/sunxb05/PyFrag/issues/1
 author: Alex Domingo (Vrije Universiteit Brussel)
 diff --git a/host/argueparce/argueparce.sh b/host/argueparce/argueparce.sh
 index 9bcc197..afdf06c 100644
