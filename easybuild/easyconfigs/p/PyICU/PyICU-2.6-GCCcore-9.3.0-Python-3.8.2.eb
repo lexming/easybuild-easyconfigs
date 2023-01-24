@@ -18,6 +18,10 @@ source_urls = [PYPI_SOURCE]
 sources = [SOURCE_TAR_GZ]
 checksums = ['a9a5bf6833360f8f69e9375b91c1a7dd6e0c9157a42aee5bb7d6891804d96371']
 
+buildependencies = [
+    ('binutils', '2.34'),
+]
+
 dependencies = [
     ('Python', '3.8.2'),
     ('ICU', '66.1'),
