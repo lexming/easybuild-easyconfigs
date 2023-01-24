@@ -1,0 +1,31 @@
+easyblock = 'PythonBundle'
+
+name = 'WebDataset'
+version = '0.1.62'
+versionsuffix = '-Python-%(pyver)s'
+
+homepage = 'https://github.com/webdataset/webdataset'
+description = """
+A high-performance Python-based I/O system for large (and small) deep learning
+problems, with strong support for PyTorch."""
+
+toolchain = {'name': 'foss', 'version': '2020a'}
+
+dependencies = [
+    ('Python', '3.8.2'),
+    ('SciPy-bundle', '2020.03', versionsuffix),
+]
+
+use_pip = True
+sanity_pip_check = True
+
+exts_list = [
+    ('braceexpand', '0.1.7', {
+        'checksums': ['e6e539bd20eaea53547472ff94f4fb5c3d3bf9d0a89388c4b56663aba765f705'],
+    }),
+    ('webdataset', version, {
+        'checksums': ['78b6c7810116d6875fa1ed8eb2dea29a54b86fde014cc2069f4c08fc3530ceb5'],
+    }),
+]
+
+moduleclass = 'data'
