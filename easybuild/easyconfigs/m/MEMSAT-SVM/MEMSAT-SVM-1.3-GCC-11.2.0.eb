@@ -14,7 +14,7 @@ checksums = ['14cb8a3d93038a60ab8dfefde8932ee5ee79b6968a7b638e316e04124ac9d995']
 
 dependencies = [
     ('Perl', '5.34.0'),
-    ('BLAST', '2.2.26', '-Linux_x86_64', True)  # provides blastpgp and makemat
+    ('BLAST', '2.2.26', '-Linux_x86_64', SYSTEM)  # provides blastpgp and makemat
 ]
 
 buildopts = 'all CC=$CC CPP=$CXX LD=$CC CFLAGS="$CFLAGS" LFLAGS="$LDFLAGS" LIBS="$LIBS"'
