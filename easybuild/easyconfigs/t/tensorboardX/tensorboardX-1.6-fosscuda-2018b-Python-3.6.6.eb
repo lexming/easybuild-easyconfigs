@@ -1,0 +1,29 @@
+easyblock = 'PythonPackage'
+
+name = 'tensorboardX'
+version = '1.6'
+versionsuffix = '-Python-%(pyver)s'
+
+homepage = 'https://github.com/lanpa/tensorboardX'
+description = "Tensorboard for PyTorch."
+
+toolchain = {'name': 'fosscuda', 'version': '2018b'}
+
+source_urls = ['https://github.com/lanpa/%(name)s/archive']
+sources = ['v%(version)s.tar.gz']
+checksums = ['3909e9b42f9e07178c30df37450bb46e92d09b41cd46b376c2705e50da9c8186']
+
+dependencies = [
+    ('Python', '3.6.6'),
+    ('PyTorch', '1.0.1', versionsuffix),
+    ('torchvision', '0.2.2', versionsuffix),
+    ('protobuf-python', '3.6.0', versionsuffix),
+    ('TensorFlow', '1.12.0', versionsuffix),
+]
+
+use_pip = True
+sanity_pip_check = True
+
+options = {'modulename': '%(name)s'}
+
+moduleclass = 'vis'
