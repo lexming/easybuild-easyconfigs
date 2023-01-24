@@ -1,0 +1,27 @@
+easyblock = 'PythonPackage'
+
+name = 'python-jellyfish'
+version = '0.8.2'
+versionsuffix = '-Python-%(pyver)s'
+local_pkgname = name.replace('python-', '')
+
+homepage = 'https://github.com/jamesturk/jellyfish'
+description = "Jellyfish is a python library for doing approximate and phonetic matching of strings."
+
+toolchain = {'name': 'GCCcore', 'version': '9.3.0'}
+
+source_urls = ['https://pypi.python.org/packages/source/%s/%s/' % (local_pkgname[0], local_pkgname)]
+sources = ['%s-%s.tar.gz' % (local_pkgname, version)]
+checksums = ['a499741401512d05bbd3556e448e960bc908eba3879fb73d450e8e91566a030b']
+
+dependencies = [
+    ('Python', '3.8.2'),
+]
+
+download_dep_fail = True
+use_pip = True
+sanity_pip_check = True
+
+options = {'modulename': local_pkgname}
+
+moduleclass = 'lib'
