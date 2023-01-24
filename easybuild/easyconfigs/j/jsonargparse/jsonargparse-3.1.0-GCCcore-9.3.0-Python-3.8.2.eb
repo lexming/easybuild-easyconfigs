@@ -12,6 +12,10 @@ configuration options from command line arguments, json configuration files
 
 toolchain = {'name': 'GCCcore', 'version': '9.3.0'}
 
+buildependencies = [
+    ('binutils', '2.34'),
+]
+
 dependencies = [
     ('Python', '3.8.2'),
     ('PyYAML', '5.3'),
