@@ -20,8 +20,8 @@ builddependencies = [
 ]
 
 dependencies = [
-    ('CUDA', '11.3.1', '', True),
-    ('cuDNN', '8.2.1.32', versionsuffix, True),
+    ('CUDA', '11.3.1', '', SYSTEM),
+    ('cuDNN', '8.2.1.32', versionsuffix, SYSTEM),
     ('Python', '3.9.5'),
     ('SciPy-bundle', '2021.05'),
     ('flatbuffers-python', '2.0'),
