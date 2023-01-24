@@ -23,10 +23,10 @@ checksums = [
 
 dependencies = [
     ('Python', '2.7.18', '-bare'),
-    ('BLAST', '2.2.26', '-Linux_x86_64', True),
+    ('BLAST', '2.2.26', '-Linux_x86_64', SYSTEM),
     ('CD-HIT', '4.8.1'),
     ('DaliLite', '4.1'),
-    ('FAST', '20040220', '-linux64', True),
+    ('FAST', '20040220', '-linux64', SYSTEM),
     ('MAFFT', '7.490', '-with-extensions'),
     ('PSIPRED', '4.02'),
     ('TM-align', '20180426'),
