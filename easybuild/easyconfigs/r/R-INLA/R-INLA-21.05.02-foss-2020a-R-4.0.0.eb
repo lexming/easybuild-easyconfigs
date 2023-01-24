@@ -76,7 +76,7 @@ components = [
     }),
     (name, version, {
         'checksums': default_component_specs['checksums'] + [
-            '3a71c714f230c4af6729898c8f2a11f6c3c73e14b3c02534c8ed2b16f385843b',
+            '9ec131a8a470ea2614be77f917c0d66eacecbba4b511c90d6427059fe2c36b51',
         ],
         'patches': ['R-INLA-%(version)s-skip-binaries.patch'],
         'prebuildopts': 'export CPATH=$EBROOTR/lib64/R/include/:$CPATH && ',
