@@ -14,6 +14,10 @@ source_urls = ['https://pypi.python.org/packages/source/%s/%s/' % (local_pkgname
 sources = ['%s-%s.tar.gz' % (local_pkgname, version)]
 checksums = ['a499741401512d05bbd3556e448e960bc908eba3879fb73d450e8e91566a030b']
 
+buildependencies = [
+    ('binutils', '2.34'),
+]
+
 dependencies = [
     ('Python', '3.8.2'),
 ]
