@@ -1,0 +1,33 @@
+easyblock = 'PythonPackage'
+
+name = 'PyICU'
+version = '2.6'
+versionsuffix = '-Python-%(pyver)s'
+
+homepage = 'https://github.com/ovalhub/pyicu'
+description = """
+PyICU is a Python extension wrapping the ICU C++ libraries.
+ICU stands for "International Components for Unicode". These are the i18n
+libraries of the Unicode Consortium. They implement much of the Unicode
+Standard, many of its companion Unicode Technical Standards, and much of
+Unicode CLDR."""
+
+toolchain = {'name': 'GCCcore', 'version': '9.3.0'}
+
+source_urls = [PYPI_SOURCE]
+sources = [SOURCE_TAR_GZ]
+checksums = ['a9a5bf6833360f8f69e9375b91c1a7dd6e0c9157a42aee5bb7d6891804d96371']
+
+dependencies = [
+    ('Python', '3.8.2'),
+    ('ICU', '66.1'),
+]
+
+download_dep_fail = True
+use_pip = True
+
+sanity_pip_check = True
+
+options = {'modulename': 'icu'}
+
+moduleclass = 'lang'
