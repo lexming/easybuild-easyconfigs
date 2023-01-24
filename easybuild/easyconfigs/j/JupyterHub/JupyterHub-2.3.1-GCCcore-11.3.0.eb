@@ -19,7 +19,7 @@ dependencies = [
     ('JupyterLab', '3.5.0'),
     ('jupyterlab-lmod', '1.0.2'),
     ('Mako', '1.2.0'),
-    ('OpenSSL', '1.1', '', True),
+    ('OpenSSL', '1.1', '', SYSTEM),
 ]
 
 use_pip = True
