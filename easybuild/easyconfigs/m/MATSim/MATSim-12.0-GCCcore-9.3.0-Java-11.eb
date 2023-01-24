@@ -14,7 +14,7 @@ sources = ['%(namelower)s-%(version)s-release.zip']
 checksums = ['b8bb5a2e2609ad7d0d3db46309ecb32a6ad6d3da5f14601d6ecff2e260f85721']
 
 dependencies = [
-    ('Java', '11', '', True),
+    ('Java', '11', '', SYSTEM),
     ('Mesa', '20.0.2'),
     ('X11', '20200222'),
 ]
