@@ -9,6 +9,10 @@ description = "Simple yet flexible natural sorting in Python."
 
 toolchain = {'name': 'GCCcore', 'version': '9.3.0'}
 
+buildependencies = [
+    ('binutils', '2.34'),
+]
+
 dependencies = [
     ('Python', '3.8.2'),
     ('PyICU', '2.6', versionsuffix),  # optional
