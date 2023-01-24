@@ -1,0 +1,56 @@
+easyblock = 'Bundle'
+
+name = 'pytorch-mac-network'
+version = '20200602'
+local_commit = '15a65d1483ebd16a194b47352b566dbb27a8e0c9'
+versionsuffix = '-Python-%(pyver)s'
+
+homepage = 'https://github.com/tohinz/pytorch-mac-network'
+description = """
+This is a Pytorch implementation of the 2018 ICLR Paper Compositional Attention
+Networks for Machine Reasoning (MAC Network), based mostly on the original
+implementation by the authors and partly (mainly question preprocessing) on the
+implementation by rosinality."""
+
+toolchain = {'name': 'fosscuda', 'version': '2019a'}
+
+dependencies = [
+    ('Python', '3.7.2'),
+    ('SciPy-bundle', '2019.03'),
+    ('h5py', '2.9.0'),
+    ('PyYAML', '5.1'),
+    ('Pillow', '6.0.0'),
+    ('NLTK', '3.4.1', versionsuffix),
+    ('PyTorch', '1.2.0', versionsuffix),
+    ('tensorboardX', '1.8', versionsuffix),
+    ('tqdm', '4.32.1', versionsuffix),
+]
+
+default_component_specs = {
+    'source_urls': [PYPI_SOURCE],
+    'sources': [SOURCE_TAR_GZ],
+    'start_dir': '%(name)s-%(version)s',
+}
+
+components = [
+    ('easydict', '1.9', {
+        'easyblock': 'PythonPackage',
+        'checksums': ['3f3f0dab07c299f0f4df032db1f388d985bb57fa4c5be30acd25c5f9a516883b'],
+        'use_pip': True,
+        'sanity_pip_check': True,
+    }),
+    (name, version, {
+        'easyblock': 'Tarball',
+        'source_urls': ['https://github.com/tohinz/pytorch-mac-network/archive'],
+        'sources': [{'download_filename': '15a65d1.tar.gz', 'filename': SOURCE_TAR_GZ}],
+        'checksums': ['1416b8159bc48ecc54ce4774358af9589cf4ae7a8f9bb993cec434cb1d03d5de'],
+        'start_dir': '%s-%s' % (name, local_commit),
+        'install_type': 'subdir',
+    }),
+]
+
+modextrapaths = {
+    'PYTHONPATH': ['lib/python%(pyshortver)s/site-packages'],
+}
+
+moduleclass = 'math'

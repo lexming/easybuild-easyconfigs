@@ -1,0 +1,88 @@
+easyblock = 'Bundle'
+
+name = 'pytorch-mac-network'
+version = '20200602'
+local_commit = '15a65d1483ebd16a194b47352b566dbb27a8e0c9'
+versionsuffix = '-Python-%(pyver)s'
+
+homepage = 'https://github.com/tohinz/pytorch-mac-network'
+description = """
+This is a Pytorch implementation of the 2018 ICLR Paper Compositional Attention
+Networks for Machine Reasoning (MAC Network), based mostly on the original
+implementation by the authors and partly (mainly question preprocessing) on the
+implementation by rosinality."""
+
+toolchain = {'name': 'fosscuda', 'version': '2018b'}
+
+dependencies = [
+    ('Python', '3.6.6'),
+    ('HDF5', '1.10.2'),
+    ('libyaml', '0.2.1'),
+    ('libjpeg-turbo', '2.0.0'),
+    ('libpng', '1.6.34'),
+    ('zlib', '1.2.11'),
+    ('LibTIFF', '4.0.9'),
+    ('freetype', '2.9.1'),
+    ('NLTK', '3.4.1', versionsuffix),
+    ('PyTorch', '1.0.1', versionsuffix),
+    ('tensorboardX', '1.6', versionsuffix),
+    ('tqdm', '4.31.1', versionsuffix),
+]
+
+default_component_specs = {
+    'source_urls': [PYPI_SOURCE],
+    'sources': [SOURCE_TAR_GZ],
+    'start_dir': '%(name)s-%(version)s',
+}
+
+components = [
+    ('easydict', '1.9', {
+        'easyblock': 'PythonPackage',
+        'checksums': ['3f3f0dab07c299f0f4df032db1f388d985bb57fa4c5be30acd25c5f9a516883b'],
+        'use_pip': True,
+        'sanity_pip_check': True,
+    }),
+    ('numpy', '1.16.3', {
+        'easyblock': 'PythonPackage',
+        'sources': ['%(name)s-%(version)s.zip'],
+        'checksums': ['78a6f89da87eeb48014ec652a65c4ffde370c036d780a995edaeb121d3625621'],
+        'runtest': False,
+        'use_pip': True,
+        'sanity_pip_check': True,
+    }),
+    ('h5py', '2.9.0', {
+        'easyblock': 'PythonPackage',
+        'checksums': ['9d41ca62daf36d6b6515ab8765e4c8c4388ee18e2a665701fef2b41563821002'],
+        'preinstallopts': 'HDF5_MPI=ON HDF5_DIR="$EBROOTHDF5" ',
+        'use_pip': True,
+        'sanity_pip_check': True,
+    }),
+    ('PyYAML', '5.1', {
+        'easyblock': 'PythonPackage',
+        'options': {'modulename': 'yaml'},
+        'checksums': ['436bc774ecf7c103814098159fbb84c2715d25980175292c648f2da143909f95'],
+        'use_pip': True,
+        'sanity_pip_check': True,
+    }),
+    ('Pillow', '6.0.0', {
+        'easyblock': 'PythonPackage',
+        'options': {'modulename': 'PIL'},
+        'checksums': ['809c0a2ce9032cbcd7b5313f71af4bdc5c8c771cb86eb7559afd954cab82ebb5'],
+        'use_pip': True,
+        'sanity_pip_check': True,
+    }),
+    (name, version, {
+        'easyblock': 'Tarball',
+        'source_urls': ['https://github.com/tohinz/pytorch-mac-network/archive'],
+        'sources': [{'download_filename': '15a65d1.tar.gz', 'filename': SOURCE_TAR_GZ}],
+        'checksums': ['1416b8159bc48ecc54ce4774358af9589cf4ae7a8f9bb993cec434cb1d03d5de'],
+        'start_dir': '%s-%s' % (name, local_commit),
+        'install_type': 'subdir',
+    }),
+]
+
+modextrapaths = {
+    'PYTHONPATH': ['lib/python%(pyshortver)s/site-packages'],
+}
+
+moduleclass = 'math'
