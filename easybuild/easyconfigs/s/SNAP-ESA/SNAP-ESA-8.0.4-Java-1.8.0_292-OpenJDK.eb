@@ -1,6 +1,6 @@
 easyblock = 'Bundle'
 
-name = 'ESA-SNAP'
+name = 'SNAP-ESA'
 version = '8.0.4'
 versionsuffix = '-Java-%(javaver)s-OpenJDK'
 
