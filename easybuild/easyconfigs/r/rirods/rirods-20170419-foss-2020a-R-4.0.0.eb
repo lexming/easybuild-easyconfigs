@@ -1,0 +1,71 @@
+easyblock = 'Bundle'
+
+name = 'rirods'
+version = '20170419'
+local_commit = 'cbb7ab53f39457820d5386e52aad5574bb7e7127'
+versionsuffix = '-R-%(rver)s'
+
+homepage = 'https://github.com/irods/irods_client_library_r_cpp'
+description = """
+rirods is an integration solution whose aim is to allow users within R to work
+efficiently and comfortably with iRODS data objects, following the R paradigms
+they are familiar with. Standard R objects are accepted and returned.
+Furthermore, the design minimizes dependency on tools beyond iRODS itself in
+order to both limit complexity of deployment and to benefit from the
+performance optimizations present in the core iRODS."""
+
+toolchain = {'name': 'foss', 'version': '2020a'}
+
+builddependencies = [
+    ('CMake', '3.16.4'),
+]
+
+dependencies = [
+    ('R', '4.0.0'),
+]
+
+default_easyblock = 'CMakeMake'
+default_component_specs = {
+    'sources': [{'filename': SOURCE_TAR_GZ, 'download_filename': 'v%(version)s.tar.gz'}],
+    'start_dir': '%(name)s-%(version)s',
+}
+
+components = [
+    ('jansson', '2.11', {
+        'source_urls': ['https://github.com/irods/jansson/archive'],
+        'checksums': ['6ff0eab3a8baf64d21cae25f88a0311fb282006eb992080722a9099469c32881'],
+    }),
+]
+
+exts_defaultclass = 'RPackage'
+exts_list = [
+    (name, version, {
+        'source_urls': ['https://github.com/irods/irods_client_library_r_cpp/archive'],
+        'sources': [{'filename': SOURCE_TAR_GZ, 'download_filename': '%s.tar.gz' % local_commit}],
+        'patches': [
+            'rirods-20170419_fix-Rinternals-overwrites.patch',
+            'rirods-20170419_fix-makevars.patch',
+        ],
+        'checksums': [
+            # rirods-20170419.tar.gz
+            '5a7b59c202ee7358d725a0ec914a251f49b277907b547a3da7f63a532cfd2882',
+            # rirods-20170419_fix-Rinternals-overwrites.patch
+            'f650a9df210c2fe289ca3b18fdbe3e6698373cfc8547084471c84a6aba504d4b',
+            # rirods-20170419_fix-makevars.patch
+            'ca5bef2b764be6276654e5d573608fe3e9d4ca813596ea4f344373ca97058c0b',
+        ],
+        'preinstallopts': 'CPATH=/opt/irods-externals/json3.7.3-0/include/:'
+                          '/opt/irods-externals/boost1.67.0-0/include:'
+                          '%(installdir)s/include:${CPATH} '
+                          'LD_LIBRARY_PATH=/opt/irods-externals/boost1.67.0-0/lib:${LD_LIBRARY_PATH}',
+    }),
+]
+
+sanity_check_paths = {
+    'files': ['%(name)s/R/%(name)s'],
+    'dirs': ['%(name)s'],
+}
+
+modextrapaths = {'R_LIBS': ''}
+
+moduleclass = 'vis'

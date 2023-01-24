@@ -1,0 +1,21 @@
+--- src/Makevars.orig	2017-04-19 15:42:32.000000000 +0200
++++ src/Makevars	2021-03-03 23:30:58.582625000 +0100
+@@ -1,3 +1,4 @@
++CXX_STD = CXX17
+ PKG_CPPFLAGS= -I/usr/include/irods \
+               -I/usr/include/irods/boost \
+               -I/usr/include/irods/iRODS/lib/api/include \
+@@ -14,11 +15,6 @@
+            -L/usr/lib/irods \
+            -L/usr/lib/irods/externals \
+            -L/usr/lib/x86_64-linux-gnu \
+-           /usr/lib/libRodsAPIs.a \
+-           -lirods_client -lirods_client_core -lirods_client_api \
+-           -lirods_client_api_table -lirods_client_plugins \
+-           -ljansson \
+-           -lboost_thread -lboost_filesystem -lboost_chrono -lboost_system -lboost_regex -lboost_date_time \
+-           -lboost_program_options\
+-           -lboost_iostreams \
++           -L/opt/irods-externals/boost1.67.0-0/lib \
++           -lirods_client \
+            -lz -lssl -lcrypto -ldl -lpthread -lm -lrt -lstdc++ -rdynamic
