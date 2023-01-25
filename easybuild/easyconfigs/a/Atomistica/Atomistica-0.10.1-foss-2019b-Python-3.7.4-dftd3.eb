@@ -2,7 +2,7 @@ easyblock = 'PythonPackage'
 
 name = 'Atomistica'
 version = '0.10.1'
-versionsuffix = '-Python-%(pyver)s'
+versionsuffix = '-Python-%(pyver)s-dftd3'
 
 homepage = 'http://www.atomistica.org/'
 description = """Atomistica is a library of interatomic potentials, including empirical
