@@ -18,7 +18,7 @@ dependencies = [
     ('configurable-http-proxy', '4.4.0'),
     ('JupyterLab', '3.2.8'),
     ('Mako', '1.1.4'),
-    ('OpenSSL', '1.1', '', True),
+    ('OpenSSL', '1.1', '', SYSTEM),
 ]
 
 use_pip = True
