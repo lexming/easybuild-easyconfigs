@@ -64,6 +64,6 @@ Available deMon2k basis sets files in $EBROOTDEMON2K/basis_sets/: %s
 Basis sets files have to be placed in the working directory of your job (eg. `cp $EBROOTDEMON2K/basis_sets/* ./`)
 """ % ', '.join(local_basissets)
 
-group = 'bdemon2k'
+# group = 'bdemon2k'
 
 moduleclass = 'chem'

@@ -38,6 +38,6 @@ if ( isloaded("Megalodon/2.4.2-foss-2021a") or isloaded("Megalodon/2.4.2-foss-20
 end
 """
 
-group = 'bguppy'
+# group = 'bguppy'
 
 moduleclass = 'bio'

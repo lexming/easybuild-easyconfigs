@@ -13,7 +13,7 @@ sources = ['ams%(version)s.pc64_linux.intelmpi.bin.tgz']
 
 dependencies = [('libGLU', '9.0.1')]
 
-group = 'badf'
+# group = 'badf'
 
 keepsymlinks = True
 

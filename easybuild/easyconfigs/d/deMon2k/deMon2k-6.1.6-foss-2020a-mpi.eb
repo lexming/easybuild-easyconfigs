@@ -68,6 +68,6 @@ Basis sets files have to be placed in the working directory of your job (eg. `cp
 Note: the file for D3CFS is an empty placeholder, if you need D3 use your copy of D3CFS
 """ % ', '.join(local_basissets)
 
-group = 'bdemon2k'
+# group = 'bdemon2k'
 
 moduleclass = 'chem'

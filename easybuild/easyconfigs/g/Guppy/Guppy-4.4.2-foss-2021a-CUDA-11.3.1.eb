@@ -25,6 +25,6 @@ sanity_check_paths = {
     'dirs': [],
 }
 
-group = 'bguppy'
+# group = 'bguppy'
 
 moduleclass = 'bio'

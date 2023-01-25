@@ -38,6 +38,6 @@ sanity_check_paths = {
     'dirs': ['api', 'lib', 'mpich2', 'templates'],
 }
 
-group = 'bphot'
+# group = 'bphot'
 
 moduleclass = 'cae'

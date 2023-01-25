@@ -13,7 +13,7 @@ and NMR spectra."""
 
 toolchain = SYSTEM
 
-group = 'bqchem'
+# group = 'bqchem'
 
 sanity_check_paths = {
     'files': ['bin/qchem'],
