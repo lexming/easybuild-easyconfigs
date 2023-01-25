@@ -12,7 +12,7 @@ configuration options from command line arguments, json configuration files
 
 toolchain = {'name': 'GCCcore', 'version': '9.3.0'}
 
-buildependencies = [
+builddependencies = [
     ('binutils', '2.34'),
 ]
 
