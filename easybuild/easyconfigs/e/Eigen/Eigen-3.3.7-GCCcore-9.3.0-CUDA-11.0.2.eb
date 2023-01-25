@@ -2,6 +2,7 @@
 
 name = 'Eigen'
 version = '3.3.7'
+versionsuffix = '-CUDA-11.0.2'
 
 homepage = 'https://eigen.tuxfamily.org'
 description = """Eigen is a C++ template library for linear algebra: matrices, vectors, numerical solvers,
