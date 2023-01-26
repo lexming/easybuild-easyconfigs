@@ -19,7 +19,7 @@ checksums = ['685adf14bd8e9c015b78097c1dc22f2f01343756f196acdc76a678e1ae352e11']
 builddependencies = [
     ('binutils', '2.34'),  # to make CMake compiler health check pass on old systems
     ('CMake', '3.16.4'),
-    ('CUDAcore', '11.0.2', '', True),
+    ('CUDAcore', '11.0.2', '', SYSTEM),
 ]
 
 configopts = '-DEIGEN_TEST_CUDA=ON'
