@@ -36,8 +36,8 @@ patches = [
 
 # increase these numbers if your system is bigger in terms of cores-per-node or number of nodes
 # it's OK if these values are larger than what your system provides
-maxcpus = '1000'
-maxnodes = '100000'
+# maxcpus = '1000'
+# maxnodes = '100000'
 
 # Build GAMESS for using TCP/IP sockets instead of MPI:
 ddi_comm = 'sockets'
