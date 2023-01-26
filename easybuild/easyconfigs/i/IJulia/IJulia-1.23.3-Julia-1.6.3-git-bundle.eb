@@ -25,7 +25,7 @@ dependencies = [
     ('Julia', _julia_ver, '-linux-%s' % ARCH, True),
 ]
 
-bundle_deps = True
+download_pkg_deps = True
 
 # install Jupyter kernel system-wide
 _kernel_dir = '%(installdir)s/jupyter'
