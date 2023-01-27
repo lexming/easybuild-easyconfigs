@@ -11,6 +11,8 @@ description = """The MATLAB Engine API for Python provides a package for Python
 
 toolchain = {'name': 'GCCcore', 'version': '10.3.0'}
 
+builddependencies = [('binutils', '2.37.1')]
+
 dependencies = [
     ('MATLAB', _matlab_version, '', SYSTEM),
     ('Python', '3.9.5'),
@@ -24,7 +26,7 @@ _fake_py_support = "sed -i '98,99d;s/<3.9/<3.10/' setup.py && "
 _fake_py_support += "sed -i 's/^_version =.*/_version=\"%s\"/' src/matlab/engine/__init__.py && " % _fake_pyver
 
 exts_list = [
-    ('matlabengine', '9.10.1', {
+    ('matlabengine', _engine_version, {
         'modulename': 'matlab.engine',
         'checksums': ['c1610690dbe58ac00e74e8cbb20406208235ede47da7960238e0c2fd3bd496c0'],
         'preinstallopts': _fake_py_support,
@@ -36,7 +38,7 @@ sanity_pip_check = True
 # Test that connection with MATLAB can be established successfully
 sanity_check_commands = ["python -c 'import matlab.engine; eng = matlab.engine.start_matlab(); eng.quit()'"]
 
-# CentOS7 needs to preload shim library for glibc
+# Systems with old glibc (e.g. CentOS7) need to preload shim library
 modluafooter = """
 setenv("LD_PRELOAD", pathJoin(os.getenv("EBROOTMATLAB"), "bin", "glnxa64", "glibc-2.17_shim.so"))
 """
