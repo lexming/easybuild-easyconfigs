@@ -1,0 +1,52 @@
+easyblock = 'PythonBundle'
+
+name = 'MATLAB-Engine'
+_matlab_version = '2022a'
+_engine_version = '9.12.17'
+version = "%s-%s" % (_matlab_version, _engine_version)
+
+homepage = 'https://www.mathworks.com/help/matlab/matlab-engine-for-python.html'
+description = """The MATLAB Engine API for Python provides a package for Python
+ to call MATLAB as a computational engine."""
+
+toolchain = {'name': 'GCCcore', 'version': '11.3.0'}
+
+builddependencies = [('binutils', '2.38')]
+
+dependencies = [
+    ('MATLAB', _matlab_version, '', SYSTEM),
+    ('Python', '3.10.4'),
+]
+
+use_pip = True
+
+# fake supported Python version
+_fake_pyver = '3_9'  # format: 'major_minor'
+_fake_py_support = "sed -i '98,99d;s/<3.10/<3.11/' setup.py && "
+_fake_py_support += "sed -i 's/^_version =.*/_version=\"%s\"/' src/matlab/engine/__init__.py && " % _fake_pyver
+
+exts_list = [
+    ('matlabengine', _engine_version, {
+        'modulename': 'matlab.engine',
+        'checksums': ['bb5984ca3f856bf58341e0bf5ed46876335c7f9dec555f761024f2434f3dfeed'],
+        'preinstallopts': _fake_py_support,
+    }),
+]
+
+postinstallcmds = [
+    "ln -s $EBROOTPYTHON/lib/libpython3.10.so.1.0 %(installdir)s/lib/libpython3.9.so.1.0",
+    # also, in $EBROOTMATLAB/extern/bin/glnxa64/ symlink matlabmultidimarrayforpython.cpython-39-x86_64-linux-gnu.so
+    # as matlabmultidimarrayforpython.cpython-310-x86_64-linux-gnu.so
+]
+
+sanity_pip_check = True
+
+# Test that connection with MATLAB can be established successfully
+sanity_check_commands = ["python -c 'import matlab.engine; eng = matlab.engine.start_matlab(); eng.quit()'"]
+
+# Systems with old glibc (e.g. CentOS7) need to preload shim library
+modluafooter = """
+setenv("LD_PRELOAD", pathJoin(os.getenv("EBROOTMATLAB"), "bin", "glnxa64", "glibc-2.17_shim.so"))
+"""
+
+moduleclass = 'math'
