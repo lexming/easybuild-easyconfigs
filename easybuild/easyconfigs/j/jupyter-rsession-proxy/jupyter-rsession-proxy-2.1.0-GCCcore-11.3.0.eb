@@ -6,17 +6,16 @@ version = '2.1.0'
 homepage = 'https://github.com/jupyterhub/jupyter-rsession-proxy'
 description = "Jupyter extensions for running an RStudio rsession proxy"
 
-toolchain = {'name': 'foss', 'version': '2021a'}
+toolchain = {'name': 'GCCcore', 'version': '11.3.0'}
 
 source_urls = [PYPI_LOWER_SOURCE]
 sources = [SOURCELOWER_TAR_GZ]
 checksums = ['ddbae33bb8a3e8915b76206b9255ba8517c56c1b021241f59d5448fcce2cd64e']
 
 dependencies = [
-    ('Python', '3.9.5'),
-    ('JupyterLab', '3.2.8'),  # Contains most of the jupyter dependencies we need.
-    ('jupyter-server-proxy', '3.2.1'),
-    ('RStudio-Server', '1.4.1717', '-Java-11-R-4.1.0'),
+    ('Python', '3.10.4'),
+    ('JupyterLab', '3.5.0'),
+    ('jupyter-server-proxy', '3.2.2'),
 ]
 
 download_dep_fail = True
