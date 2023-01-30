@@ -14,7 +14,7 @@ toolchain = {'name': 'GCCcore', 'version': '11.3.0'}
 builddependencies = [('binutils', '2.38')]
 
 dependencies = [
-    ('MATLAB', _matlab_version, '', SYSTEM),
+    ('MATLAB', _matlab_version, '-r5', SYSTEM),
     ('Python', '3.10.4'),
 ]
 

@@ -12,7 +12,7 @@ description = "Matlab kernel for Jupyter notebooks based on MetaKernel."
 toolchain = SYSTEM
 
 dependencies = [
-    ('MATLAB', '2022a'),
+    ('MATLAB', '2022a-r5'),
     ('MATLAB-Engine', '2022a-9.12.17', versionsuffix),
     ('Python', '3.10.4', versionsuffix),
     ('IPython', '8.5.0', versionsuffix),
