@@ -20,7 +20,7 @@ builddependencies = [
 
 dependencies = [
     ('Python', '3.9.5'),
-    ('JupyterHub', '2.3.1'),
+    ('JupyterLab', '3.2.8'),
     ('OpenSSL', '1.1', '', SYSTEM),
     ('aiohttp', '3.8.1'),
 ]
@@ -29,23 +29,6 @@ sanity_pip_check = True
 use_pip = True
 
 exts_list = [
-    ('sniffio', '1.2.0', {
-        'checksums': ['c4666eecec1d3f50960c6bdf61ab7bc350648da6c126e3cf6898d8cd4ddcd3de'],
-    }),
-    ('anyio', version, {
-        'checksums': ['07968db9fa7c1ca5435a133dc62f988d84ef78e1d9b22814a59d1c62618afbc5'],
-    }),
-    ('requests-unixsocket', '0.2.0', {
-        'checksums': ['9e5c1a20afc3cf786197ae59c79bcdb0e7565f218f27df5f891307ee8817c1ea'],
-    }),
-    ('websocket-client', '1.1.0', {
-        'modulename': 'websocket',
-        'checksums': ['b68e4959d704768fa20e35c9d508c8dc2bbc041fd8d267c0d7345cffe2824568'],
-    }),
-    ('jupyter-server', '1.9.0', {
-        'source_tmpl': 'jupyter_server-%(version)s.tar.gz',
-        'checksums': ['7d19006380f6217458a9db309b54e3dab87ced6c06329c61823907bef2a6f51b'],
-    }),
     ('simpervisor', '0.4', {
         'checksums': ['cec79e13cdbd6edb04a5c98c1ff8d4bd9713e706c069226909a1ef0e89d393c5'],
     }),
