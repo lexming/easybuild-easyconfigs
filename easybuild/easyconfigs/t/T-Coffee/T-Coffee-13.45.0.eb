@@ -25,4 +25,13 @@ modextrapaths = {
     'PERL5LIB': 'perl/lib/perl5',
 }
 
+modluafooter = """
+scratch_dir = os.getenv("VSC_SCRATCH") or pathJoin("/tmp", os.getenv("USER"))
+setenv("DIR_4_TCOFFEE", pathJoin(scratch_dir, ".t_coffee"))
+setenv("TMP_4_TCOFFEE", pathJoin(scratch_dir, ".t_coffee", "tmp"))
+setenv("CACHE_4_TCOFFEE", pathJoin(scratch_dir, ".t_coffee", "cache"))
+setenv("PLUGINS_4_TCOFFEE", pathJoin(scratch_dir, ".t_coffee", "plugins"))
+setenv("PDB_DIR", "/databases/bio/PDB")
+"""
+
 moduleclass = 'bio'
