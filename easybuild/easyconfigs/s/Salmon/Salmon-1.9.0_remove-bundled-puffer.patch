@@ -1,0 +1,58 @@
+--- salmon-1.9.0/CMakeLists.txt.orig	2023-02-17 01:23:01.531519000 +0100
++++ salmon-1.9.0/CMakeLists.txt	2023-02-17 01:23:24.391340790 +0100
+@@ -908,8 +908,8 @@
+ 
+ # Recurse into pufferfish source directory 
+ # and build the library 
+-set(BUILD_PUFF_FOR_SALMON TRUE)
+-add_subdirectory(external/pufferfish)
++# set(BUILD_PUFF_FOR_SALMON TRUE)
++# add_subdirectory(external/pufferfish)
+ 
+ # and then the main salmon source directory
+ add_subdirectory(src)
+--- salmon-1.9.0/src/CMakeLists.txt.orig	2023-02-20 11:06:22.307936000 +0100
++++ salmon-1.9.0/src/CMakeLists.txt	2023-02-20 11:06:50.352102826 +0100
+@@ -6,14 +6,11 @@
+ ${GAT_SOURCE_DIR}/include
+ ${GAT_SOURCE_DIR}/include/eigen3
+ ${GAT_SOURCE_DIR}/external
+-${GAT_SOURCE_DIR}/external/cereal/include
+ ${GAT_SOURCE_DIR}/external/install/include
+ ${ZLIB_INCLUDE_DIR}
+ ${TBB_INCLUDE_DIRS}
+ ${Boost_INCLUDE_DIRS}
+ ${GAT_SOURCE_DIR}/external/install/include
+-${GAT_SOURCE_DIR}/external/install/include/pufferfish
+-${GAT_SOURCE_DIR}/external/install/include/pufferfish/digestpp
+ ${LIB_GFF_INCLUDE_DIR}
+ #${GAT_SOURCE_DIR}/external/install/include/rapmap
+ #${GAT_SOURCE_DIR}/external/install/include/rapmap/digestpp
+@@ -80,7 +77,6 @@
+ SalmonStringUtils.cpp
+ SimplePosBias.cpp
+ SGSmooth.cpp
+-${GAT_SOURCE_DIR}/external/install/src/pufferfish/metro/metrohash64.cpp
+ )
+ 
+ # check if we know how to do IPO
+@@ -103,7 +99,6 @@
+ 
+ set (UNIT_TESTS_INDIVIDUAL_SRCS
+   ${GAT_SOURCE_DIR}/src/FragmentLengthDistribution.cpp
+-  ${GAT_SOURCE_DIR}/external/install/src/pufferfish/rank9b.cpp
+   ${GAT_SOURCE_DIR}/tests/GCSampleTests.cpp
+   ${GAT_SOURCE_DIR}/tests/LibraryTypeTests.cpp
+ )
+@@ -217,11 +212,6 @@
+ #  message ("Setting libdivsufsort64 = ${SUFFARRAY_LIB64}") 
+ #endif()
+ 
+-add_dependencies(salmon puffer)
+-add_dependencies(salmon twopaco)
+-add_dependencies(salmon graphdump)
+-add_dependencies(salmon ntcard)
+-add_dependencies(salmon ksw2pp)
+ add_dependencies(salmon salmon_core)
+ add_dependencies(salmon alevin_core)
+ if(TBB_RECONFIGURE OR TBB_TARGET_EXISTED)

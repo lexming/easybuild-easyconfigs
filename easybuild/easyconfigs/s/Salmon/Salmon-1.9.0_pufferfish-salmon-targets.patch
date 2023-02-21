@@ -1,0 +1,15 @@
+--- pufferfish-salmon-v1.9.0/src/CMakeLists.txt.orig	2023-02-17 00:38:33.126587000 +0100
++++ pufferfish-salmon-v1.9.0/src/CMakeLists.txt	2023-02-17 00:45:35.015042000 +0100
+@@ -4,9 +4,11 @@
+ 
+ link_directories(
+ 		${GAT_SOURCE_DIR}/external/install/lib
+-    ${GAT_SOURCE_DIR}/external/install/lib64
++    ${GAT_SOURCE_DIR}/external/install/lib
+ )
+ 
++set(BUILD_PUFF_FOR_SALMON TRUE)
++
+ set (KSW2PP_BASIC_LIB_SRCS
+ ksw2pp/kalloc.c
+ ksw2pp/ksw2_extd.c

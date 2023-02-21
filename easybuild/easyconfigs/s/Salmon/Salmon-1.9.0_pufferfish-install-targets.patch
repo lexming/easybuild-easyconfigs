@@ -1,0 +1,12 @@
+--- src/CMakeLists.txt.orig	2023-02-20 12:18:40.298163000 +0100
++++ src/CMakeLists.txt	2023-02-20 12:19:14.215153425 +0100
+@@ -225,3 +225,9 @@
+ 
+ 
+ endif()
++
++install(TARGETS puffer DESTINATION "lib")
++install(DIRECTORY "${PROJECT_SOURCE_DIR}/include/"
++        DESTINATION "include/pufferfish"
++        FILES_MATCHING PATTERN "include/*.hpp")
++install(TARGETS ksw2pp DESTINATION "lib")

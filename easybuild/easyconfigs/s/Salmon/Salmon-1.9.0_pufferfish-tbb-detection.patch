@@ -1,0 +1,19 @@
+--- pufferfish-salmon-v1.9.0/CMakeLists.txt.orig	2023-02-16 23:27:57.938248000 +0100
++++ pufferfish-salmon-v1.9.0/CMakeLists.txt	2023-02-16 23:28:42.775718624 +0100
+@@ -202,7 +202,6 @@
+ endif()
+ 
+ 
+-if (NOT BUILD_PUFF_FOR_SALMON)
+ ## Try and find TBB first
+ find_package(TBB 2021.4 
+   HINTS ${TBB_ROOT_SEARCH}
+@@ -449,8 +448,6 @@
+ add_dependencies(libsetcover libtbb)
+ endif()
+ 
+-endif() # end of NOT BUILD_PUFF_FOR_SALMON
+-
+ set(LIB_FLAGS "-L ${CMAKE_CURRENT_SOURCE_DIR}/external/lib")
+ set(PUFF_RELEASE_FLAGS "${DEFINE_FLAGS};${KSW_FLAGS};${PF_CPP_FLAGS};${OPT_FLAGS}")
+ set(PUFF_DEBUG_FLAGS "${DEFINE_FLAGS};${KSW_FLAGS};${PF_CPP_FLAGS};${DEBUG_FLAGS}")

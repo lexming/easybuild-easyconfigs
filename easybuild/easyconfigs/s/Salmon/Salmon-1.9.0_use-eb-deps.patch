@@ -1,0 +1,25 @@
+--- salmon-1.9.0/scripts/fetchPufferfish.sh.orig	2023-02-20 15:51:27.292959000 +0100
++++ salmon-1.9.0/scripts/fetchPufferfish.sh	2023-02-20 15:50:54.811400000 +0100
+@@ -57,6 +57,9 @@
+ rm -fr ${EXTERNAL_DIR}/pufferfish
+ unzip ${EXTERNAL_DIR}/pufferfish.zip -d ${EXTERNAL_DIR}
+ mv ${EXTERNAL_DIR}/pufferfish-${SVER} ${EXTERNAL_DIR}/pufferfish
++rm -rf ${EXTERNAL_DIR}/pufferfish/include/cereal
++rm -rf ${EXTERNAL_DIR}/pufferfish/include/spdlog
++rm -rf ${EXTERNAL_DIR}/../include/spdlog
+ 
+ mkdir -p ${INSTALL_DIR}/include/pufferfish
+ 
+@@ -105,6 +108,12 @@
+ cp -r ${EXTERNAL_DIR}/pufferfish/src/metro ${INSTALL_DIR}/src/pufferfish
+ cp ${EXTERNAL_DIR}/pufferfish/src/rank9b.cpp ${INSTALL_DIR}/src/pufferfish
+ 
++# add missing includes
++sed -i '/#include <clocale>/a #include <map>' ${EXTERNAL_DIR}/pufferfish/src/Pufferfish.cpp
++sed -i '/#include <queue>/a #include <map>' ${EXTERNAL_DIR}/pufferfish/src/PufferfishAligner.cpp
++
++# fix debug flags in pufferfish
++sed -i 's/STRING_VIEW;-pg;-g;-gstabs/STRING_VIEW;-g;-gstabs/' ${EXTERNAL_DIR}/pufferfish/CMakeLists.txt
+ 
+ #mkdir -p ${INSTALL_DIR}/include/pufferfish
+ #mkdir -p ${INSTALL_DIR}/src/pufferfish

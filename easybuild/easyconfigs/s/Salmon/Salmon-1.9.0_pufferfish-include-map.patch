@@ -1,0 +1,20 @@
+--- pufferfish-salmon-v1.9.0/src/PufferfishAligner.cpp.orig	2023-02-17 00:05:36.025895000 +0100
++++ pufferfish-salmon-v1.9.0/src/PufferfishAligner.cpp	2023-02-17 00:05:43.320121358 +0100
+@@ -20,6 +20,7 @@
+ #include <memory>
+ #include <cstring>
+ #include <queue>
++#include <map>
+ 
+ //we already have timers
+ 
+--- pufferfish-salmon-v1.9.0/src/Pufferfish.cpp.orig	2023-02-17 00:15:21.394346000 +0100
++++ pufferfish-salmon-v1.9.0/src/Pufferfish.cpp	2023-02-17 00:15:30.826165372 +0100
+@@ -26,6 +26,7 @@
+ #include <string>
+ #include <cstdlib>
+ #include <clocale>
++#include <map>
+ #include <ghc/filesystem.hpp>
+ #include <cereal/archives/json.hpp>
+ 
