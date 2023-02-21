@@ -1,0 +1,25 @@
+easyblock = 'CMakeMake'
+
+name = 'spdlog'
+version = '0.17.0'
+
+homepage = 'https://github.com/gabime/spdlog'
+description = 'Very fast, header-only/compiled, C++ logging library.'
+
+toolchain = SYSTEM
+
+github_account = 'gabime'
+source_urls = [GITHUB_SOURCE]
+sources = ['v%(version)s.tar.gz']
+checksums = ['94f74fd1b3344733d1db3de2ec22e6cbeb769f93a8baa0d4a22b1f62dc7369f8']
+
+builddependencies = [
+    ('CMake', '3.18.4'),
+]
+
+sanity_check_paths = {
+    'files': ['include/spdlog/spdlog.h'],
+    'dirs': ['lib64/cmake', 'lib64/pkgconfig'],
+}
+
+moduleclass = 'lib'
