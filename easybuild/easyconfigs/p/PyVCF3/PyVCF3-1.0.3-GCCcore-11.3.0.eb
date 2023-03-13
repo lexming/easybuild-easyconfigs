@@ -18,12 +18,18 @@ and has been published on pyPI as PyVCF3."""
 toolchain = {'name': 'GCCcore', 'version': '11.3.0'}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> a501a28... add missing build dependency on binutils to PyVCF v1.0.3
 builddependencies = [
     ('binutils', '2.38'),
 ]
 
+<<<<<<< HEAD
 =======
 >>>>>>> 1f40fb7... adding easyconfigs: PyVCF3-1.0.3-GCCcore-11.3.0.eb
+=======
+>>>>>>> a501a28... add missing build dependency on binutils to PyVCF v1.0.3
 dependencies = [
     ('Python', '3.10.4'),
 ]
