@@ -10,10 +10,13 @@ graph data structure and layout algorithms."""
 
 toolchain = {'name': 'GCCcore', 'version': '11.3.0'}
 
+<<<<<<< HEAD
 builddependencies = [
     ('binutils', '2.38'),
 ]
 
+=======
+>>>>>>> 85b01b2... adding easyconfigs: pygraphviz-1.10-GCCcore-11.3.0.eb
 dependencies = [
     ('Python', '3.10.4'),
     ('Graphviz', '5.0.0'),
@@ -28,6 +31,9 @@ exts_list = [
     }),
 ]
 
+<<<<<<< HEAD
 sanity_pip_check = True
 
+=======
+>>>>>>> 85b01b2... adding easyconfigs: pygraphviz-1.10-GCCcore-11.3.0.eb
 moduleclass = 'vis'
