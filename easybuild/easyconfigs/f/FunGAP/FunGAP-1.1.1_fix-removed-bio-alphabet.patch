@@ -1,0 +1,144 @@
+Adapt code to newer versions of Biopython without Bio.Alphabet
+See https://biopython.org/wiki/Alphabet
+author: Alex Domingo (Vrije Universiteit Brussel)
+--- make_transcripts.py.orig	2023-03-25 11:00:17.678166000 +0100
++++ make_transcripts.py	2023-03-25 11:01:10.572192000 +0100
+@@ -10,7 +10,6 @@
+ from argparse import ArgumentParser
+ from collections import defaultdict
+ 
+-from Bio.Alphabet import generic_dna
+ from Bio.Seq import Seq
+ 
+ 
+@@ -48,7 +47,7 @@
+ 
+ def get_reverse_complement(nuc_seq):
+     '''Get reverse complementary sequence'''
+-    my_dna = Seq(nuc_seq, generic_dna)
++    my_dna = Seq(nuc_seq)
+     rev_comp_dna = str(my_dna.reverse_complement())
+     return rev_comp_dna
+ 
+--- create_markdown.py.orig	2023-03-28 02:08:40.975377000 +0200
++++ create_markdown.py	2023-03-28 02:09:15.609196931 +0200
+@@ -16,7 +16,6 @@
+ import matplotlib.pyplot as plt
+ import numpy as np
+ from Bio import SeqIO
+-from Bio.Alphabet import IUPAC, generic_dna
+ from Bio.Seq import Seq
+ from Bio.SeqUtils import GC
+ 
+@@ -66,7 +65,7 @@
+ 
+     # Run functions :) Slow is as good as Fast
+     create_dir(output_dir)
+-    d_fasta = SeqIO.to_dict(SeqIO.parse(input_fasta, 'fasta', generic_dna))
++    d_fasta = SeqIO.to_dict(SeqIO.parse(input_fasta, 'fasta'))
+     d_gff3 = parse_gff3(input_gff3)
+     protein_lengths, d_stat = get_stats(d_fasta, d_gff3)
+     d_stat = get_stats2(d_fasta, d_stat)
+@@ -87,7 +86,7 @@
+ 
+ def get_reverse_complement(nuc_seq):
+     '''Get reverse complement sequence'''
+-    my_dna = Seq(nuc_seq, generic_dna)
++    my_dna = Seq(nuc_seq)
+     rev_comp_dna = str(my_dna.reverse_complement())
+     return rev_comp_dna
+ 
+@@ -226,7 +225,7 @@
+ 
+     # Get GC content of CDS seq
+     full_cds_seq = ''.join(d_cds_seq.values())
+-    my_seq = Seq(full_cds_seq, IUPAC.unambiguous_dna)
++    my_seq = Seq(full_cds_seq)
+     cds_gc_percent = GC(my_seq)
+     # Percent coding
+     coding_percent = float(len(full_cds_seq)) / total_bases
+@@ -269,7 +269,7 @@
+     non_coding_percent = float(len(non_coding_seq)) / total_bases
+     non_coding_percent = non_coding_percent * 100
+     non_coding_percent = round(non_coding_percent, 2)
+-    my_seq = Seq(non_coding_seq, IUPAC.unambiguous_dna)
++    my_seq = Seq(non_coding_seq)
+     non_coding_gc = GC(my_seq)
+ 
+     d_stat['Percent non-coding region'] = (non_coding_percent)
+--- generate_genbank.py.orig	2023-03-28 02:07:18.037286000 +0200
++++ generate_genbank.py	2023-03-28 02:08:28.920917594 +0200
+@@ -17,7 +17,6 @@
+ from datetime import datetime
+ 
+ from Bio import SeqIO
+-from Bio.Alphabet import generic_dna, generic_protein
+ from Bio.Seq import Seq
+ from Bio.SeqFeature import CompoundLocation, FeatureLocation, SeqFeature
+ from Bio.SeqRecord import SeqRecord
+@@ -145,8 +144,8 @@
+     outfile = '{}.gb'.format(output_prefix)
+ 
+     # First, import input_fna in dictionary
+-    d_fna = SeqIO.to_dict(SeqIO.parse(input_fna, 'fasta', generic_dna))
+-    d_faa = SeqIO.to_dict(SeqIO.parse(input_faa, 'fasta', generic_protein))
++    d_fna = SeqIO.to_dict(SeqIO.parse(input_fna, 'fasta'))
++    d_faa = SeqIO.to_dict(SeqIO.parse(input_faa, 'fasta'))
+ 
+     d_fna_sorted = sorted(
+         d_fna.items(),
+@@ -169,7 +168,6 @@
+     for scaffold, seq in d_fna_sorted:
+         my_seq = Seq(str(seq.seq))
+         my_seq_record = SeqRecord(my_seq)
+-        my_seq_record.seq.alphabet = generic_dna
+ 
+         my_seq_record.description = '{} {}'.format(organism_name, scaffold)
+         date = datetime.today().strftime('%d-%^b-%Y')
+--- gff3_postprocess.py.orig	2023-03-28 02:06:37.046928000 +0200
++++ gff3_postprocess.py	2023-03-28 02:07:10.101994000 +0200
+@@ -14,7 +14,6 @@
+ 
+ from BCBio import GFF
+ from Bio import SeqIO
+-from Bio.Alphabet import generic_dna
+ from Bio.SeqFeature import FeatureLocation
+ 
+ 
+@@ -93,7 +92,7 @@
+         )
+         g_features[gene_i].sub_features = [m_feature]
+ 
+-    d_fna = SeqIO.to_dict(SeqIO.parse(genome_assembly, 'fasta', generic_dna))
++    d_fna = SeqIO.to_dict(SeqIO.parse(genome_assembly, 'fasta'))
+     d_scaffold = {}
+     scaffold_i = 0
+     genome_assembly_txt = import_file(genome_assembly)
+--- gff3_translation.py.orig	2023-03-28 02:01:15.542556000 +0200
++++ gff3_translation.py	2023-03-28 02:02:01.575729000 +0200
+@@ -12,7 +12,6 @@
+ from collections import defaultdict
+ 
+ from Bio import BiopythonWarning, SeqIO
+-from Bio.Alphabet import generic_dna
+ from Bio.Seq import Seq
+ 
+ warnings.simplefilter('ignore', BiopythonWarning)
+@@ -81,7 +80,7 @@
+         gene_id = reg_parent.search(gene_id).group(1)
+         d_gff3[gene_id].append((scaffold, start, end, strand, phase))
+     # Parse fasta and store in dictionary
+-    d_fasta = SeqIO.to_dict(SeqIO.parse(asm_file, 'fasta', generic_dna))
++    d_fasta = SeqIO.to_dict(SeqIO.parse(asm_file, 'fasta'))
+     # Extract sequence
+     output = open(output_file, 'w')
+     gene_ids = d_gff3.keys()
+@@ -127,7 +126,7 @@
+ 
+ def get_reverse_complement(nuc_seq):
+     '''Get reverse complement'''
+-    my_dna = Seq(nuc_seq, generic_dna)
++    my_dna = Seq(nuc_seq)
+     rev_comp_dna = str(my_dna.reverse_complement())
+     return rev_comp_dna
+ 

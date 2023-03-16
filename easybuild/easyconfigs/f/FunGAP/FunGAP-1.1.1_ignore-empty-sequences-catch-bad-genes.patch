@@ -1,0 +1,19 @@
+Ignore gene entries with empty sequences due to lack of subfeatures
+See https://github.com/CompSynBioLab-KoreaUniv/FunGAP/issues/58
+author: Alex Domingo (Vrije Universiteit Brussel)
+--- /apps/brussel/CO7/skylake/software/FunGAP/1.1.1-foss-2022a/catch_bad_genes.py	2020-09-12 19:48:08.000000000 +0200
++++ catch_bad_genes.py	2023-03-26 00:23:37.507577000 +0100
+@@ -115,6 +115,13 @@
+                             d_intron[prefix] += 1
+                         i += 1
+ 
++                    if not seq_cds:
++                        print("WARNING: Ignoring gene coordinate with empty "
++                              "sequence due to lack of features")
++                        print("See issue: https://github.com/CompSynBioLab-"
++                              "KoreaUniv/FunGAP/issues/58")
++                        print(mrna_feature)
++                        continue
+                     gene_seq = reduce(operator.add, seq_cds)
+                     # If strand is -, get reverse complementary sequence
+                     if mrna_feature.strand == -1:

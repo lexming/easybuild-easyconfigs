@@ -1,0 +1,48 @@
+Set paths to AUGUSTUS installation from its environment variables preferably
+Fix location of getAnnoFastaFromJoingenes.py script from AUGUSTUS
+author: Alex Domingo (Vrije Universirteit Brussel)
+--- run_braker.py.orig	2023-03-22 18:19:12.739585000 +0100
++++ run_braker.py	2023-03-22 18:22:27.426819000 +0100
+@@ -138,9 +138,15 @@
+         logger_time.debug('START: BRAKER')
+ 
+         if not os.path.exists(gff3_braker):
+-            augustus_config_path = os.path.join(
++            augustus_bin_path = os.environ['AUGUSTUS_BIN_PATH'] or os.path.dirname(
++                D_CONF['AUGUSTUS_PATH']
++            )
++            augustus_config_path = os.environ['AUGUSTUS_CONFIG_PATH'] or os.path.join(
+                 os.path.dirname(D_CONF['AUGUSTUS_PATH']), '../config'
+             )
++            augustus_scripts_path = os.environ['AUGUSTUS_SCRIPTS_PATH'] or os.path.join(
++                os.path.dirname(D_CONF['AUGUSTUS_PATH']), '../scripts'
++            )
+             config_species = os.path.join(
+                 augustus_config_path, 'species', prefix
+             )
+@@ -156,7 +162,6 @@
+             bamtools_path = os.path.dirname(D_CONF['BAMTOOLS_PATH'])
+             genemark_path = os.path.dirname(D_CONF['GENEMARK_PATH'])
+             samtools_path = os.path.dirname(D_CONF['SAMTOOLS_PATH'])
+-            augustus_scripts_path = os.path.dirname(D_CONF['AUGUSTUS_PATH'])
+             working_dir = os.path.join(output_dir, prefix)
+             if not os.path.exists(working_dir):
+                 os.mkdir(working_dir)
+@@ -169,7 +174,7 @@
+                     braker_bin, fungus_flag, num_cores, adjusted_assembly,
+                     bam_file, species, augustus_config_path, bamtools_path,
+                     genemark_path, samtools_path, working_dir,
+-                    translation_table, augustus_scripts_path, log_braker
++                    translation_table, augustus_bin_path, log_braker
+                 )
+             )
+             logger_txt.debug('[Run] %s', command1)
+@@ -183,7 +188,7 @@
+             os.system(command2)
+ 
+             get_anno_script = os.path.join(
+-                os.path.dirname(braker_bin), 'getAnnoFastaFromJoingenes.py'
++                augustus_scripts_path, 'getAnnoFastaFromJoingenes.py'
+             )
+             command3 = '{} -g {} -o {} -t {} -3 {}'.format(
+                 get_anno_script, adjusted_assembly,
