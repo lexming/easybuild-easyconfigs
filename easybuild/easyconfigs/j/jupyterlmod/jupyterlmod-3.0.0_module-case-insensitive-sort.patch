@@ -1,0 +1,28 @@
+Use case-insensitive order for list of available modules
+author: Alex Domingo (Vrije Universiteit Brussel)
+--- lmod/__init__.py.orig	2023-03-17 11:26:39.045235000 +0100
++++ lmod/__init__.py	2023-03-17 14:02:37.713765000 +0100
+@@ -86,7 +86,7 @@
+             string = await module("avail", *args)
+             if string is not None:
+                 modules = MODULE_REGEX.findall(string.strip())
+-                modules.sort(key=lambda v: v.split("/")[0])
++                modules.sort(key=lambda v: v.split("/")[0].lower())
+             else:
+                 modules = []
+             self.avail_cache = modules
+@@ -98,6 +98,7 @@
+             string = await module("list")
+             if string and not string.startswith(EMPTY_LIST_STR):
+                 modules = string.split()
++                modules.sort(key=lambda v: v.split("/")[0].lower())
+                 self.list_cache[True] = modules
+                 self.list_cache[False] = [
+                     name for name in modules
+@@ -217,4 +218,4 @@
+ purge = _lmod.purge
+ show = _lmod.show
+ use = _lmod.use
+-unuse = _lmod.unuse
+\ No newline at end of file
++unuse = _lmod.unuse

@@ -29,7 +29,12 @@ use_pip = True
 
 exts_list = [
     (name, version, {
-        'checksums': ['da769078650766b1fca6ef1e673d15ddd6ce7428001e05cc364cba246a77c3fe'],
+        'patches': ['jupyterlmod-%(version)s_module-case-insensitive-sort.patch'],
+        'checksums': [
+            {'jupyterlmod-3.0.0.tar.gz': 'da769078650766b1fca6ef1e673d15ddd6ce7428001e05cc364cba246a77c3fe'},
+            {'jupyterlmod-3.0.0_module-case-insensitive-sort.patch':
+             '26f743774a76db299bc2e4945e4b0a3e4f152a20293aba9153ab4a4aaedeab4c'},
+        ],
     }),
 ]
 
