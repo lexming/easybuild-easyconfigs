@@ -1,0 +1,46 @@
+# This file is an EasyBuild reciPY as per https://github.com/easybuilders/easybuild
+#
+# Copyright:: Copyright 2012-2017 University of Luxembourg / LCSB, Cyprus Institute / CaSToRC,
+#                                 Ghent University / The Francis Crick Institute
+#
+# Authors::
+# * Kenneth Hoste <kenneth.hoste@ugent.be>
+# * Ward Poelmans <wpoely86@gmail.com>
+# * Oliver Stueker <oliver.stueker@ace-net.ca>
+# License::   MIT/GPL
+##
+name = 'GAMESS-US'
+version = '20200930-R2'
+
+homepage = 'https://www.msg.chem.iastate.edu/gamess/'
+description = """ The General Atomic and Molecular Electronic Structure System (GAMESS)
+ is a general ab initio quantum chemistry package. """
+
+toolchain = {'name': 'gompi', 'version': '2020a'}
+toolchainopts = {'usempi': True, 'openmp': False}
+
+dependencies = [
+    ('OpenBLAS', '0.3.9', '-int8'),
+]
+
+parallel = 4
+
+# manually download via http://www.msg.chem.iastate.edu/gamess/download.html (requires registration)
+# rename gamess-current.tar.gz by changing 'current' to the proper version
+sources = ['gamess-%(version)s.tar.gz']
+checksums = ['5eb9242751159b6de244055e1bbb5987e052f913d47ce5eb8a4c6d262361cdc3']
+
+# use folders per job in $VSC_SCRATCH
+scratch_dir = '$VSC_SCRATCH/%(name)s-$SLURM_JOB_ID'
+user_scratch_dir = '$VSC_SCRATCH/%(name)s-$SLURM_JOB_ID'
+
+maxcpus = '256'
+maxnodes = '32'
+hyperthreading = False
+
+postinstallcmds = [
+    # use job ID 0 for out of job executions
+    "sed -i '4i\if (!($?SLURM_JOB_ID)) set SLURM_JOB_ID=0' %(installdir)s/rungms",
+]
+
+moduleclass = 'chem'
