@@ -25,6 +25,8 @@ dependencies = [
     ('Exonerate', '2.4.0'),
     ('BLAST+', '2.13.0'),
     ('Biopython', '1.79'),
+    ('DIAMOND', '2.1.0'),
+    ('CDBtools', '0.99'),
 ]
 
 fix_perl_shebang_for = ['scripts/*.pl']
