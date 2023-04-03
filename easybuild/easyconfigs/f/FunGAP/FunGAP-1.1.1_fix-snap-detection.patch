@@ -1,4 +1,5 @@
-Snap is not part of MAKER but SNAP-HMM in EasyBuild
+Fix detection of fathom, forge and hmm-assembler.pl, which are not part of MAKER but SNAP
+see https://github.com/CompSynBioLab-KoreaUniv/FunGAP/pull/97
 author: Alex Domingo (Vrije Universiteit Brussel)
 --- set_dependencies.py.orig	2023-03-16 15:27:00.506475000 +0100
 +++ set_dependencies.py	2023-03-16 15:31:31.102674857 +0100

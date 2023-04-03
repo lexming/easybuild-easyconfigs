@@ -1,4 +1,5 @@
-The paths set by MAKER are correct, avoid tampering them.
+The paths to MAKER executables set by MAKER are already correct, avoid
+tampering with them.
 author: Alex Domingo (Vrije Universiteit Brussel)
 --- run_maker.py.orig	2023-03-21 09:19:05.057679000 +0100
 +++ run_maker.py	2023-03-21 09:19:49.143408491 +0100

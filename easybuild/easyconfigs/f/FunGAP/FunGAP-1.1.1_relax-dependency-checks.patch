@@ -1,5 +1,5 @@
 Disable too strict check on version of AUGUSTUS and the GeneMark key in the
-home directory
+home directory of the user
 author: Alex Domingo (Vrije Universiteit Brusel)
 --- set_dependencies.py.orig	2023-03-16 15:50:03.802522000 +0100
 +++ set_dependencies.py	2023-03-16 15:50:28.562603082 +0100

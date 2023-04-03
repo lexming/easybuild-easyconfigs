@@ -8,27 +8,28 @@ description = "Fungal Genome Annotation Pipeline using evidence-based gene model
 
 toolchain = {'name': 'foss', 'version': '2022a'}
 
-github_account = 'CompSynBioLab-KoreaUniv'
-source_urls = [GITHUB_SOURCE]
-sources = ['v%(version)s.tar.gz']
+# Tag v1.1.1 points to an old commit still in v1.1.0
+# pull correct sources from specific commit
+_commit = '924f3ba080f98cbf181b0b21601e095619479ce6'
+
+source_urls = ['https://github.com/CompSynBioLab-KoreaUniv/FunGAP/archive']
+sources = [{'download_filename': '%s.tar.gz' % _commit, 'filename': SOURCE_TAR_GZ}]
 patches = [
     'FunGAP-%(version)s_fix-snap-detection.patch',
     'FunGAP-%(version)s_relax-dependency-checks.patch',
     'FunGAP-%(version)s_replace-deprecated-pa-repeatmodeler.patch',
     'FunGAP-%(version)s_fix-maker-exes.patch',
     'FunGAP-%(version)s_fix-augustus-calls-in-runbreaker.patch',
-    'FunGAP-%(version)s_fix-removed-bio-alphabet.patch',
 ]
 checksums = [
-    {'v1.1.1.tar.gz': 'b538e00ac32a17e1881158d1cc8b115c33439940f60c04db8c920aabf4618727'},
-    {'FunGAP-1.1.1_fix-snap-detection.patch': '4203d784bdde6fc75bf974714f316ad96407ea365fcb3c6ced44a1a1da441d62'},
-    {'FunGAP-1.1.1_relax-dependency-checks.patch': '7370f6675b7bda08b4e68da536b7ce59f19c29eefaae1ac506c0df1edc5e4a9f'},
+    {'FunGAP-1.1.1.tar.gz': '3d827c4b11452afdd51b71766e0e3193b7efad31db4536606115f2cac0b964c8'},
+    {'FunGAP-1.1.1_fix-snap-detection.patch': 'f782224ce186e1e2d8953898122b79d616f8a749b00ec662ec5a3fa1903550fa'},
+    {'FunGAP-1.1.1_relax-dependency-checks.patch': '73f9ae2a20cf03c34f852642a28d3b7e9858250f653ff1e711c3c9a56ae2fd77'},
     {'FunGAP-1.1.1_replace-deprecated-pa-repeatmodeler.patch':
      'c528aab74a070d6eedc9ff2097b6149e8d36759b9ff93c46302994179a38a774'},
-    {'FunGAP-1.1.1_fix-maker-exes.patch': 'ba58c86bd00de665a9890ee7e1348843b3542064695b6531c7e217a9faccbef3'},
+    {'FunGAP-1.1.1_fix-maker-exes.patch': 'de344cf45dad047ab46a17462e19ce0789a89071c1484cbdedd9d898f9601bd0'},
     {'FunGAP-1.1.1_fix-augustus-calls-in-runbreaker.patch':
-     '6490fdcf28ae80912bc51942a4e768aa35c969c693313b9db01a6954627f4ca0'},
-    {'FunGAP-1.1.1_fix-removed-bio-alphabet.patch': 'b3852af210162dba3814a1a67a73985d673bdb77e54611d1213c11309cbc321b'},
+     '150b6f79f95d0c8abece42231c5dcedf8610a811db9cc63ac6cc047f0dcfdc64'},
 ]
 
 dependencies = [
