@@ -10,19 +10,10 @@ graph data structure and layout algorithms."""
 
 toolchain = {'name': 'GCCcore', 'version': '11.3.0'}
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 7629152... add missing build dependency on binutils to pygraphviz v1.10
 builddependencies = [
     ('binutils', '2.38'),
 ]
 
-<<<<<<< HEAD
-=======
->>>>>>> 85b01b2... adding easyconfigs: pygraphviz-1.10-GCCcore-11.3.0.eb
-=======
->>>>>>> 7629152... add missing build dependency on binutils to pygraphviz v1.10
 dependencies = [
     ('Python', '3.10.4'),
     ('Graphviz', '5.0.0'),
@@ -37,14 +28,6 @@ exts_list = [
     }),
 ]
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 sanity_pip_check = True
 
-=======
->>>>>>> 85b01b2... adding easyconfigs: pygraphviz-1.10-GCCcore-11.3.0.eb
-=======
-sanity_pip_check = True
-
->>>>>>> b717189... add missing pip sanity checks to pygraphviz v1.10
 moduleclass = 'vis'

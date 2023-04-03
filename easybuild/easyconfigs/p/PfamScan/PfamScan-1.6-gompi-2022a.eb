@@ -37,15 +37,7 @@ modextrapaths = {
 
 sanity_check_commands = [
     ('perl', '-e "use Bio::Pfam::Scan::PfamScan"'),
-<<<<<<< HEAD
-<<<<<<< HEAD
     ('pfam_scan.pl', '--help'),
-=======
-    ('pfam_scan.pl', '--help'), 
->>>>>>> bfdb6c5... adding easyconfigs: PfamScan-1.6-gompi-2022a.eb
-=======
-    ('pfam_scan.pl', '--help'),
->>>>>>> ef9a8a9... remove trailing spaces from PfamScan v1.6
 ]
 
 # Download Pfam database (280 MB download, 1.5 GB on disk)
@@ -57,20 +49,9 @@ sanity_check_commands = [
 #     "gzip -d %s/*.gz" % _pfam_db_dir,
 #     "hmmpress %s/Pfam-A.hmm" % _pfam_db_dir,
 # ]
-<<<<<<< HEAD
-<<<<<<< HEAD
 #
 modloadmsg = """
 Pfam database dir is located at /databases/bio/Pfam-35
 """
-=======
-# 
-=======
-#
->>>>>>> ef9a8a9... remove trailing spaces from PfamScan v1.6
-# modloadmsg = """
-# Pfam database dir is located at %s
-# """ % _pfam_db_dir
->>>>>>> bfdb6c5... adding easyconfigs: PfamScan-1.6-gompi-2022a.eb
 
 moduleclass = 'bio'

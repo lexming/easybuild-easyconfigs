@@ -24,6 +24,10 @@ dependencies = [
 
 use_pip = True
 
+# WARNING: the versions of ipywidgets, widgetsnbextension and jupyterlab_widgets are tied between them
+# use the versions published in a single release commit instead of blindly pushing to last available version,
+# see for instance https://github.com/jupyter-widgets/ipywidgets/commit/c5fac25d17a93faf7bea66f5d103c605a9f19ddb
+
 exts_list = [
     ('ipython_genutils', '0.2.0', {
         'checksums': ['eb2e116e75ecef9d4d228fdc66af54269afa26ab4463042e33785b887c628ba8'],
