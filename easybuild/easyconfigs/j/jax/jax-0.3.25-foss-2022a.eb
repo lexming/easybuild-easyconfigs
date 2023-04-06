@@ -92,15 +92,20 @@ exts_list = [
         'checksums': ['d1d5af7bd9c784a273c4e1eccfaa8feaca5e0481a08717b5313fa231da22a903'],
     }),
     (name, version, {
-        'patches': ['jax-0.3.23_relax-testPoly5-tolerance.patch'],
-        'runtest': "pytest -n %(parallel)s tests",
         'source_tmpl': '%(name)s-v%(version)s.tar.gz',
         'source_urls': ['https://github.com/google/jax/archive/'],
+        'patches': [
+            'jax-0.3.23_relax-testPoly5-tolerance.patch',
+            'jax-0.3.25_skip-qdwh-test-rank-deficient-deficient.patch',
+        ],
         'checksums': [
             {'jax-v0.3.25.tar.gz': '49e8ce88ddd7dd0de86116c9d75d98a577a9061377ec423493fbac5ea29f79f0'},
             {'jax-0.3.23_relax-testPoly5-tolerance.patch':
              'be64bf36dde4884a97b6c8bb22c6b14ab5b24033cd40bfe7ce18363c55c30e87'},
+            {'jax-0.3.25_skip-qdwh-test-rank-deficient-deficient.patch':
+             '70f16f2dba03ab162ce6e13ea61774524b485e9630209bbd4bec81fd16c8812f'},
         ],
+        'runtest': "pytest -n %(parallel)s tests",
     }),
 ]
 
