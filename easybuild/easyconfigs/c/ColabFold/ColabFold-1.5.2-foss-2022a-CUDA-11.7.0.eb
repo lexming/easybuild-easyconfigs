@@ -2,6 +2,7 @@ easyblock = 'PythonBundle'
 
 name = 'ColabFold'
 version = '1.5.2'
+versionsuffix = '-CUDA-%(cudaver)s'
 
 homepage = 'https://github.com/sokrypton/ColabFold'
 description = """Making protein folding accessible to all. Predict proteins structures both in
@@ -11,9 +12,10 @@ github_account = 'sokrypton'
 toolchain = {'name': 'foss', 'version': '2022a'}
 
 dependencies = [
+    ('CUDA', '11.7.0', '', SYSTEM),
     ('Python', '3.10.4'),
     ('SciPy-bundle', '2022.05'),
-    ('AlphaFold', '2.3.1'),
+    ('AlphaFold', '2.3.1', versionsuffix),
     ('matplotlib', '3.5.2'),
     ('tqdm', '4.64.0'),
     ('py3Dmol', '2.0.1.post1'),
