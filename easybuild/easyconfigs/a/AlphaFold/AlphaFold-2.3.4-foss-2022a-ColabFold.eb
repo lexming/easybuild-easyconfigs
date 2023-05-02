@@ -55,7 +55,6 @@ components = [
             },
         ],
         'patches': [
-            #'AlphaFold-2.0.0_fix-packages.patch',
             'AlphaFold-ColabFold-2.3.4_data-dep-paths.patch',
             'AlphaFold-2.0.0_n-cpu.patch',
             'AlphaFold-ColabFold-2.3.4_fix-scp-path.patch',
@@ -65,14 +64,16 @@ components = [
         'checksums': [
             'be6778333fc110b8662b0e262798d6fc1663a14d9341469c6558b2d7771b8024',  # alphafold-colabfold-2.3.4.tar.gz
             '24510899eeb49167cffedec8fa45363a4d08279c0c637a403b452f7d0ac09451',  # stereo_chemical_props-7102c6.txt
-            #'826d2d1a5d6ac52c51a60ba210e1947d5631a1e2d76f8815305b5d23f74458db',  # AlphaFold-2.0.0_fix-packages.patch
-            '3826e357c35a58b2c8c0fab41ac8ae1b4d4c135162fe47ded577a13dade0c6f3',  # AlphaFold-ColabFold-2.3.4_data-dep-paths.patch
-            'dfda4dd5f9aba19fe2b6eb9a0ec583d12dcefdfee8ab8803fc57ad48d582db04',  # AlphaFold-2.0.0_n-cpu.patch
-            '07bf81f987bc1ab67b7d71121396449289d3ffb499cddb62a135574f2ca7115a',  # AlphaFold-ColabFold-2.3.4_fix-scp-path.patch
-            '1a2e4e843bd9a4d15ee39e6c37cc63ba281311cc7a0a5610f0e43b52ef93faac',  # AlphaFold-2.0.1_setup_rm_tfcpu.patch
+            # AlphaFold-ColabFold-2.3.4_data-dep-paths.patch
+            '3826e357c35a58b2c8c0fab41ac8ae1b4d4c135162fe47ded577a13dade0c6f3',
+            # AlphaFold-2.0.0_n-cpu.patch
+            'dfda4dd5f9aba19fe2b6eb9a0ec583d12dcefdfee8ab8803fc57ad48d582db04',
+            # AlphaFold-ColabFold-2.3.4_fix-scp-path.patch
+            '07bf81f987bc1ab67b7d71121396449289d3ffb499cddb62a135574f2ca7115a',
+            # AlphaFold-2.0.1_setup_rm_tfcpu.patch
+            '1a2e4e843bd9a4d15ee39e6c37cc63ba281311cc7a0a5610f0e43b52ef93faac',
             # AlphaFold-2.3.1_use_openmm_7.7.0.patch
             'd800bb085deac7edbe2d72916c1194043964aaf51b88a3b5a5016ab68a1090ec',
-
         ],
         'start_dir': 'alphafold-%s' % _commit,
         'use_pip': True,

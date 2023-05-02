@@ -25,7 +25,7 @@ dependencies = [
     ('HH-suite', '3.3.0'),
     ('HMMER', '3.3.2'),
     ('Kalign', '3.3.5'),
-    ('jax', '0.3.14', versionsuffix),  # also provides absl-py
+    ('jax', '0.3.25', versionsuffix),  # also provides absl-py
     ('UCX-CUDA', '1.12.1', versionsuffix),
     ('cuDNN', '8.4.1.50', versionsuffix, SYSTEM),
     ('NCCL', '2.12.12', versionsuffix),
@@ -162,7 +162,7 @@ sanity_pip_check = True
 modextravars = {
     'TF_FORCE_UNIFIED_MEMORY': '1',
     'XLA_PYTHON_CLIENT_MEM_FRACTION': '3',
-    # 'ALPHAFOLD_DATA_DIR': '/path/to/AlphaFold_DBs',  # please adapt
+    'ALPHAFOLD_DATA_DIR': '/databases/bio/%(namelower)s-%(version)s',
     'OPENMM_RELAX': 'CUDA'  # unset or set to 'CPU' in order not to run the energy minimization on GPU; PR#189
 }
 
