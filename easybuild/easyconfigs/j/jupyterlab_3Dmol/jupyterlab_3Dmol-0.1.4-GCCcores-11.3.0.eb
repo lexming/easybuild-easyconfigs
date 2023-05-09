@@ -1,0 +1,52 @@
+easyblock = 'Binary'
+
+name = 'jupyterlab_3Dmol'
+version = '0.1.4'
+
+homepage = 'https://github.com/3dmol/jupyterlab_3Dmol'
+description = "JupyterLab extension that enables the use of py3Dmol"
+
+toolchain = {'name': 'GCCcore', 'version': '11.3.0'}
+
+source_urls = ['https://registry.npmjs.org/jupyterlab_3dmol/-']
+sources = [SOURCELOWER_TGZ]
+checksums = ['efe93e9addfcd26f059c2d9addbd538fdc4966e9bc92d711cf60ffa075f5162a']
+
+builddependencies = [
+    ('binutils', '2.38'),
+    ('nodejs', '16.15.1'),
+]
+
+dependencies = [
+    ('Python', '3.10.4'),
+    ('JupyterLab', '3.5.0'),
+    ('py3Dmol', '2.0.1.post1'),
+]
+
+# WARNING: this module of jupyterlab-lmod will replace the JupyterLab App directory (JUPYTERLAB_DIR)
+# current version of jupyterlab-lmod can only be installed as source extension in JUPYTERLAB_DIR
+# this is not an issue with the default installation of JupyterLab in EB as it has no apps/extensions
+_jupyterlab_dir = '%(installdir)s/share/jupyter/lab'
+
+install_cmd = "mkdir -p %s && " % _jupyterlab_dir
+install_cmd += "JUPYTERLAB_DIR=%s " % _jupyterlab_dir
+install_cmd += "jupyter labextension install %s" % SOURCELOWER_TGZ
+
+sanity_check_commands = [
+    "jupyter labextension check %(namelower)s",
+]
+
+sanity_check_paths = {
+    'files': [],
+    'dirs': ["%s/%s" % (_jupyterlab_dir, x) for x in ['extensions', 'schemas', 'staging', 'static', 'themes']],
+}
+
+modextrapaths = {
+    'JUPYTER_PATH': 'share/jupyter',
+    'JUPYTER_CONFIG_PATH': 'etc/jupyter',
+}
+modextravars = {
+    'JUPYTERLAB_DIR': _jupyterlab_dir,
+}
+
+moduleclass = 'vis'
