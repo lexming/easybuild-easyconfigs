@@ -36,6 +36,10 @@ exts_list = [
     ('jupyter_server', version, {
         'checksums': ['d0adca19913a3763359be7f0b8c2ea8bfde356f4b8edd8e3149d7d0fbfaa248b'],
     }),
+    ('jupyter_server_terminals', '0.4.4', {
+        'sources': ['%(name)s-%(version)s-py3-none-any.whl'],
+        'checksums': ['75779164661cec02a8758a5311e18bb8eb70c4e86c6b699403100f1585a12a36'],
+    }),
 ]
 
 moduleclass = 'tools'
