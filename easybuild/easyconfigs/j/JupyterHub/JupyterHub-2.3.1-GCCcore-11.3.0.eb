@@ -17,7 +17,7 @@ dependencies = [
     ('Python', '3.10.4'),
     ('configurable-http-proxy', '4.5.3'),
     ('JupyterLab', '3.5.0'),
-    ('jupyterlab-lmod', '1.0.2'),
+    ('jupyterlmod', '4.0.3'),
     ('Mako', '1.2.0'),
     ('OpenSSL', '1.1', '', SYSTEM),
 ]
