@@ -1,10 +1,11 @@
-# Update to 1.18.3
+# Update to 1.20.4
 # Jordi Camps / CNAG
+# Sebastien Moretti / SIB
 
 easyblock = 'Tarball'
 
 name = 'Go'
-version = "1.18.3"
+version = "1.20.4"
 
 homepage = 'https://www.golang.org'
 description = """Go is an open source programming language that makes it easy to build
@@ -17,8 +18,8 @@ source_urls = ['https://storage.googleapis.com/golang/']
 local_archs = {'aarch64': 'arm64', 'x86_64': 'amd64'}
 sources = ['go%%(version)s.linux-%s.tar.gz' % local_archs[ARCH]]
 checksums = [{
-    'go%(version)s.linux-amd64.tar.gz': '956f8507b302ab0bb747613695cdae10af99bbd39a90cae522b7c0302cc27245',
-    'go%(version)s.linux-arm64.tar.gz': 'beacbe1441bee4d7978b900136d1d6a71d150f0a9bb77e9d50c822065623a35a',
+    'go%(version)s.linux-amd64.tar.gz': '698ef3243972a51ddb4028e4a1ac63dc6d60821bf18e59a807e051fee0a385bd',
+    'go%(version)s.linux-arm64.tar.gz': '105889992ee4b1d40c7c108555222ca70ae43fccb42e20fbf1eebb822f5e72c6',
 }]
 
 sanity_check_paths = {
