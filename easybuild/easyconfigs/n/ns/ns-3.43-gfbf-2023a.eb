@@ -37,7 +37,7 @@ dependencies = [
 
 start_dir = 'ns-%(version)s'
 
-configure_cmd = './ns3 configure --enable-examples --enable-tests --enable-python-bindings --build-profile optimized'
+configure_cmd = './ns3 configure --enable-examples --enable-tests --build-profile optimized'
 
 build_cmd = './ns3 build'
 
@@ -49,16 +49,12 @@ install_cmd = './ns3 --jobs %(parallel)s install'
 postinstallcmds = [
     'cd %(installdir)s && ln -s libexec/ns3 bin',
     'cp -a build/{examples,utils,scratch} %(installdir)s',
-    'mkdir -p %(installdir)s/lib/python%(pyshortver)s/site-packages',
-    'cp ns3 %(installdir)s/bin',
-    'cp -a build/bindings/python/ns %(installdir)s/lib/python%(pyshortver)s/site-packages/',
+    #'cp ns3 %(installdir)s/bin',
 ]
 
 sanity_check_paths = {
     'files': ['lib/libns%%(version)s-energy-optimized.%s' % SHLIB_EXT],
     'dirs': ['examples', 'include', 'utils', 'scratch'],
 }
-
-sanity_check_commands = ["python -c 'from ns import ns'"]
 
 moduleclass = 'tools'

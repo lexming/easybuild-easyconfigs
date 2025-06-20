@@ -1,0 +1,14 @@
+Enable optimized build of ns and add examples and tests.
+Author: Alex Domingo (Vrije Universiteit Brussel)
+--- ns-allinone-3.43/ns-3.43/setup.py.orig	2025-06-19 19:29:32.217447507 +0200
++++ ns-allinone-3.43/ns-3.43/setup.py	2025-06-19 19:36:36.556189698 +0200
+@@ -21,6 +21,9 @@
+                 "-DNS3_LOG:BOOL=ON",
+                 "-DNS3_WARNINGS_AS_ERRORS:BOOL=OFF",
+                 "-DNS3_PYTHON_BINDINGS:BOOL=ON",
++                "-DNS3_NATIVE_OPTIMIZATIONS=optimized",
++                "-DNS3_EXAMPLES=ON",
++                "-DNS3_TESTS=ON",
+                 "-DNS3_BINDINGS_INSTALL_DIR:STRING=INSTALL_PREFIX",
+                 "-DNS3_FETCH_OPTIONAL_COMPONENTS:BOOL=ON",
+                 "-DNS3_PIP_PACKAGING:BOOL=ON",

@@ -1,0 +1,57 @@
+easyblock = 'PythonBundle'
+
+name = 'ns-python'
+version = '3.43'
+
+homepage = 'https://www.nsnam.org/'
+description = """ns-3 is a discrete-event network simulator for Internet systems, targeted
+primarily for research and educational use. ns-3 is free, open-source software,
+licensed under the GNU GPLv2 license, and maintained by a worldwide community."""
+
+toolchain = {'name': 'gfbf', 'version': '2023a'}
+
+builddependencies = [
+    ('Ninja', '1.11.1'),
+    ('CMake', '3.26.3'),
+    ('cmake-build-extension', '0.6.1'),
+]
+
+dependencies = [
+    ('Python', '3.11.3'),
+    ('cppyy', '3.1.2'),
+    ('GSL', '2.7'),
+    ('Eigen', '3.4.0'),
+    ('SQLite', '3.42.0'),
+    ('Boost', '1.82.0'),
+]
+
+exts_list = [
+    ('ns3', version, {
+        'source_urls': ['https://www.nsnam.org/releases/'],
+        'sources': ['ns-allinone-%(version)s.tar.bz2'],
+        'patches': ['ns-python-%(version)s_build_config.patch'],
+        'checksums': [
+            {'ns-allinone-3.43.tar.bz2': 'b8873410948be3ae468ff97e7dfca3d6d8248a2c831e9f24d015483009bafb8d'},
+            {'ns-python-3.43_build_config.patch': '0f016a01323d4a682af0336b4597b54c7c9fc43f27ebaa06901eab463b2e8d31'},
+        ],
+        'start_dir': 'ns-%(version)s',
+        'preinstallopts': 'export SETUPTOOLS_SCM_PRETEND_VERSION=%(version)s && ',
+        'runtest': 'python utils/python-unit-tests.py',
+        'testinstall': True,
+    }),
+]
+
+_ns3_build_dir = "%(builddir)s/ns3/ns-allinone-%(version)s/ns-%(version)s/build"
+postinstallcmds = [
+    f'cp -a {_ns3_build_dir}/{{examples,utils,scratch}} %(installdir)s',
+]
+
+sanity_check_paths = {
+    'files': [],
+    'dirs': [f'lib/python%(pyshortver)s/site-packages/{x}' for x in ['ns', 'ns3']] +
+            ['examples', 'utils', 'scratch']
+}
+
+sanity_check_commands = ["python -c 'from ns import ns'"]
+
+moduleclass = 'tools'
